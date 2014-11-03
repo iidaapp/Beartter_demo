@@ -10,7 +10,7 @@ import twitter4j.UserStreamAdapter;
 
 public class TestStream {
 
-public static void main(String[] args) {
+public static void testStream(String[] args) {
 
 		TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
 		StatusListener listner = new MyStreamAdapter();
