@@ -14,9 +14,6 @@ import twitter4j.auth.RequestToken;
 
 public class CallbackServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 
@@ -24,25 +21,24 @@ public class CallbackServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		Twitter twitter = (Twitter) req.getSession().getAttribute("Twitter");
+		RequestToken requestToken = (RequestToken) req.getSession().getAttribute("RequestToken");
 		String verifier = req.getParameter("oauth_verifier");
+
 		AccessToken accessToken = null;
+
 		try {
-			accessToken = twitter.getOAuthAccessToken((RequestToken)req.getSession().getAttribute("RequestToken"), verifier);
+			accessToken = twitter.getOAuthAccessToken(requestToken, verifier);
+			twitter.updateStatus("This is test tweet from Beartter. / これはBeartterによるテストツイートです。");
+			req.getSession().removeAttribute("RequestToken");
 		} catch (TwitterException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return;
 		}
 
-		if (accessToken != null) {
-			// AccessTokenをセッションに保持
-//			session.setAttribute("AccessToken", accessToken.getToken());
-//			session.setAttribute("AccessTokenSecret", accessToken.getTokenSecret());
-			
-			System.out.print(accessToken.getToken());
-			System.out.println(accessToken.getTokenSecret());
-		} else {
-			resp.setContentType("text/plain");
-			resp.getWriter().println("AccessTokenがNullってます！");
+		if (accessToken == null) {
+			System.out.println("no accesstoken");
+
 		}
 	}
 }

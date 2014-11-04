@@ -24,7 +24,6 @@ public class TwitterOauthSampleServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("testtesttest");
 
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		cb.setDebugEnabled(true).setOAuthConsumerKey(consumerKey).setOAuthConsumerSecret(consumerSecret);
@@ -34,7 +33,7 @@ public class TwitterOauthSampleServlet extends HttpServlet {
 		req.getSession().setAttribute("twitter", twitter);
 
 		try {
-			RequestToken requestToken = twitter.getOAuthRequestToken("http://127.0.0.1:8080/beartter_demo/callback");
+			RequestToken requestToken = twitter.getOAuthRequestToken("http://127.0.0.1:8082/beartter_demo/callback");
 
 			HttpSession session = req.getSession();
 			session.setAttribute("RequestToken", requestToken);
