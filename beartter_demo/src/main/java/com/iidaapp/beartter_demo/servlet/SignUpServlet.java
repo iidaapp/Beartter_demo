@@ -1,4 +1,4 @@
-package com.iidaapp.beartter_demo;
+package com.iidaapp.beartter_demo.servlet;
 
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ import twitter4j.TwitterFactory;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
 
-public class TwitterOauthSampleServlet extends HttpServlet {
+public class SignUpServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 

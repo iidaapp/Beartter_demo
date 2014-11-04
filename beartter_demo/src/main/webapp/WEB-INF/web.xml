@@ -9,23 +9,31 @@
 		<servlet-class>com.iidaapp.beartter_demo.JsonTestServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>twitterOauthSampleServlet</servlet-name>
-		<servlet-class>com.iidaapp.beartter_demo.TwitterOauthSampleServlet</servlet-class>
+		<servlet-name>signUpServlet</servlet-name>
+		<servlet-class>com.iidaapp.beartter_demo.servlet.SignUpServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>twitterCallbackServlet</servlet-name>
-		<servlet-class>com.iidaapp.beartter_demo.CallbackServlet</servlet-class>
+		<servlet-class>com.iidaapp.beartter_demo.servlet.CallbackServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>loginServlet</servlet-name>
+		<servlet-class>com.iidaapp.beartter_demo.servlet.LoginServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>jsonTestServlet</servlet-name>
 		<url-pattern>/test</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>twitterOauthSampleServlet</servlet-name>
-		<url-pattern>/sample</url-pattern>
+		<servlet-name>signUpServlet</servlet-name>
+		<url-pattern>/signup</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>twitterCallbackServlet</servlet-name>
 		<url-pattern>/callback</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>loginServlet</servlet-name>
+		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
 </web-app>

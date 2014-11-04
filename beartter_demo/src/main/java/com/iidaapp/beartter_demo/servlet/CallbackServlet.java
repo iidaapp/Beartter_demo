@@ -1,4 +1,4 @@
-package com.iidaapp.beartter_demo;
+package com.iidaapp.beartter_demo.servlet;
 
 import java.io.IOException;
 
@@ -28,7 +28,6 @@ public class CallbackServlet extends HttpServlet {
 
 		try {
 			accessToken = twitter.getOAuthAccessToken(requestToken, verifier);
-			twitter.updateStatus("This is test tweet from Beartter. / これはBeartterによるテストツイートです。");
 			req.getSession().removeAttribute("RequestToken");
 		} catch (TwitterException e) {
 			// TODO Auto-generated catch block
