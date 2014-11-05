@@ -17,6 +17,10 @@
 		<servlet-class>com.iidaapp.beartter_demo.servlet.CallbackServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>signUpDetailServlet</servlet-name>
+		<servlet-class>com.iidaapp.beartter_demo.servlet.SignUpDetailServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>loginServlet</servlet-name>
 		<servlet-class>com.iidaapp.beartter_demo.servlet.LoginServlet</servlet-class>
 	</servlet>
@@ -27,6 +31,10 @@
 	<servlet-mapping>
 		<servlet-name>signUpServlet</servlet-name>
 		<url-pattern>/signup</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>signUpDetailServlet</servlet-name>
+		<url-pattern>/signup/detail</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>twitterCallbackServlet</servlet-name>

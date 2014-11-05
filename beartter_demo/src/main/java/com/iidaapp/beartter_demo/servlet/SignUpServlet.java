@@ -38,8 +38,9 @@ public class SignUpServlet extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.setAttribute("RequestToken", requestToken);
 			session.setAttribute("Twitter", twitter);
+			session.setAttribute("RequestServlet", "signup");
 
-			String url = requestToken.getAuthenticationURL();
+			String url = requestToken.getAuthenticationURL() + "&force_login=true";
 
 			resp.sendRedirect(url);
 
