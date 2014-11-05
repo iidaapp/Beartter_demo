@@ -10,43 +10,42 @@ import javax.servlet.http.HttpSession;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
-import twitter4j.auth.RequestToken;
-import twitter4j.conf.ConfigurationBuilder;
+import twitter4j.User;
+import twitter4j.auth.AccessToken;
 
 public class SignUpServlet extends HttpServlet {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-
-	private static String consumerKey = "ptN7vHD2pPLKSquWAcSdyHAzU";
-	private static String consumerSecret = "JV22LP21h8VsRYWkouR6aACcMmX85D48C759QWgglu9CmDOLdJ";
 
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		ConfigurationBuilder cb = new ConfigurationBuilder();
-		cb.setDebugEnabled(true).setOAuthConsumerKey(consumerKey).setOAuthConsumerSecret(consumerSecret);
-		TwitterFactory tf = new TwitterFactory(cb.build());
-		Twitter twitter = tf.getInstance();
-
-		req.getSession().setAttribute("twitter", twitter);
-
 		try {
-			RequestToken requestToken = twitter.getOAuthRequestToken("http://127.0.0.1:8082/beartter_demo/callback");
+			HttpSession session = req.getSession(false);
+			if (session == null)
+				resp.sendRedirect("http://127.0.0.1:8082/beartter_demo/error");
 
-			HttpSession session = req.getSession();
-			session.setAttribute("RequestToken", requestToken);
-			session.setAttribute("Twitter", twitter);
-			session.setAttribute("RequestServlet", "signup");
+			AccessToken accessToken = (AccessToken) session.getAttribute("AccessToken");
+			Twitter twitter = (Twitter) session.getAttribute("Twitter");
+			User user;
 
-			String url = requestToken.getAuthenticationURL() + "&force_login=true";
+			user = twitter.verifyCredentials();
 
-			resp.sendRedirect(url);
+			session.setAttribute("screenName", accessToken.getScreenName());
+			session.setAttribute("profileImageUrl", user.getProfileImageURL());
+
+			// リダイレクト
+			resp.sendRedirect("http://127.0.0.1:8082/beartter_demo/signup_detail");
 
 		} catch (TwitterException e) {
-
+			// TODO ログ出力方法
 			e.printStackTrace();
+			resp.sendRedirect("http://127.0.0.1:8082/beartter_demo/error");
 		}
+
 	}
 }
