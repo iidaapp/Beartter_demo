@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 
 			// TODO ログ出力方法
 			e.printStackTrace();
-			resp.sendRedirect("http://127.0.0.1:8082/beartter_demo/error");
+			resp.sendRedirect("error");
 
 		}
 	}

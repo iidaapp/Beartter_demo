@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.iidaapp.beartter_demo.db.DbUtils;
-
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
+
+import com.iidaapp.beartter_demo.db.DbUtils;
 
 public class CallbackServlet extends HttpServlet {
 
@@ -24,7 +24,11 @@ public class CallbackServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		HttpSession session = req.getSession();
+		HttpSession session = req.getSession(false);
+		if (session == null) {
+			resp.sendRedirect("error");
+			return;
+		}
 
 		// Twitterオブジェクトの取得
 		Twitter twitter = (Twitter) session.getAttribute("Twitter");
@@ -44,31 +48,33 @@ public class CallbackServlet extends HttpServlet {
 			if (accessToken == null) {
 				// TODO ログ出力方法
 				System.out.println("no accesstoken");
-				resp.sendRedirect("http://127.0.0.1:8082/beartter_demo/error");
+				resp.sendRedirect("error");
+				return;
 			}
-			
+
 			// アクセストークン、Twitterインスタンスをセッションに再格納
 			session.setAttribute("AccessToken", accessToken);
 			session.setAttribute("Twitter", twitter);
 
 			// アクセストークン情報が登録済みか判定
-			long beatterId = DbUtils.selectBeartterIdByUserId(accessToken.getUserId());
+			long beatterId = DbUtils.selectBeartterIdFromAccessToken(accessToken.getUserId());
 
 			// beartterIdが0の場合、SELECT取得なし。会員登録画面へ遷移
-			if (beatterId == 0){
-				resp.sendRedirect("http://127.0.0.1:8082/beartter_demo/signup");
+			if (beatterId == 0) {
+				resp.sendRedirect("signup");
 				return;
 			}
 
 			// 取得ありの場合、認証完了。ログイン完了としてトップ画面へ遷移
-			resp.sendRedirect("http://127.0.0.1:8082/beartter_demo/top");
+			resp.sendRedirect("main");
 			return;
 
 		} catch (TwitterException | ClassNotFoundException | SQLException e) {
 
 			// Extentionをキャッチした場合、ログを出力してエラー画面へ遷移。
 			e.printStackTrace();
-			resp.sendRedirect("http://127.0.0.1:8082/beartter_demo/error");
+			resp.sendRedirect("error");
+			return;
 		}
 	}
 }

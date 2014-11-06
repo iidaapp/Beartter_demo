@@ -2,6 +2,8 @@ package com.iidaapp.beartter_demo.servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,11 +26,12 @@ public class SignUpServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		try {
-			HttpSession session = req.getSession(false);
-			if (session == null)
-				resp.sendRedirect("http://127.0.0.1:8082/beartter_demo/error");
+		ServletContext sc = getServletContext();
+		HttpSession session = req.getSession(false);
+		if (session == null)
+			sc.getRequestDispatcher("/error").forward(req, resp);
 
+		try {
 			AccessToken accessToken = (AccessToken) session.getAttribute("AccessToken");
 			Twitter twitter = (Twitter) session.getAttribute("Twitter");
 			User user;
@@ -38,13 +41,13 @@ public class SignUpServlet extends HttpServlet {
 			session.setAttribute("screenName", accessToken.getScreenName());
 			session.setAttribute("profileImageUrl", user.getProfileImageURL());
 
-			// リダイレクト
-			resp.sendRedirect("http://127.0.0.1:8082/beartter_demo/signup_detail");
+			sc.getRequestDispatcher("/page/SignUp.jsp").forward(req, resp);
+			return;
 
 		} catch (TwitterException e) {
 			// TODO ログ出力方法
 			e.printStackTrace();
-			resp.sendRedirect("http://127.0.0.1:8082/beartter_demo/error");
+			sc.getRequestDispatcher("/error").forward(req, resp);
 		}
 
 	}

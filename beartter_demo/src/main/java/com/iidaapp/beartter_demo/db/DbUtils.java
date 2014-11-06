@@ -16,7 +16,7 @@ public class DbUtils {
 	private static String DRIVER = "com.mysql.jdbc.Driver";
 
 
-	public static long selectBeartterIdByUserId(long userId) throws ClassNotFoundException, SQLException {
+	public static long selectBeartterIdFromAccessToken(long userId) throws ClassNotFoundException, SQLException {
 
 		long beartterId = 0;
 		Statement stmt = null;
@@ -33,18 +33,18 @@ public class DbUtils {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery("SELECT beartter_id FROM beartter_db.access_token where user_id = " + userId);
 
-			if (rs.next()) {
+			if(rs.next()) {
 				beartterId = rs.getInt("beartter_id");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		} finally {
-			if (rs != null)
+			if(rs != null)
 				rs.close();
-			if (stmt != null)
+			if(stmt != null)
 				stmt.close();
-			if (con != null)
+			if(con != null)
 				con.close();
 
 		}
@@ -53,6 +53,81 @@ public class DbUtils {
 
 	}
 
+
+	public static int countUserInfoByBeartterId(String beartterId) throws ClassNotFoundException, SQLException {
+
+		Statement stmt = null;
+		ResultSet rs = null;
+		Connection con = null;
+		int resultCount = 0;
+
+		try {
+			// ドライバ設定
+			Class.forName(DRIVER);
+			// データベースとの接続
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+
+			// 実行
+			stmt = con.createStatement();
+			rs = stmt.executeQuery("SELECT COUNT(*) FROM beartter_db.userinfo where beartter_id = " + beartterId);
+
+			if(rs.next()) {
+				resultCount = rs.getInt("cnt");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(rs != null)
+				rs.close();
+			if(stmt != null)
+				stmt.close();
+			if(con != null)
+				con.close();
+
+		}
+
+		return resultCount;
+	}
+
+
+	public static int countUserInfoByEmailAddress(String EmailAddress) throws ClassNotFoundException, SQLException {
+
+		Statement stmt = null;
+		ResultSet rs = null;
+		Connection con = null;
+		int resultCount = 0;
+
+		try {
+			// ドライバ設定
+			Class.forName(DRIVER);
+			// データベースとの接続
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+
+			// 実行
+			stmt = con.createStatement();
+			rs = stmt.executeQuery("SELECT COUNT(*) FROM beartter_db.userinfo where email_address = " + EmailAddress);
+
+			if(rs.next()) {
+				resultCount = rs.getInt("cnt");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(rs != null)
+				rs.close();
+			if(stmt != null)
+				stmt.close();
+			if(con != null)
+				con.close();
+
+		}
+
+		return resultCount;
+	}
 
 	public static int insertAccessToken(AccessToken accessToken) throws ClassNotFoundException, SQLException {
 
@@ -68,17 +143,17 @@ public class DbUtils {
 
 			// 実行
 			stmt = con.createStatement();
-			num = stmt.executeUpdate("INSERT INTO beartter_db.access_token values (1000001, '" + accessToken.getToken() + "', '" + accessToken.getTokenSecret() + "', '" + accessToken.getUserId() + "', '"
-					+ accessToken.getScreenName() + "', now(), now());");
+			num = stmt.executeUpdate("INSERT INTO beartter_db.access_token values (1000001, '" + accessToken.getToken() + "', '" + accessToken.getTokenSecret() + "', '" + accessToken.getUserId()
+					+ "', '" + accessToken.getScreenName() + "', now(), now());");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		} finally {
 
-			if (stmt != null)
+			if(stmt != null)
 				stmt.close();
-			if (con != null)
+			if(con != null)
 				con.close();
 
 		}

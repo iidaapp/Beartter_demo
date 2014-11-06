@@ -17,12 +17,12 @@
 		<servlet-class>com.iidaapp.beartter_demo.servlet.LoginServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>topServlet</servlet-name>
-		<servlet-class>com.iidaapp.beartter_demo.servlet.TopServlet</servlet-class>
+		<servlet-name>mainServlet</servlet-name>
+		<servlet-class>com.iidaapp.beartter_demo.servlet.MainServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>signUpDetail</servlet-name>
-		<jsp-file>/page/signup.jsp</jsp-file>
+		<servlet-name>signUpConfirm</servlet-name>
+		<servlet-class>com.iidaapp.beartter_demo.servlet.SignUpConfirm</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -38,11 +38,11 @@
 		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>topServlet</servlet-name>
-		<url-pattern>/top</url-pattern>
+		<servlet-name>mainServlet</servlet-name>
+		<url-pattern>/main</url-pattern>
 	</servlet-mapping>
-<servlet-mapping>
-	<servlet-name>signUpDetail</servlet-name>
-	<url-pattern>/signup_detail</url-pattern>
-</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>signUpConfirm</servlet-name>
+		<url-pattern>/signup/confirm</url-pattern>
+	</servlet-mapping>
 </web-app>
