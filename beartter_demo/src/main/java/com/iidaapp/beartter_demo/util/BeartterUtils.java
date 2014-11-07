@@ -19,7 +19,7 @@ public class BeartterUtils {
 	}
 
 
-	private static boolean checkValueExistInSignUpForm(SignUpForm signUpForm) {
+	public static boolean checkValueExistInSignUpForm(SignUpForm signUpForm) {
 
 		if(StringUtils.isEmpty(signUpForm.getUserName()) || StringUtils.isEmpty(signUpForm.getPassword()) || StringUtils.isEmpty(signUpForm.getPasswordConfirm())
 				|| StringUtils.isEmpty(signUpForm.getMailAddress()))
@@ -29,7 +29,7 @@ public class BeartterUtils {
 	}
 
 
-	private static boolean isSamePassword(String password, String passwordConfirm) {
+	public static boolean isSamePassword(String password, String passwordConfirm) {
 
 		if(password.equals(passwordConfirm))
 			return true;
@@ -38,7 +38,7 @@ public class BeartterUtils {
 	}
 
 
-	private static boolean isUniqueUserNameSignUpForm(String userName) throws ClassNotFoundException, SQLException {
+	public static boolean isUniqueUserNameSignUpForm(String userName) throws ClassNotFoundException, SQLException {
 
 		int count = DbUtils.countUserInfoByBeartterId(userName);
 
@@ -49,7 +49,7 @@ public class BeartterUtils {
 	}
 
 
-	private static boolean isUniqueEMailAddress(String mailAddress) throws ClassNotFoundException, SQLException {
+	public static boolean isUniqueEMailAddress(String mailAddress) throws ClassNotFoundException, SQLException {
 
 		int count = DbUtils.countUserInfoByEmailAddress(mailAddress);
 

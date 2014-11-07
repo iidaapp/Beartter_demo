@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.iidaapp.beartter_demo.db.DbConnection;
+
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -24,6 +26,8 @@ public class LoginServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		System.out.println("LoginServlet Start");
 
 		// TwitterFactoryの設定
 		ConfigurationBuilder cb = new ConfigurationBuilder();

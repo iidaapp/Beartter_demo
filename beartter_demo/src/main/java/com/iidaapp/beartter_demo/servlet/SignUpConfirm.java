@@ -20,6 +20,7 @@ public class SignUpConfirm extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		System.out.println("SignUpConfirm Start");
 		ServletContext sc = getServletContext();
 
 		String userName = (String) req.getParameter("userName");
@@ -31,6 +32,7 @@ public class SignUpConfirm extends HttpServlet {
 
 		try {
 
+			validateSignUpForm(signUpForm);
 			if(!BeartterUtils.validateSignUpForm(signUpForm)){
 
 				sc.getRequestDispatcher("/page/SignUp.jsp").forward(req, resp);
@@ -49,5 +51,11 @@ public class SignUpConfirm extends HttpServlet {
 
 		
 
+	}
+
+
+	private void validateSignUpForm(SignUpForm signUpForm) {
+
+		
 	}
 }

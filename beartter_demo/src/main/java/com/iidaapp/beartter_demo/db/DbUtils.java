@@ -1,7 +1,6 @@
 package com.iidaapp.beartter_demo.db;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,13 +9,8 @@ import twitter4j.auth.AccessToken;
 
 public class DbUtils {
 
-	private static String URL = "jdbc:mysql://localhost:3306/beartter_db";
-	private static String USER = "root";
-	private static String PASSWORD = "";
-	private static String DRIVER = "com.mysql.jdbc.Driver";
 
-
-	public static long selectBeartterIdFromAccessToken(long userId) throws ClassNotFoundException, SQLException {
+	public static long selectBeartterIdFromAccessToken(long userId) throws SQLException {
 
 		long beartterId = 0;
 		Statement stmt = null;
@@ -24,10 +18,9 @@ public class DbUtils {
 		Connection con = null;
 
 		try {
-			// ドライバ設定
-			Class.forName(DRIVER);
-			// データベースとの接続
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+
+			// コネクション取得
+			con = DbConnection.getConnection();
 
 			// 実行
 			stmt = con.createStatement();
@@ -54,7 +47,7 @@ public class DbUtils {
 	}
 
 
-	public static int countUserInfoByBeartterId(String beartterId) throws ClassNotFoundException, SQLException {
+	public static int countUserInfoByBeartterId(String beartterId) throws SQLException {
 
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -62,10 +55,9 @@ public class DbUtils {
 		int resultCount = 0;
 
 		try {
-			// ドライバ設定
-			Class.forName(DRIVER);
-			// データベースとの接続
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+
+			// コネクション取得
+			con = DbConnection.getConnection();
 
 			// 実行
 			stmt = con.createStatement();
@@ -92,7 +84,7 @@ public class DbUtils {
 	}
 
 
-	public static int countUserInfoByEmailAddress(String EmailAddress) throws ClassNotFoundException, SQLException {
+	public static int countUserInfoByEmailAddress(String EmailAddress) throws SQLException {
 
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -100,10 +92,9 @@ public class DbUtils {
 		int resultCount = 0;
 
 		try {
-			// ドライバ設定
-			Class.forName(DRIVER);
-			// データベースとの接続
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+
+			// コネクション取得
+			con = DbConnection.getConnection();
 
 			// 実行
 			stmt = con.createStatement();
@@ -114,8 +105,7 @@ public class DbUtils {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
+			throw new RuntimeException();
 		} finally {
 			if(rs != null)
 				rs.close();
@@ -129,17 +119,17 @@ public class DbUtils {
 		return resultCount;
 	}
 
-	public static int insertAccessToken(AccessToken accessToken) throws ClassNotFoundException, SQLException {
+
+	public static int insertAccessToken(AccessToken accessToken) throws SQLException {
 
 		Statement stmt = null;
 		Connection con = null;
 		int num = 0;
 
 		try {
-			// ドライバ設定
-			Class.forName(DRIVER);
-			// データベースとの接続
-			con = DriverManager.getConnection(URL, USER, PASSWORD);
+
+			// コネクション取得
+			con = DbConnection.getConnection();
 
 			// 実行
 			stmt = con.createStatement();

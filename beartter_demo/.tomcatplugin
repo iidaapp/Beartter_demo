@@ -9,15 +9,7 @@
     <extraInfo></extraInfo>
     <webPath>/beartter_demo</webPath>
     <webClassPathEntries>
-        <webClassPathEntry>/Users/iida/.m2/repository/com/google/code/gson/gson/2.3/gson-2.3.jar</webClassPathEntry>
-        <webClassPathEntry>/Users/iida/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar</webClassPathEntry>
-        <webClassPathEntry>/Users/iida/.m2/repository/jstl/jstl/1.2/jstl-1.2.jar</webClassPathEntry>
-        <webClassPathEntry>/Users/iida/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar</webClassPathEntry>
-        <webClassPathEntry>/Users/iida/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar</webClassPathEntry>
-        <webClassPathEntry>/Users/iida/.m2/repository/org/apache/commons/commons-lang3/3.3.2/commons-lang3-3.3.2.jar</webClassPathEntry>
-        <webClassPathEntry>/Users/iida/.m2/repository/org/slf4j/slf4j-api/1.7.7/slf4j-api-1.7.7.jar</webClassPathEntry>
-        <webClassPathEntry>/Users/iida/.m2/repository/org/twitter4j/twitter4j-core/4.0.2/twitter4j-core-4.0.2.jar</webClassPathEntry>
-        <webClassPathEntry>/Users/iida/.m2/repository/org/twitter4j/twitter4j-stream/4.0.2/twitter4j-stream-4.0.2.jar</webClassPathEntry>
-        <webClassPathEntry>/beartter_demo/webapp/WEB-INF/classes</webClassPathEntry>
+        <webClassPathEntry>/beartter_demo/target/classes</webClassPathEntry>
+        <webClassPathEntry>org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER</webClassPathEntry>
     </webClassPathEntries>
 </tomcatProjectProperties>

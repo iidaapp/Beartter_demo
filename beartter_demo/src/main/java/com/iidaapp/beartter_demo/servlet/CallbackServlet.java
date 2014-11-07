@@ -69,7 +69,7 @@ public class CallbackServlet extends HttpServlet {
 			resp.sendRedirect("main");
 			return;
 
-		} catch (TwitterException | ClassNotFoundException | SQLException e) {
+		} catch (TwitterException | SQLException e) {
 
 			// Extentionをキャッチした場合、ログを出力してエラー画面へ遷移。
 			e.printStackTrace();
