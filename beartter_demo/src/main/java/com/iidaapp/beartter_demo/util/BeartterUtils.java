@@ -8,16 +8,6 @@ import com.iidaapp.beartter_demo.db.DbUtils;
 
 public class BeartterUtils {
 
-	public static boolean validateSignUpForm(SignUpForm signUpForm) throws ClassNotFoundException, SQLException {
-
-		if(checkValueExistInSignUpForm(signUpForm) && isSamePassword(signUpForm.getPassword(), signUpForm.getPasswordConfirm()) && isUniqueUserNameSignUpForm(signUpForm.getUserName())
-				&& isUniqueEMailAddress(signUpForm.getMailAddress()))
-
-			return true;
-
-		return false;
-	}
-
 
 	public static boolean checkValueExistInSignUpForm(SignUpForm signUpForm) {
 
@@ -38,7 +28,7 @@ public class BeartterUtils {
 	}
 
 
-	public static boolean isUniqueUserNameSignUpForm(String userName) throws ClassNotFoundException, SQLException {
+	public static boolean isUniqueUserNameSignUpForm(String userName) throws SQLException {
 
 		int count = DbUtils.countUserInfoByBeartterId(userName);
 
@@ -49,7 +39,7 @@ public class BeartterUtils {
 	}
 
 
-	public static boolean isUniqueEMailAddress(String mailAddress) throws ClassNotFoundException, SQLException {
+	public static boolean isUniqueEMailAddress(String mailAddress) throws SQLException {
 
 		int count = DbUtils.countUserInfoByEmailAddress(mailAddress);
 

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.iidaapp.beartter_demo.util.BeartterUtils;
 import com.iidaapp.beartter_demo.util.SignUpForm;
+import com.iidaapp.beartter_demo.util.SignUpFormValidateResults;
 
 public class SignUpConfirm extends HttpServlet {
 
@@ -30,32 +31,51 @@ public class SignUpConfirm extends HttpServlet {
 
 		SignUpForm signUpForm = new SignUpForm(userName, password, passwordConfirm, mailAddress);
 
+		SignUpFormValidateResults results = null;
 		try {
-
-			validateSignUpForm(signUpForm);
-			if(!BeartterUtils.validateSignUpForm(signUpForm)){
-
-				sc.getRequestDispatcher("/page/SignUp.jsp").forward(req, resp);
-
-			}
-
-		} catch (ClassNotFoundException e) {
-
-			e.printStackTrace();
-			resp.sendRedirect("error");
+			results = validateSignUpForm(signUpForm);
 		} catch (SQLException e) {
-
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-			resp.sendRedirect("error");
 		}
 
+		if(!results.isCheckAllValueExistInSignUpForm()){
+			req.getSession().setAttribute("ValueExist", false);
+			sc.getRequestDispatcher("/page/SignUp.jsp").forward(req, resp);
+			return;
+		}
+		req.getSession().setAttribute("userName", userName);
+		req.getSession().setAttribute("mailAddress", mailAddress);
+
+		if(results.successAllValidate()){
+			req.getSession().setAttribute("password", password);
+			sc.getRequestDispatcher("/page/SignUpConfirm.jsp");
+			return;
+		}
 		
+		req.getSession().setAttribute("NotSamePassword", !results.isSamePassword());
+		req.getSession().setAttribute("NotUniqueEMailAddress", !results.isUniqueEMailAddress());
+		req.getSession().setAttribute("NotUniqueUserName", !results.isUniqueUserNameSignUpForm());
+
+		sc.getRequestDispatcher("/page/SignUp.jsp");
+		return;
 
 	}
 
 
-	private void validateSignUpForm(SignUpForm signUpForm) {
+	private static SignUpFormValidateResults validateSignUpForm(SignUpForm signUpForm) throws SQLException {
 
-		
+		SignUpFormValidateResults results = new SignUpFormValidateResults();
+		if (!BeartterUtils.checkValueExistInSignUpForm(signUpForm)) {
+			results.setCheckValueExistInSignUpForm(false);
+			return results;
+		}
+
+		results.setCheckValueExistInSignUpForm(true);
+		results.setSamePassword(BeartterUtils.isSamePassword(signUpForm.getPassword(), signUpForm.getPasswordConfirm()));
+		results.setUniqueEMailAddress(BeartterUtils.isUniqueEMailAddress(signUpForm.getMailAddress()));
+		results.setUniqueUserNameSignUpForm(BeartterUtils.isUniqueUserNameSignUpForm(signUpForm.getUserName()));
+
+		return results;
 	}
 }
