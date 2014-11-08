@@ -1,21 +1,22 @@
 package com.iidaapp.beartter_demo.db;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import com.iidaapp.beartter_demo.entity.AccessTokenEntity;
 import com.iidaapp.beartter_demo.entity.UserinfoEntity;
 
 public class DbUtils {
 
-	public static long selectBeartterIdFromAccessToken(long userId) throws SQLException {
+	public static String selectBeartterIdFromAccessToken(long userId) throws SQLException {
 
-		long beartterId = 0;
-		Statement stmt = null;
+		String beartterId = null;
+		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Connection con = null;
+		String sql = "SELECT beartter_id FROM beartter_db.access_token where user_id = ?";
 
 		try {
 
@@ -23,11 +24,12 @@ public class DbUtils {
 			con = DbConnection.getConnection();
 
 			// 実行
-			stmt = con.createStatement();
-			rs = stmt.executeQuery("SELECT beartter_id FROM beartter_db.access_token where user_id = " + userId);
+			stmt = con.prepareStatement(sql);
+			stmt.setLong(1, userId);
+			rs = stmt.executeQuery();
 
 			if (rs.next()) {
-				beartterId = rs.getInt("beartter_id");
+				beartterId = rs.getString("beartter_id");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -49,10 +51,11 @@ public class DbUtils {
 
 	public static int countUserInfoByBeartterId(String beartterId) throws SQLException {
 
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Connection con = null;
 		int resultCount = 0;
+		String sql = "SELECT COUNT(*) FROM beartter_db.userinfo where beartter_id = ?";
 
 		try {
 
@@ -60,8 +63,9 @@ public class DbUtils {
 			con = DbConnection.getConnection();
 
 			// 実行
-			stmt = con.createStatement();
-			rs = stmt.executeQuery("SELECT COUNT(*) FROM beartter_db.userinfo where beartter_id = '" + beartterId + "'");
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, beartterId);
+			rs = stmt.executeQuery();
 
 			if (rs.next()) {
 				resultCount = rs.getInt(1);
@@ -86,10 +90,11 @@ public class DbUtils {
 
 	public static int countUserInfoByEmailAddress(String EmailAddress) throws SQLException {
 
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Connection con = null;
 		int resultCount = 0;
+		String sql = "SELECT COUNT(*) FROM beartter_db.userinfo where email_address = ?";
 
 		try {
 
@@ -97,8 +102,9 @@ public class DbUtils {
 			con = DbConnection.getConnection();
 
 			// 実行
-			stmt = con.createStatement();
-			rs = stmt.executeQuery("SELECT COUNT(*) FROM beartter_db.userinfo where email_address = '" + EmailAddress + "'");
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, EmailAddress);
+			rs = stmt.executeQuery();
 
 			if (rs.next()) {
 				resultCount = rs.getInt(1);
@@ -122,9 +128,10 @@ public class DbUtils {
 
 	public static int insertAccessToken(AccessTokenEntity accessTokenEntity) throws SQLException {
 
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		Connection con = null;
 		int rs = 0;
+		String sql = "insert into beartter_db.access_token values (?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 
@@ -132,16 +139,16 @@ public class DbUtils {
 			con = DbConnection.getConnection();
 
 			// 実行
-			stmt = con.createStatement();
-			rs = stmt.executeUpdate("insert into beartter_db.access_token values ('"
-					+ accessTokenEntity.getBeartterId() + "', '"
-					+ accessTokenEntity.getoAuthToken() + "', '"
-					+ accessTokenEntity.getoAuthSecret() + "', '"
-					+ accessTokenEntity.getUserId() + "', '"
-					+ accessTokenEntity.getScreenName() + "', '"
-					+ accessTokenEntity.getAddDate() + "', '"
-					+ accessTokenEntity.getModifyDate() + "'"
-					+ ")");
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, accessTokenEntity.getBeartterId());
+			stmt.setString(2, accessTokenEntity.getoAuthToken());
+			stmt.setString(3, accessTokenEntity.getoAuthSecret());
+			stmt.setLong(4, accessTokenEntity.getUserId());
+			stmt.setString(5, accessTokenEntity.getScreenName());
+			stmt.setTimestamp(6, accessTokenEntity.getAddDate());
+			stmt.setTimestamp(7, accessTokenEntity.getModifyDate());
+
+			rs = stmt.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -161,9 +168,10 @@ public class DbUtils {
 
 	public static int insertUserinfoEntity(UserinfoEntity userinfoEntity) throws SQLException {
 
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		int rs = 0;
 		Connection con = null;
+		String sql = "insert into beartter_db.userinfo values (?, ?, ?, ?, ?, ?)";
 
 		try {
 
@@ -171,15 +179,14 @@ public class DbUtils {
 			con = DbConnection.getConnection();
 
 			// 実行
-			stmt = con.createStatement();
-			rs = stmt.executeUpdate("insert into beartter_db.userinfo values ('"
-			+ userinfoEntity.getBeartterId() + "', '"
-			+ userinfoEntity.getEmailAddress() + "', '"
-			+ userinfoEntity.getPassword() + "', '"
-			+ userinfoEntity.getBirthDate() + "', '"
-			+ userinfoEntity.getAddDate() + "', '"
-			+ userinfoEntity.getModifyDate() + "'"
-			+ ")");
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, userinfoEntity.getBeartterId());
+			stmt.setString(2, userinfoEntity.getEmailAddress());
+			stmt.setString(3, userinfoEntity.getPassword());
+			stmt.setDate(4, userinfoEntity.getBirthDate());
+			stmt.setTimestamp(5, userinfoEntity.getAddDate());
+			stmt.setTimestamp(6, userinfoEntity.getModifyDate());
+			rs = stmt.executeUpdate();
 
 		} catch (Exception e) {
 			throw new RuntimeException();

@@ -9,12 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
+
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
 import com.iidaapp.beartter_demo.db.DbUtils;
+import com.iidaapp.beartter_demo.util.BeartterUtils;
 
 public class CallbackServlet extends HttpServlet {
 
@@ -57,10 +60,10 @@ public class CallbackServlet extends HttpServlet {
 			session.setAttribute("Twitter", twitter);
 
 			// アクセストークン情報が登録済みか判定
-			long beatterId = DbUtils.selectBeartterIdFromAccessToken(accessToken.getUserId());
+			String beartterId = DbUtils.selectBeartterIdFromAccessToken(accessToken.getUserId());
 
 			// beartterIdが0の場合、SELECT取得なし。会員登録画面へ遷移
-			if (beatterId == 0) {
+			if (StringUtils.isEmpty(beartterId)) {
 				resp.sendRedirect("signup");
 				return;
 			}
