@@ -39,7 +39,7 @@ public class BeartterUtils {
 	}
 
 
-	public static boolean isUniqueEMailAddress(String mailAddress) throws SQLException {
+	public static boolean isUniqueEmailAddress(String mailAddress) throws SQLException {
 
 		int count = DbUtils.countUserInfoByEmailAddress(mailAddress);
 
@@ -47,6 +47,13 @@ public class BeartterUtils {
 			return true;
 
 		return false;
+	}
+	
+	public static boolean isCorrectEmailAddress(String mailAddress){
+		
+		String mailAddressPattern = "[0-9a-zA-Z_\\-]+@[0-9a-zA-Z_\\-]+(\\.[0-9a-zA-Z_\\-]+){1,}";
+
+		return mailAddress.matches(mailAddressPattern);
 	}
 
 }

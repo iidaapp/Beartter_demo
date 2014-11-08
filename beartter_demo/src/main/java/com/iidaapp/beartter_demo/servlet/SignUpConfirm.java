@@ -83,18 +83,20 @@ public class SignUpConfirm extends HttpServlet {
 
 		if (!results.isCheckAllValueExistInSignUpForm()) {
 			session.setAttribute("ValueExist", false);
-			session.removeAttribute("NotSamePassword");
-			session.removeAttribute("NotUniqueEMailAddress");
-			session.removeAttribute("NotUniqueUserName");
+			session.removeAttribute("SamePassword");
+			session.removeAttribute("UniqueEMailAddress");
+			session.removeAttribute("UniqueUserName");
+			session.removeAttribute("CorrectEmailAddress");
 			return;
 		}
 
 		session.removeAttribute("ValueExist");
 
 		if (results.successAllValidate()) {
-			session.removeAttribute("NotSamePassword");
-			session.removeAttribute("NotUniqueEMailAddress");
-			session.removeAttribute("NotUniqueUserName");
+			session.removeAttribute("SamePassword");
+			session.removeAttribute("UniqueEMailAddress");
+			session.removeAttribute("UniqueUserName");
+			session.removeAttribute("CorrectEmailAddress");
 
 			return;
 		}
@@ -102,6 +104,7 @@ public class SignUpConfirm extends HttpServlet {
 		session.setAttribute("SamePassword", results.isSamePassword());
 		session.setAttribute("UniqueEMailAddress", results.isUniqueEMailAddress());
 		session.setAttribute("UniqueUserName", results.isUniqueUserNameSignUpForm());
+		session.setAttribute("CorrectEmailAddress", results.isCorrectEmailAddress());
 
 		return;
 	}
@@ -117,8 +120,9 @@ public class SignUpConfirm extends HttpServlet {
 
 		results.setCheckValueExistInSignUpForm(true);
 		results.setSamePassword(BeartterUtils.isSamePassword(signUpForm.getPassword(), signUpForm.getPasswordConfirm()));
-		results.setUniqueEMailAddress(BeartterUtils.isUniqueEMailAddress(signUpForm.getMailAddress()));
+		results.setUniqueEMailAddress(BeartterUtils.isUniqueEmailAddress(signUpForm.getMailAddress()));
 		results.setUniqueUserNameSignUpForm(BeartterUtils.isUniqueUserNameSignUpForm(signUpForm.getUserName()));
+		results.setCorrectEmailAddress(BeartterUtils.isCorrectEmailAddress(signUpForm.getMailAddress()));
 
 		return results;
 	}

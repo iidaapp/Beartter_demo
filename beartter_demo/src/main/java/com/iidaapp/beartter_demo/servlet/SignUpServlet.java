@@ -42,9 +42,10 @@ public class SignUpServlet extends HttpServlet {
 
 			// 念のため、以降使うAttributeの破棄
 			session.removeAttribute("ValueExist");
-			session.removeAttribute("NotSamePassword");
-			session.removeAttribute("NotUniqueEMailAddress");
-			session.removeAttribute("NotUniqueUserName");
+			session.removeAttribute("SamePassword");
+			session.removeAttribute("UniqueEMailAddress");
+			session.removeAttribute("UniqueUserName");
+			session.removeAttribute("CorrectEmailAddress");
 
 			// 表示するためのユーザ情報の格納
 			session.setAttribute("screenName", accessToken.getScreenName());

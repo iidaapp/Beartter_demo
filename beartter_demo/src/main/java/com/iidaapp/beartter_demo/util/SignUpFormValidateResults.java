@@ -6,13 +6,11 @@ public class SignUpFormValidateResults {
 	private boolean isSamePassword;
 	private boolean isUniqueUserNameSignUpForm;
 	private boolean isUniqueEMailAddress;
+	private boolean isCorrectEmailAddress;
 
 
 	public boolean successAllValidate() {
-		if (checkAllValueExistInSignUpForm
-				&& isSamePassword
-				&& isUniqueUserNameSignUpForm
-				&& isUniqueEMailAddress)
+		if (checkAllValueExistInSignUpForm && isSamePassword && isUniqueUserNameSignUpForm && isUniqueEMailAddress && isCorrectEmailAddress)
 			return true;
 
 		return false;
@@ -56,6 +54,16 @@ public class SignUpFormValidateResults {
 
 	public void setUniqueEMailAddress(boolean isUniqueEMailAddress) {
 		this.isUniqueEMailAddress = isUniqueEMailAddress;
+	}
+
+
+	public boolean isCorrectEmailAddress() {
+		return isCorrectEmailAddress;
+	}
+
+
+	public void setCorrectEmailAddress(boolean isCorrectEmailAddress) {
+		this.isCorrectEmailAddress = isCorrectEmailAddress;
 	}
 
 }

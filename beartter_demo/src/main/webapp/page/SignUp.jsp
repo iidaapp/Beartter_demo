@@ -27,9 +27,13 @@
 		<c:if test="${!empty UniqueUserName and !UniqueUserName}">
 		ユーザー名使用済み
 		</c:if>
+		<c:if test="${!empty CorrectEmailAddress and !CorrectEmailAddress}">
+		Emailの形式じゃない
+		</c:if>
 		<div>
 			Beartterユーザー名<br />
-			<input type="text" name="userName">
+			<input type="text" name="userName" <c:if test="${!empty userName}">value="${userName}"</c:if> >
+			
 		</div>
 		<br />
 		<div>
@@ -44,7 +48,7 @@
 		<br />
 		<div>
 			メールアドレス<br />
-			<input type="text" name="mailAddress">
+			<input type="text" name="mailAddress" <c:if test="${!empty password}">value="${password}"</c:if> >
 		</div>
 		<br /> <br />
 		<div>
