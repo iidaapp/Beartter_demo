@@ -6,6 +6,9 @@ public class SignUpForm {
 	private String password;
 	private String passwordConfirm;
 	private String mailAddress;
+	private String year;
+	private String month;
+	private String day;
 
 
 	public SignUpForm(String userName, String password, String passwordConfirm, String mailAddress) {
@@ -15,6 +18,10 @@ public class SignUpForm {
 		this.passwordConfirm = passwordConfirm;
 		this.mailAddress = mailAddress;
 
+	}
+
+
+	public SignUpForm() {
 	}
 
 
@@ -55,5 +62,35 @@ public class SignUpForm {
 
 	public void setMailAddress(String mailAddress) {
 		this.mailAddress = mailAddress;
+	}
+
+
+	public String getYear() {
+		return year;
+	}
+
+
+	public String getMonth() {
+		return month;
+	}
+
+
+	public String getDay() {
+		return day;
+	}
+
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+
+	public void setDay(String day) {
+		this.day = day;
 	}
 }

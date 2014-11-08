@@ -30,12 +30,23 @@ public class SignUpConfirm extends HttpServlet {
 
 		// Formの入力情報の取得
 		String userName = (String) req.getParameter("userName");
+		String mailAddress = (String) req.getParameter("mailAddress");
+		String year = (String) req.getParameter("year");
+		String month = (String) req.getParameter("month");
+		String day = (String) req.getParameter("day");
 		String password = (String) req.getParameter("password");
 		String passwordConfirm = (String) req.getParameter("passwordConfirm");
-		String mailAddress = (String) req.getParameter("mailAddress");
+
 
 		// Form入力オブジェクト生成
-		SignUpForm signUpForm = new SignUpForm(userName, password, passwordConfirm, mailAddress);
+		SignUpForm signUpForm = new SignUpForm();
+		signUpForm.setUserName(userName);
+		signUpForm.setMailAddress(mailAddress);
+		signUpForm.setPassword(password);
+		signUpForm.setPasswordConfirm(passwordConfirm);
+		signUpForm.setYear(year);
+		signUpForm.setMonth(month);
+		signUpForm.setDay(day);
 
 		// バリデーション結果オブジェクトにバリデーション結果の格納
 		SignUpFormValidateResults results = null;
@@ -52,6 +63,9 @@ public class SignUpConfirm extends HttpServlet {
 		// 入力情報をセッションに格納
 		session.setAttribute("userName", userName);
 		session.setAttribute("mailAddress", mailAddress);
+		session.setAttribute("year", year);
+		session.setAttribute("month", month);
+		session.setAttribute("day", day);
 
 		// ひとつでも空欄の入力がある場合、入力画面へ遷移
 		if (!results.isCheckAllValueExistInSignUpForm()) {
@@ -87,6 +101,7 @@ public class SignUpConfirm extends HttpServlet {
 			session.removeAttribute("UniqueEMailAddress");
 			session.removeAttribute("UniqueUserName");
 			session.removeAttribute("CorrectEmailAddress");
+			session.removeAttribute("CorrectBirthDate");
 			return;
 		}
 
@@ -97,6 +112,7 @@ public class SignUpConfirm extends HttpServlet {
 			session.removeAttribute("UniqueEMailAddress");
 			session.removeAttribute("UniqueUserName");
 			session.removeAttribute("CorrectEmailAddress");
+			session.removeAttribute("CorrectBirthDate");
 
 			return;
 		}
@@ -105,6 +121,7 @@ public class SignUpConfirm extends HttpServlet {
 		session.setAttribute("UniqueEMailAddress", results.isUniqueEMailAddress());
 		session.setAttribute("UniqueUserName", results.isUniqueUserNameSignUpForm());
 		session.setAttribute("CorrectEmailAddress", results.isCorrectEmailAddress());
+		session.setAttribute("CorrectBirthDate", results.isCorrectEmailAddress());
 
 		return;
 	}
@@ -123,6 +140,7 @@ public class SignUpConfirm extends HttpServlet {
 		results.setUniqueEMailAddress(BeartterUtils.isUniqueEmailAddress(signUpForm.getMailAddress()));
 		results.setUniqueUserNameSignUpForm(BeartterUtils.isUniqueUserNameSignUpForm(signUpForm.getUserName()));
 		results.setCorrectEmailAddress(BeartterUtils.isCorrectEmailAddress(signUpForm.getMailAddress()));
+		results.setCorrectBirthDate(BeartterUtils.isCorrectBirthDate(signUpForm.getYear(), signUpForm.getMonth(), signUpForm.getDay()));
 
 		return results;
 	}

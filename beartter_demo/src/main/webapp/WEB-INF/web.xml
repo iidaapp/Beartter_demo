@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
- version="2.4">
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	version="2.4">
 
 	<servlet>
 		<servlet-name>twitterCallbackServlet</servlet-name>
@@ -25,8 +24,8 @@
 		<servlet-class>com.iidaapp.beartter_demo.servlet.SignUpConfirm</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>testConfirm</servlet-name>
-		<servlet-class>com.iidaapp.beartter_demo.servlet.OrenoTest</servlet-class>
+		<servlet-name>signUpComplete</servlet-name>
+		<servlet-class>com.iidaapp.beartter_demo.servlet.SignUpComplete</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
@@ -50,7 +49,7 @@
 		<url-pattern>/confirm</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>testConfirm</servlet-name>
-		<url-pattern>/test</url-pattern>
+		<servlet-name>signUpComplete</servlet-name>
+		<url-pattern>/complete</url-pattern>
 	</servlet-mapping>
 </web-app>

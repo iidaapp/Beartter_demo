@@ -30,30 +30,38 @@
 		<c:if test="${!empty CorrectEmailAddress and !CorrectEmailAddress}">
 		Emailの形式じゃない
 		</c:if>
+		<c:if test="${!empty CorrectBirthDate and !CorrectBirthDate}">
+		年月日の形式じゃない
+		</c:if>
 		<div>
-			Beartterユーザー名<br />
-			<input type="text" name="userName" <c:if test="${!empty userName}">value="${userName}"</c:if> >
-			
+			Beartterユーザー名<br /> <input type="text" name="userName"
+				<c:if test="${!empty userName}">value="${userName}"</c:if>>
+
 		</div>
 		<br />
 		<div>
-			パスワード<br />
-			<input type="password" name="password">
+			メールアドレス<br /> <input type="text" name="mailAddress"
+				<c:if test="${!empty password}">value="${password}"</c:if>>
 		</div>
 		<br />
 		<div>
-			パスワード確認<br />
-			<input type="password" name="passwordConfirm">
+			誕生日<br /> 
+			<input type="text" name="year" size="4" <c:if test="${!empty year}">value="${year}"</c:if>>年
+			<input type="text" name="month" size="2"<c:if test="${!empty month}">value="${month}"</c:if>>月
+			<input type="text" name="day" size="2"<c:if test="${!empty day}">value="${day}"</c:if>>日
 		</div>
 		<br />
 		<div>
-			メールアドレス<br />
-			<input type="text" name="mailAddress" <c:if test="${!empty password}">value="${password}"</c:if> >
+			パスワード<br /> <input type="password" name="password">
 		</div>
+		<br />
+		<div>
+			パスワード確認<br /> <input type="password" name="passwordConfirm">
+		</div>
+
 		<br /> <br />
 		<div>
-			<br />
-			<input type="submit" name="submit">
+			<br /> <input type="submit" name="submit">
 		</div>
 	</form>
 

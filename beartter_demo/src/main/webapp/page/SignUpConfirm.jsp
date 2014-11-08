@@ -16,11 +16,12 @@
 	<div>userName : ${userName}</div>
 	<div>mailAddress : ${mailAddress}</div>
 	<div>password : 入力されたパスワード</div>
+	<div>birthDate : ${year} 年 ${month} 月 ${day} 日</div>
 	<p>以上の内容で登録してよろしいですか？</p>
-	<form name="send">
-		<input type="button" onClick="register()" value="登録">
+	<form name="send" action="complete">
+		<input type="submit" value="登録">
 		<input
-			type="button" onClick="return()" value="戻る">
+			type="button" value="戻る">
 	</form>
 </body>
 <script type="text/javascript">

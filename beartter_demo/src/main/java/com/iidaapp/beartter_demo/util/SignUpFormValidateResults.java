@@ -7,6 +7,7 @@ public class SignUpFormValidateResults {
 	private boolean isUniqueUserNameSignUpForm;
 	private boolean isUniqueEMailAddress;
 	private boolean isCorrectEmailAddress;
+	private boolean isCorrectBirthDate;
 
 
 	public boolean successAllValidate() {
@@ -64,6 +65,21 @@ public class SignUpFormValidateResults {
 
 	public void setCorrectEmailAddress(boolean isCorrectEmailAddress) {
 		this.isCorrectEmailAddress = isCorrectEmailAddress;
+	}
+
+
+	public boolean isCorrectBirthDate() {
+		return isCorrectBirthDate;
+	}
+
+
+	public void setCheckAllValueExistInSignUpForm(boolean checkAllValueExistInSignUpForm) {
+		this.checkAllValueExistInSignUpForm = checkAllValueExistInSignUpForm;
+	}
+
+
+	public void setCorrectBirthDate(boolean isCorrectBirthDate) {
+		this.isCorrectBirthDate = isCorrectBirthDate;
 	}
 
 }
