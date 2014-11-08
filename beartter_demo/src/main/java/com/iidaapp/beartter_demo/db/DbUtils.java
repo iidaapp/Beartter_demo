@@ -61,10 +61,10 @@ public class DbUtils {
 
 			// 実行
 			stmt = con.createStatement();
-			rs = stmt.executeQuery("SELECT COUNT(*) FROM beartter_db.userinfo where beartter_id = " + beartterId);
+			rs = stmt.executeQuery("SELECT COUNT(*) FROM beartter_db.userinfo where beartter_id = '" + beartterId + "'");
 
 			if(rs.next()) {
-				resultCount = rs.getInt("cnt");
+				resultCount = rs.getInt(1);
 			}
 
 		} catch (Exception e) {
@@ -98,10 +98,10 @@ public class DbUtils {
 
 			// 実行
 			stmt = con.createStatement();
-			rs = stmt.executeQuery("SELECT COUNT(*) FROM beartter_db.userinfo where email_address = " + EmailAddress);
+			rs = stmt.executeQuery("SELECT COUNT(*) FROM beartter_db.userinfo where email_address = '" + EmailAddress + "'");
 
 			if(rs.next()) {
-				resultCount = rs.getInt("cnt");
+				resultCount = rs.getInt(1);
 			}
 
 		} catch (Exception e) {

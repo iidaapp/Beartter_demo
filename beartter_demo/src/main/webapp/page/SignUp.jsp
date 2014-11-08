@@ -18,6 +18,15 @@
 		<c:if test="${!empty ValueExist and !ValueExist}">
 		空欄あり
 		</c:if>
+		<c:if test="${!empty SamePassword and !SamePassword}">
+		パスワード不一致
+		</c:if>
+		<c:if test="${!empty UniqueEMailAddress and !UniqueEMailAddress}">
+		メールアドレス使用済み
+		</c:if>
+		<c:if test="${!empty UniqueUserName and !UniqueUserName}">
+		ユーザー名使用済み
+		</c:if>
 		<div>
 			Beartterユーザー名<br />
 			<input type="text" name="userName">

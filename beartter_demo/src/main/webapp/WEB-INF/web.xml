@@ -24,6 +24,10 @@
 		<servlet-name>signUpConfirm</servlet-name>
 		<servlet-class>com.iidaapp.beartter_demo.servlet.SignUpConfirm</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>testConfirm</servlet-name>
+		<servlet-class>com.iidaapp.beartter_demo.servlet.OrenoTest</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>signUpServlet</servlet-name>
@@ -44,5 +48,9 @@
 	<servlet-mapping>
 		<servlet-name>signUpConfirm</servlet-name>
 		<url-pattern>/confirm</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>testConfirm</servlet-name>
+		<url-pattern>/test</url-pattern>
 	</servlet-mapping>
 </web-app>

@@ -18,10 +18,6 @@ public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private static String consumerKey = "ptN7vHD2pPLKSquWAcSdyHAzU";
-	private static String consumerSecret = "JV22LP21h8VsRYWkouR6aACcMmX85D48C759QWgglu9CmDOLdJ";
-
-
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -29,7 +25,7 @@ public class LoginServlet extends HttpServlet {
 
 		// TwitterFactoryの設定
 		ConfigurationBuilder cb = new ConfigurationBuilder();
-		cb.setDebugEnabled(true).setOAuthConsumerKey(consumerKey).setOAuthConsumerSecret(consumerSecret);
+		cb.setDebugEnabled(true);
 		TwitterFactory tf = new TwitterFactory(cb.build());
 
 		// Twitterインスタンス取得
