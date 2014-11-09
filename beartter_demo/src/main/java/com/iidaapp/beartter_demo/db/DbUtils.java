@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.iidaapp.beartter_demo.entity.AccessTokenEntity;
 import com.iidaapp.beartter_demo.entity.UserinfoEntity;
@@ -201,4 +203,43 @@ public class DbUtils {
 		return rs;
 	}
 
+
+	public static List<AccessTokenEntity> selectAccessTokenFromAccessToken(String beartterId) throws SQLException{
+		PreparedStatement stmt = null;
+		ResultSet rs;
+		Connection con = null;
+		List<AccessTokenEntity> entityList = new ArrayList<AccessTokenEntity>();
+		String sql = "select * from beartter_db.access_token where beartter_id = ?";
+		
+		try{
+			con = DbConnection.getConnection();
+			
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, beartterId);
+			rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				AccessTokenEntity entity = new AccessTokenEntity();
+				entity.setBeartterId(rs.getString(1));
+				entity.setoAuthToken(rs.getString(2));
+				entity.setoAuthSecret(rs.getString(3));
+				entity.setUserId(rs.getLong(4));
+				entity.setScreenName(rs.getString(5));
+				entity.setAddDate(rs.getTimestamp(6));
+				entity.setModifyDate(rs.getTimestamp(7));
+				
+				entityList.add(entity);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException();
+		} finally {
+			if (stmt != null)
+				stmt.close();
+			if (con != null)
+				con.close();
+
+		}
+
+		return entityList;
+	}
 }

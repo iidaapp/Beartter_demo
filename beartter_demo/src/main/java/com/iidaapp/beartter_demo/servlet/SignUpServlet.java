@@ -41,15 +41,15 @@ public class SignUpServlet extends HttpServlet {
 			User user = twitter.verifyCredentials();
 
 			// 念のため、以降使うAttributeの破棄
-			session.removeAttribute("ValueExist");
-			session.removeAttribute("SamePassword");
-			session.removeAttribute("UniqueEMailAddress");
-			session.removeAttribute("UniqueUserName");
-			session.removeAttribute("CorrectEmailAddress");
+			req.removeAttribute("ValueExist");
+			req.removeAttribute("SamePassword");
+			req.removeAttribute("UniqueEMailAddress");
+			req.removeAttribute("UniqueUserName");
+			req.removeAttribute("CorrectEmailAddress");
 
 			// 表示するためのユーザ情報の格納
-			session.setAttribute("screenName", accessToken.getScreenName());
-			session.setAttribute("profileImageUrl", user.getProfileImageURL());
+			req.setAttribute("screenName", accessToken.getScreenName());
+			req.setAttribute("profileImageUrl", user.getProfileImageURL());
 
 			// 遷移
 			req.getRequestDispatcher("/page/SignUp.jsp").forward(req, resp);

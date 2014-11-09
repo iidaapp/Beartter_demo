@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
-	version="2.4">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
 
 	<servlet>
 		<servlet-name>twitterCallbackServlet</servlet-name>
@@ -27,6 +27,11 @@
 		<servlet-name>signUpComplete</servlet-name>
 		<servlet-class>com.iidaapp.beartter_demo.servlet.SignUpComplete</servlet-class>
 	</servlet>
+	<servlet>
+		<async-supported>true</async-supported>
+		<servlet-name>PollingServlet</servlet-name>
+		<servlet-class>com.iidaapp.beartter_demo.servlet.PoolingServlet</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>signUpServlet</servlet-name>
@@ -51,5 +56,9 @@
 	<servlet-mapping>
 		<servlet-name>signUpComplete</servlet-name>
 		<url-pattern>/complete</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PollingServlet</servlet-name>
+		<url-pattern>/polling</url-pattern>
 	</servlet-mapping>
 </web-app>

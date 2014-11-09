@@ -69,6 +69,14 @@ public class SignUpComplete extends HttpServlet {
 			req.getRequestDispatcher("error");
 		}
 
+		session.removeAttribute("userName");
+		session.removeAttribute("mailAddress");
+		session.removeAttribute("password");
+		session.removeAttribute("year");
+		session.removeAttribute("month");
+		session.removeAttribute("day");
+
+		session.setAttribute("beartterId", beartterId);
 		req.getRequestDispatcher("/page/SignUpComplete.jsp").forward(req, resp);
 
 	}

@@ -17,7 +17,6 @@ import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
 import com.iidaapp.beartter_demo.db.DbUtils;
-import com.iidaapp.beartter_demo.util.BeartterUtils;
 
 public class CallbackServlet extends HttpServlet {
 
@@ -55,20 +54,27 @@ public class CallbackServlet extends HttpServlet {
 				return;
 			}
 
-			// アクセストークン、Twitterインスタンスをセッションに再格納
-			session.setAttribute("AccessToken", accessToken);
-			session.setAttribute("Twitter", twitter);
-
 			// アクセストークン情報が登録済みか判定
 			String beartterId = DbUtils.selectBeartterIdFromAccessToken(accessToken.getUserId());
 
 			// beartterIdが0の場合、SELECT取得なし。会員登録画面へ遷移
 			if (StringUtils.isEmpty(beartterId)) {
+
+				// アクセストークン、Twitterインスタンスをセッションに再格納
+				session.setAttribute("AccessToken", accessToken);
+				session.setAttribute("Twitter", twitter);
+
 				resp.sendRedirect("signup");
 				return;
 			}
 
 			// 取得ありの場合、認証完了。ログイン完了としてトップ画面へ遷移
+			// アクセストークン、Twitterインスタンスの破棄
+			session.removeAttribute("AccessToken");
+			session.removeAttribute("Twitter");
+
+			// beartterIdの格納
+			session.setAttribute("beartterId", beartterId);
 			resp.sendRedirect("main");
 			return;
 
