@@ -12,7 +12,7 @@
 <p>GOOD DESIGN LOGO</p>
 </div>
 <div>
-<a href="http://127.0.0.1:8082/beartter_demo/login"><img src = "/beartter_demo/staticcontents/sign-in-with-twitter-gray.png" /></a>
+<a href="http://127.0.0.1:8082/beartter_demo/login"><img src = "/beartter_demo/staticcontents/img/sign-in-with-twitter-gray.png" /></a>
 </div>
 </body>
 </html>

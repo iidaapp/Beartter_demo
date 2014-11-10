@@ -27,11 +27,6 @@
 		<servlet-name>signUpComplete</servlet-name>
 		<servlet-class>com.iidaapp.beartter_demo.servlet.SignUpComplete</servlet-class>
 	</servlet>
-	<servlet>
-		<async-supported>true</async-supported>
-		<servlet-name>PollingServlet</servlet-name>
-		<servlet-class>com.iidaapp.beartter_demo.servlet.PoolingServlet</servlet-class>
-	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>signUpServlet</servlet-name>
@@ -57,8 +52,5 @@
 		<servlet-name>signUpComplete</servlet-name>
 		<url-pattern>/complete</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>PollingServlet</servlet-name>
-		<url-pattern>/polling</url-pattern>
-	</servlet-mapping>
+
 </web-app>
