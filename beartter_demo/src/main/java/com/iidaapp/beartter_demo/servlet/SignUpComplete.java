@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +18,9 @@ import com.iidaapp.beartter_demo.db.DbUtils;
 import com.iidaapp.beartter_demo.entity.AccessTokenEntity;
 import com.iidaapp.beartter_demo.entity.UserinfoEntity;
 import com.iidaapp.beartter_demo.util.BeartterUtils;
+import com.iidaapp.beartter_demo.util.SignUpForm;
 
+@WebServlet(name="signUpComplete", urlPatterns="/complete")
 public class SignUpComplete extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -26,23 +29,37 @@ public class SignUpComplete extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		execute(req, resp);
+	}
+
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		execute(req, resp);
+	}
+
+
+	private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+
 		HttpSession session = req.getSession(false);
-		if (session == null) {
+		if(session == null) {
 			System.out.println("session is null");
 			req.getRequestDispatcher("error");
 		}
 
 		// Twitter情報、ユーザー情報のDBへの登録
 		AccessToken accessToken = (AccessToken) session.getAttribute("AccessToken");
+		SignUpForm signUpForm = (SignUpForm) session.getAttribute("signUpForm");
 		UserinfoEntity userinfoEntity = new UserinfoEntity();
 		AccessTokenEntity accessTokenEntity = new AccessTokenEntity();
 
-		String beartterId = (String) session.getAttribute("userName");
-		String emailAddress = (String) session.getAttribute("mailAddress");
-		String password = (String) session.getAttribute("password");
-		String year = (String) session.getAttribute("year");
-		String month = (String) session.getAttribute("month");
-		String day = (String) session.getAttribute("day");
+		String beartterId = signUpForm.getUserName();
+		String emailAddress = signUpForm.getMailAddress();
+		String password = signUpForm.getPassword();
+		String year = signUpForm.getYear();
+		String month = signUpForm.getMonth();
+		String day = signUpForm.getDay();
 		Date birthDate = BeartterUtils.getBirthDate(year, month, day);
 
 		userinfoEntity.setBeartterId(beartterId);
@@ -69,15 +86,13 @@ public class SignUpComplete extends HttpServlet {
 			req.getRequestDispatcher("error");
 		}
 
-		session.removeAttribute("userName");
-		session.removeAttribute("mailAddress");
-		session.removeAttribute("password");
-		session.removeAttribute("year");
-		session.removeAttribute("month");
-		session.removeAttribute("day");
+		session.removeAttribute("signUpForm");
+		session.removeAttribute("AccessToken");
+		session.removeAttribute("Twitter");
+		session.removeAttribute("screenName");
+		session.removeAttribute("profileImageUrl");
 
 		session.setAttribute("beartterId", beartterId);
 		req.getRequestDispatcher("/page/SignUpComplete.jsp").forward(req, resp);
-
 	}
 }

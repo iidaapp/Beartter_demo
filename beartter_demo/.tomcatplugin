@@ -9,7 +9,7 @@
     <extraInfo></extraInfo>
     <webPath>/beartter_demo</webPath>
     <webClassPathEntries>
-        <webClassPathEntry>/beartter_demo/target/classes</webClassPathEntry>
+        <webClassPathEntry>/beartter_demo/src/main/webapp/WEB-INF/classes</webClassPathEntry>
         <webClassPathEntry>org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER</webClassPathEntry>
     </webClassPathEntries>
 </tomcatProjectProperties>

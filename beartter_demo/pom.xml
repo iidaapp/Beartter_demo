@@ -10,6 +10,11 @@
 	<name>beartter_demo</name>
 	<url>http://maven.apache.org</url>
 
+	<build>
+		<outputDirectory>src\main\webapp\WEB-INF\classes</outputDirectory>
+		<testOutputDirectory>src\main\webapp\WEB-INF\test-classes</testOutputDirectory>
+	</build>
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -35,11 +40,8 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.3.2</version>
 		</dependency>
-<!-- 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.0.1</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>javax.servlet-api</artifactId> 
+			<version>3.0.1</version> </dependency> -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>

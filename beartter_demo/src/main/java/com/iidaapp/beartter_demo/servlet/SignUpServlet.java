@@ -3,6 +3,7 @@ package com.iidaapp.beartter_demo.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ import twitter4j.TwitterException;
 import twitter4j.User;
 import twitter4j.auth.AccessToken;
 
+@WebServlet(name="signUpServlet", urlPatterns="/signup")
 public class SignUpServlet extends HttpServlet {
 
 	/**
@@ -23,6 +25,18 @@ public class SignUpServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		execute(req, resp);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		execute(req, resp);
+	}
+
+
+	private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
 		// ログ出力
 		// TODO ログ出力方法
@@ -40,16 +54,9 @@ public class SignUpServlet extends HttpServlet {
 			Twitter twitter = (Twitter) session.getAttribute("Twitter");
 			User user = twitter.verifyCredentials();
 
-			// 念のため、以降使うAttributeの破棄
-			req.removeAttribute("ValueExist");
-			req.removeAttribute("SamePassword");
-			req.removeAttribute("UniqueEMailAddress");
-			req.removeAttribute("UniqueUserName");
-			req.removeAttribute("CorrectEmailAddress");
-
 			// 表示するためのユーザ情報の格納
-			req.setAttribute("screenName", accessToken.getScreenName());
-			req.setAttribute("profileImageUrl", user.getProfileImageURL());
+			session.setAttribute("screenName", accessToken.getScreenName());
+			session.setAttribute("profileImageUrl", user.getProfileImageURL());
 
 			// 遷移
 			req.getRequestDispatcher("/page/SignUp.jsp").forward(req, resp);
@@ -60,6 +67,5 @@ public class SignUpServlet extends HttpServlet {
 			e.printStackTrace();
 			req.getRequestDispatcher("/error").forward(req, resp);
 		}
-
 	}
 }

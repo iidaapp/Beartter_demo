@@ -3,6 +3,7 @@ package com.iidaapp.beartter_demo.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,9 +15,11 @@ import twitter4j.TwitterFactory;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
 
+@WebServlet(name="loginServlet", urlPatterns="/login")
 public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,6 +45,13 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("RequestToken", requestToken);
 			session.setAttribute("Twitter", twitter);
 			session.setAttribute("RequestServlet", "login");
+
+			// 念のため、以降使うAttributeの破棄
+			session.removeAttribute("ValueExist");
+			session.removeAttribute("SamePassword");
+			session.removeAttribute("UniqueEMailAddress");
+			session.removeAttribute("UniqueUserName");
+			session.removeAttribute("CorrectEmailAddress");
 
 			// 認証URLの取得（強制ログイン）
 			String url = requestToken.getAuthenticationURL() + "&force_login=true";

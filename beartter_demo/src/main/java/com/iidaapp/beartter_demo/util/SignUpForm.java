@@ -11,17 +11,15 @@ public class SignUpForm {
 	private String day;
 
 
-	public SignUpForm(String userName, String password, String passwordConfirm, String mailAddress) {
+	public SignUpForm(String userName, String password, String passwordConfirm, String mailAddress, String year, String month, String day) {
 
 		this.userName = userName;
 		this.password = password;
 		this.passwordConfirm = passwordConfirm;
 		this.mailAddress = mailAddress;
-
-	}
-
-
-	public SignUpForm() {
+		this.year = year;
+		this.month = month;
+		this.day = day;
 	}
 
 

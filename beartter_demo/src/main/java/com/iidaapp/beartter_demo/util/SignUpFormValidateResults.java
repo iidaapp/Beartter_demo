@@ -11,7 +11,7 @@ public class SignUpFormValidateResults {
 
 
 	public boolean successAllValidate() {
-		if (checkAllValueExistInSignUpForm && isSamePassword && isUniqueUserNameSignUpForm && isUniqueEMailAddress && isCorrectEmailAddress)
+		if (checkAllValueExistInSignUpForm && isSamePassword && isUniqueUserNameSignUpForm && isUniqueEMailAddress && isCorrectEmailAddress && isCorrectBirthDate)
 			return true;
 
 		return false;

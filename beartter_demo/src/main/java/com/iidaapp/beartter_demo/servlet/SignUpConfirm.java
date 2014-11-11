@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,13 +14,27 @@ import com.iidaapp.beartter_demo.util.BeartterUtils;
 import com.iidaapp.beartter_demo.util.SignUpForm;
 import com.iidaapp.beartter_demo.util.SignUpFormValidateResults;
 
+@WebServlet(name="signUpConfirm", urlPatterns="/confirm")
 public class SignUpConfirm extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		execute(req, resp);
+	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		execute(req, resp);
+
+	}
+
+
+	private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
 		// ログ出力
 		// TODO ログ出力方法
@@ -37,16 +52,8 @@ public class SignUpConfirm extends HttpServlet {
 		String password = (String) req.getParameter("password");
 		String passwordConfirm = (String) req.getParameter("passwordConfirm");
 
-
 		// Form入力オブジェクト生成
-		SignUpForm signUpForm = new SignUpForm();
-		signUpForm.setUserName(userName);
-		signUpForm.setMailAddress(mailAddress);
-		signUpForm.setPassword(password);
-		signUpForm.setPasswordConfirm(passwordConfirm);
-		signUpForm.setYear(year);
-		signUpForm.setMonth(month);
-		signUpForm.setDay(day);
+		SignUpForm signUpForm = new SignUpForm(userName, password, passwordConfirm, mailAddress, year, month, day);
 
 		// バリデーション結果オブジェクトにバリデーション結果の格納
 		SignUpFormValidateResults results = null;
@@ -58,33 +65,28 @@ public class SignUpConfirm extends HttpServlet {
 		}
 
 		// バリデーション結果情報をセッションに格納
-		setAttributeByValidationResults(session, results);
+		setAttributeByValidationResults(req, results);
 
 		// 入力情報をセッションに格納
-		session.setAttribute("userName", userName);
-		session.setAttribute("mailAddress", mailAddress);
-		session.setAttribute("year", year);
-		session.setAttribute("month", month);
-		session.setAttribute("day", day);
+		session.setAttribute("signUpForm", signUpForm);
 
 		// ひとつでも空欄の入力がある場合、入力画面へ遷移
-		if (!results.isCheckAllValueExistInSignUpForm()) {
+		if(!results.isCheckAllValueExistInSignUpForm()) {
 
-			req.getRequestDispatcher("/page/SignUp.jsp").forward(req, resp);
+			req.getRequestDispatcher("signup").forward(req, resp);
 			return;
 		}
 
-		// すべてのバリデーションがOKの場合、パスワードもセッションに格納して確認画面へ遷移
-		if (results.successAllValidate()) {
-			session.setAttribute("password", password);
+		// すべてのバリデーションがOKの場合確認画面へ遷移
+		if(results.successAllValidate()) {
+
 			req.getRequestDispatcher("/page/SignUpConfirm.jsp").forward(req, resp);
 			return;
 		}
 
 		// ひとつでもバリデーションがNGの場合、入力画面へ遷移
-		req.getRequestDispatcher("/page/SignUp.jsp").forward(req, resp);
+		req.getRequestDispatcher("signup").forward(req, resp);
 		return;
-
 	}
 
 
@@ -93,44 +95,32 @@ public class SignUpConfirm extends HttpServlet {
 	 * @param session
 	 * @param results
 	 */
-	private void setAttributeByValidationResults(HttpSession session, SignUpFormValidateResults results) {
+	private void setAttributeByValidationResults(HttpServletRequest req, SignUpFormValidateResults results) {
 
-		if (!results.isCheckAllValueExistInSignUpForm()) {
-			session.setAttribute("ValueExist", false);
-			session.removeAttribute("SamePassword");
-			session.removeAttribute("UniqueEMailAddress");
-			session.removeAttribute("UniqueUserName");
-			session.removeAttribute("CorrectEmailAddress");
-			session.removeAttribute("CorrectBirthDate");
+		if(!results.isCheckAllValueExistInSignUpForm()) {
+			req.setAttribute("ValueExist", false);
 			return;
 		}
 
-		session.removeAttribute("ValueExist");
-
-		if (results.successAllValidate()) {
-			session.removeAttribute("SamePassword");
-			session.removeAttribute("UniqueEMailAddress");
-			session.removeAttribute("UniqueUserName");
-			session.removeAttribute("CorrectEmailAddress");
-			session.removeAttribute("CorrectBirthDate");
+		if(results.successAllValidate()) {
 
 			return;
 		}
 
-		session.setAttribute("SamePassword", results.isSamePassword());
-		session.setAttribute("UniqueEMailAddress", results.isUniqueEMailAddress());
-		session.setAttribute("UniqueUserName", results.isUniqueUserNameSignUpForm());
-		session.setAttribute("CorrectEmailAddress", results.isCorrectEmailAddress());
-		session.setAttribute("CorrectBirthDate", results.isCorrectEmailAddress());
+		req.setAttribute("SamePassword", results.isSamePassword());
+		req.setAttribute("UniqueEMailAddress", results.isUniqueEMailAddress());
+		req.setAttribute("UniqueUserName", results.isUniqueUserNameSignUpForm());
+		req.setAttribute("CorrectEmailAddress", results.isCorrectEmailAddress());
+		req.setAttribute("CorrectBirthDate", results.isCorrectEmailAddress());
 
 		return;
 	}
 
 
-	private static SignUpFormValidateResults validateSignUpForm(SignUpForm signUpForm) throws SQLException {
+	private SignUpFormValidateResults validateSignUpForm(SignUpForm signUpForm) throws SQLException {
 
 		SignUpFormValidateResults results = new SignUpFormValidateResults();
-		if (!BeartterUtils.checkValueExistInSignUpForm(signUpForm)) {
+		if(!BeartterUtils.checkValueExistInSignUpForm(signUpForm)) {
 			results.setCheckValueExistInSignUpForm(false);
 			return results;
 		}
