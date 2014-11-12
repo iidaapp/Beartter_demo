@@ -45,6 +45,7 @@ public class SignUpComplete extends HttpServlet {
 		HttpSession session = req.getSession(false);
 		if(session == null) {
 			System.out.println("session is null");
+			req.setAttribute("errorDescription","session is null");
 			req.getRequestDispatcher("error");
 		}
 
@@ -83,6 +84,7 @@ public class SignUpComplete extends HttpServlet {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			session.setAttribute("errorDescription", e.getCause());
 			req.getRequestDispatcher("error");
 		}
 

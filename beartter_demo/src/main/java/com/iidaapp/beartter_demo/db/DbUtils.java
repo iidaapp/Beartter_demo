@@ -204,7 +204,7 @@ public class DbUtils {
 	}
 
 
-	public static List<AccessTokenEntity> selectAccessTokenFromAccessToken(String beartterId) throws SQLException{
+	public static List<AccessTokenEntity> selectAccessTokenListFromAccessToken(String beartterId) throws SQLException{
 		PreparedStatement stmt = null;
 		ResultSet rs;
 		Connection con = null;
@@ -241,5 +241,42 @@ public class DbUtils {
 		}
 
 		return entityList;
+	}
+	
+	public static AccessTokenEntity selectAccessTokenFromAccessToken(String beartterId) throws SQLException{
+		PreparedStatement stmt = null;
+		ResultSet rs;
+		Connection con = null;
+		AccessTokenEntity entity = new AccessTokenEntity();
+		String sql = "select * from beartter_db.access_token where beartter_id = ?";
+		
+		try{
+			con = DbConnection.getConnection();
+			
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, beartterId);
+			rs = stmt.executeQuery();
+			
+			if (rs.next()) {
+				entity.setBeartterId(rs.getString(1));
+				entity.setoAuthToken(rs.getString(2));
+				entity.setoAuthSecret(rs.getString(3));
+				entity.setUserId(rs.getLong(4));
+				entity.setScreenName(rs.getString(5));
+				entity.setAddDate(rs.getTimestamp(6));
+				entity.setModifyDate(rs.getTimestamp(7));
+
+			}
+		} catch (Exception e) {
+			throw new RuntimeException();
+		} finally {
+			if (stmt != null)
+				stmt.close();
+			if (con != null)
+				con.close();
+
+		}
+
+		return entity;
 	}
 }

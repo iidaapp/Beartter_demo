@@ -63,6 +63,7 @@ public class LoginServlet extends HttpServlet {
 
 			// TODO ログ出力方法
 			e.printStackTrace();
+			session.setAttribute("errorDescription", e.getCause());
 			resp.sendRedirect("error");
 
 		}

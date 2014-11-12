@@ -19,7 +19,7 @@ public class TestStream {
 
 public static void testStream(String beartterId) throws SQLException {
 
-		List<AccessTokenEntity> entityList = DbUtils.selectAccessTokenFromAccessToken(beartterId);
+		List<AccessTokenEntity> entityList = DbUtils.selectAccessTokenListFromAccessToken(beartterId);
 
 		if(entityList.size() == 0)
 			return;

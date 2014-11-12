@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import twitter4j.Paging;
+import twitter4j.ResponseList;
+import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -19,7 +22,6 @@ import twitter4j.auth.AccessToken;
 
 import com.iidaapp.beartter_demo.db.DbUtils;
 import com.iidaapp.beartter_demo.entity.AccessTokenEntity;
-import com.iidaapp.beartter_demo.util.StatusList;
 
 @WebServlet(name = "mainServlet", urlPatterns = "/main")
 public class MainServlet extends HttpServlet {
@@ -44,42 +46,51 @@ public class MainServlet extends HttpServlet {
 	private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
 		HttpSession session = req.getSession(false);
-		if (session == null)
+		if(session == null) {
+			req.setAttribute("errorDescription", "session is null.");
 			req.getRequestDispatcher("error");
+			return;
+		}
 
 		String beartterId = (String) session.getAttribute("beartterId");
-		List<AccessTokenEntity> accessTokenEntity = null;
+		String pagingNoString = req.getParameter("paging");
+		if(pagingNoString == null)
+			pagingNoString = "1";
+		Integer pagingNo = Integer.parseInt(pagingNoString);
+
+		Paging paging = new Paging(pagingNo);
+
+		AccessTokenEntity accessTokenEntity = null;
+
 		try {
 			accessTokenEntity = DbUtils.selectAccessTokenFromAccessToken(beartterId);
-			if (accessTokenEntity.size() == 0) {
-				throw new Exception();
-			}
 		} catch (SQLException e) {
+			session.setAttribute("errorDescription", e.getCause());
 			req.getRequestDispatcher("error");
-		} catch (Exception e) {
+		} 
+
+		List<ResponseList<Status>> statusList = new ArrayList<ResponseList<Status>>();
+		AccessToken accessToken = new AccessToken(accessTokenEntity.getoAuthToken(), accessTokenEntity.getoAuthSecret());
+		Twitter twitter = new TwitterFactory().getInstance(accessToken);
+
+		try {
+			statusList.add(twitter.getHomeTimeline(paging));
+		} catch (TwitterException e) {
+			e.printStackTrace();
+			session.setAttribute("errorDescription", e.getCause());
 			req.getRequestDispatcher("error");
+			return;
 		}
 
-		List<StatusList> statusList = new ArrayList<StatusList>();
-
-		for (AccessTokenEntity entity : accessTokenEntity) {
-
-			AccessToken accessToken = new AccessToken(entity.getoAuthToken(), entity.getoAuthSecret());
-			Twitter twitter = new TwitterFactory().getInstance(accessToken);
-			try {
-				StatusList status = new StatusList(twitter.getHomeTimeline());
-				statusList.add(status);
-			} catch (TwitterException e) {
-				req.getRequestDispatcher("error");
-			}
-		}
 		// try {
 		// TestStream.testStream(beartterId);
 		// } catch (SQLException e) {
 		// // TODO Auto-generated catch block
 		// e.printStackTrace();
 		// }
-		session.setAttribute("statusList", statusList);
+		req.setAttribute("statusList", statusList);
+		session.setAttribute("pagingNo", pagingNo);
+		session.setAttribute("twitter", twitter);
 
 		// 遷移
 		req.getRequestDispatcher("/page/MainTop.jsp").forward(req, resp);

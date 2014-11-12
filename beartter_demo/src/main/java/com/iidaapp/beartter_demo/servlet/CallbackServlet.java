@@ -63,6 +63,7 @@ public class CallbackServlet extends HttpServlet {
 			if(accessToken == null) {
 				// TODO ログ出力方法
 				System.out.println("no accesstoken");
+				session.setAttribute("errorDescription", "Session don't have Accesstoken.");
 				resp.sendRedirect("error");
 				return;
 			}
@@ -95,6 +96,7 @@ public class CallbackServlet extends HttpServlet {
 
 			// Extentionをキャッチした場合、ログを出力してエラー画面へ遷移。
 			e.printStackTrace();
+			session.setAttribute("errorDescription", e.getCause());
 			resp.sendRedirect("error");
 			return;
 		}
