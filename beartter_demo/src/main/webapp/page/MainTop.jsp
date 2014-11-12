@@ -9,10 +9,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <jsp:include page="util/ImplementsJquery.jsp" />
 <script src="/beartter_demo/staticcontents/js/jquery.leanModal.min.js" type="text/javascript"></script>
-<script src="/beartter_demo/staticcontents/js/jquery.inview.min.js" type="text/javascript"></script>
 <script src="/beartter_demo/staticcontents/js/common.js" type="text/javascript"></script>
-<link rel="stylesheet"
-	href="/beartter_demo/staticcontents/css/Main.css" type="text/css" />
+<link rel="stylesheet" href="/beartter_demo/staticcontents/css/Main.css" type="text/css" />
 
 <title>Insert title here</title>
 <!--         <script type="text/javascript">
@@ -53,93 +51,81 @@
 	<br />
 	<c:if test="${!empty pagingNo and !(pagingNo eq 1)}">
 		<form action="main" method="post">
-			<input type="hidden" name="paging" value="${pagingNo - 1}">
-			<input type="submit" value="前のページへ" />
+			<input type="hidden" name="paging" value="${pagingNo - 1}"> <input
+				type="submit" value="前のページへ" />
 		</form>
 	</c:if>
 
 	<form action="main" method="post">
-		<input type="hidden" name="paging" value="${pagingNo + 1}">
-		<input type="submit" value="次のページへ" />
+		<input type="hidden" name="paging" value="${pagingNo + 1}"> <input
+			type="submit" value="次のページへ" />
 	</form>
 
-		<c:forEach var="timeLineList" items="${statusList}">
-			<table frame="hsides" rules="rows">
-				<c:forEach items="${timeLineList}" var="status">
+	<c:forEach var="timeLineList" items="${statusList}">
+		<table frame="hsides" rules="rows">
+			<c:forEach items="${timeLineList}" var="status">
 
-					<!-- 通常ツイート -->
-					<c:if test="${empty status.retweetedStatus}">
-						<tr>
-							<td><a rel="leanModal" href="#div787"  onclick="getValue(${status.user.id});"><img src="${status.user.profileImageURL}" /></a></td>
-							<td>${fn:escapeXml(status.text)}</td>
-						</tr>
-						<tr>
-							<td><a rel="leanModal" href="#div787" >${fn:escapeXml(status.user.screenName)}</a></td>
-							<td>${fn:escapeXml(status.createdAt)}</td>
-						</tr>
-					</c:if>
+				<!-- 通常ツイート -->
+				<c:if test="${empty status.retweetedStatus}">
+					<tr>
+						<td><a rel="leanModal" href="#div787"
+							onclick="getValue(${status.user.id});"><img
+								src="${status.user.profileImageURL}" /></a></td>
+						<td>${fn:escapeXml(status.text)}</td>
+					</tr>
+					<tr>
+						<td><a rel="leanModal" href="#div787">${fn:escapeXml(status.user.screenName)}</a></td>
+						<td>${fn:escapeXml(status.createdAt)}</td>
+					</tr>
+				</c:if>
 
-					<!-- RT -->
-					<c:if test="${!empty status.retweetedStatus}">
-						<tr>
-							<td><img src="
+				<!-- RT -->
+				<c:if test="${!empty status.retweetedStatus}">
+					<tr>
+						<td><img
+							src="
 							${status.retweetedStatus.user.profileImageURL}" /></td>
-							<td>${fn:escapeXml(status.retweetedStatus.text)}</td>
-						</tr>
-						<tr>
-							<td>${fn:escapeXml(status.retweetedStatus.user.screenName)}</td>
-							<td>${status.user.screenName} retweeted
-								${fn:escapeXml(status.retweetedStatus.createdAt)}</td>
-						</tr>
-					</c:if>
+						<td>${fn:escapeXml(status.retweetedStatus.text)}</td>
+					</tr>
+					<tr>
+						<td>${fn:escapeXml(status.retweetedStatus.user.screenName)}</td>
+						<td>${status.user.screenName}retweeted
+							${fn:escapeXml(status.retweetedStatus.createdAt)}</td>
+					</tr>
+				</c:if>
 
-				</c:forEach>
-			</table>
-		</c:forEach>
-<input id="temp" type="hidden" />
+			</c:forEach>
+		</table>
+	</c:forEach>
+	<input id="temp" type="hidden" />
 
-<div id="div787">
-<table>
-	<tbody>
-		<tr>
-			<td colspan="6"></td>
-		</tr>
-		<tr>
-			<td colspan="6"></td>
-		</tr>
-		<tr>
-			<td colspan="6"></td>
-		</tr>
-		<tr>
-			<td colspan="6"></td>
-		</tr>
-		<tr>
-			<td colspan="6"></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td colspan="6"></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-	</tbody>
-</table>
-</div>
+	<div id="div787">
+		<table>
+			<tbody>
+				<tr>
+					<td colspan="5" id="icon"></td>
+				</tr>
+				<tr>
+					<td colspan="5" id="name"></td>
+				</tr>
+				<tr>
+					<td colspan="5" id="screenname"></td>
+				</tr>
+				<tr>
+					<td colspan="5" id="desc"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 
 function getValue(id){
 	getProfile(id);
