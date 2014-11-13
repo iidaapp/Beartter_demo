@@ -8,9 +8,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <jsp:include page="util/ImplementsJquery.jsp" />
-<script src="/beartter_demo/staticcontents/js/jquery.leanModal.min.js" type="text/javascript"></script>
-<script src="/beartter_demo/staticcontents/js/common.js" type="text/javascript"></script>
-<link rel="stylesheet" href="/beartter_demo/staticcontents/css/Main.css" type="text/css" />
+<script src="/beartter_demo/staticcontents/js/jquery.leanModal.min.js"
+	type="text/javascript"></script>
+<script src="/beartter_demo/staticcontents/js/common.js"
+	type="text/javascript"></script>
+<script type="text/javascript" script-name="syncopate"
+	src="http://use.edgefonts.net/syncopate.js"></script>
+<link rel="stylesheet" href="/beartter_demo/staticcontents/css/Main.css"
+	type="text/css" />
 
 <title>Insert title here</title>
 <!--         <script type="text/javascript">
@@ -82,14 +87,20 @@
 				<!-- RT -->
 				<c:if test="${!empty status.retweetedStatus}">
 					<tr>
-						<td><img
-							src="
-							${status.retweetedStatus.user.profileImageURL}" /></td>
+						<td>
+							<a rel="leanModal" href="#div787" onclick="getValue(${status.retweetedStatus.user.id});">
+								<img src="${status.retweetedStatus.user.profileImageURL}" />
+							</a>
+						</td>
 						<td>${fn:escapeXml(status.retweetedStatus.text)}</td>
 					</tr>
 					<tr>
-						<td>${fn:escapeXml(status.retweetedStatus.user.screenName)}</td>
-						<td>${status.user.screenName}retweeted
+						<td>
+							<a rel="leanModal" href="#div787" onclick="getValue(${status.retweetedStatus.user.id});">
+								${fn:escapeXml(status.retweetedStatus.user.screenName)}
+							</a>
+						</td>
+						<td>${status.user.screenName} retweeted
 							${fn:escapeXml(status.retweetedStatus.createdAt)}</td>
 					</tr>
 				</c:if>
@@ -103,23 +114,22 @@
 		<table>
 			<tbody>
 				<tr>
-					<td colspan="5" id="icon"></td>
+					<td id="icon"></td>
 				</tr>
 				<tr>
-					<td colspan="5" id="name"></td>
+					<td id="name"></td>
 				</tr>
 				<tr>
-					<td colspan="5" id="screenname"></td>
+					<td id="screenname"></td>
 				</tr>
 				<tr>
-					<td colspan="5" id="desc"></td>
+					<td id="desc"></td>
 				</tr>
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td id="relation"></td>
+				</tr>
+				<tr>
+					<td><input type="button" id="friendshipbutton" /></td>
 				</tr>
 			</tbody>
 		</table>
@@ -129,6 +139,7 @@
 
 function getValue(id){
 	getProfile(id);
+	getFriendship(id);
 }
 
 $( 'a[rel*=leanModal]').leanModal({

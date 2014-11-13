@@ -9,21 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
-
+import twitter4j.Relationship;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
-import twitter4j.TwitterObjectFactory;
 import twitter4j.User;
 
-@WebServlet(name = "getProfileServlet", urlPatterns = { "/getprofile" })
-public class GetProfileServlet extends HttpServlet {
+@WebServlet(name = "getFriendshipServlet", urlPatterns = { "/getfriendship" })
+public class GetFriendshipServlet extends HttpServlet {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5488423071560251931L;
-
+	private static final long serialVersionUID = -2070897874066192558L;
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,25 +39,34 @@ public class GetProfileServlet extends HttpServlet {
 		if(user == null)
 			return;
 
-		String json = TwitterObjectFactory.getRawJSON(user);
+		boolean isFollowRequestSent = user.isFollowRequestSent();
 
-		if(StringUtils.isEmpty(json))
+		Relationship relation = null;
+		try {
+			relation = twitter.showFriendship(twitter.getId(), userId);
+		} catch (IllegalStateException | TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		}
+
+		if(relation == null)
 			return;
 
-		resp.setCharacterEncoding("UTF-8");
+
+		boolean isSourceFollowingTarget = relation.isSourceFollowingTarget();
+
+		String json = "{\"isFollowRequestSent\":" + Boolean.toString(isFollowRequestSent) + ", \"isSourceFollowingTarget\":" + Boolean.toString(isSourceFollowingTarget) + "}";
 		PrintWriter writer = null;
-
-		try {
-
+		try{
 			writer = resp.getWriter();
 			writer.print(json);
 
-		} finally {
-
+		}finally{
 			if(writer != null)
 				writer.close();
 		}
-
+		
 		return;
 	}
 }
