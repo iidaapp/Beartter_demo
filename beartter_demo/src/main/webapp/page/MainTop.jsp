@@ -50,92 +50,124 @@
             }
         </script> -->
 </head>
-<body>
-	TOP画面
-	<br />
-	<br />
-	<c:if test="${!empty pagingNo and !(pagingNo eq 1)}">
-		<form action="main" method="post">
-			<input type="hidden" name="paging" value="${pagingNo - 1}"> <input
-				type="submit" value="前のページへ" />
-		</form>
-	</c:if>
+<body class="tl">
 
-	<form action="main" method="post">
-		<input type="hidden" name="paging" value="${pagingNo + 1}"> <input
-			type="submit" value="次のページへ" />
-	</form>
+	<!-- コンテナ開始 -->
+	<div id="container_tl">
 
-	<c:forEach var="timeLineList" items="${statusList}">
-		<table frame="hsides" rules="rows">
-			<c:forEach items="${timeLineList}" var="status">
 
-				<!-- 通常ツイート -->
-				<c:if test="${empty status.retweetedStatus}">
-					<tr>
-						<td><a rel="leanModal" href="#div787"
-							onclick="getValue(${status.user.id});"><img
-								src="${status.user.profileImageURL}" /></a></td>
-						<td>${fn:escapeXml(status.text)}</td>
-					</tr>
-					<tr>
-						<td><a rel="leanModal" href="#div787">${fn:escapeXml(status.user.screenName)}</a></td>
-						<td>${fn:escapeXml(status.createdAt)}</td>
-					</tr>
-				</c:if>
+		<!-- ヘッダ開始 -->
+		<div id="header_tl">
+			TOP画面 <br /> <br />
+			<c:if test="${!empty error and (error eq 187) }">
+				<div id="error_msg">二重投稿は出来ません</div>
+			</c:if>
+			<c:if test="${!empty error and (error eq 400) }">
+				<div id="error_msg">Tweetは1文字以上140文字以下でお願いします</div>
+			</c:if>
+			<c:if test="${!empty pagingNo and !(pagingNo eq 1)}">
+				<form action="main" method="post">
+					<input type="hidden" name="paging" value="${pagingNo - 1}">
+					<input type="submit" value="前のページへ" />
+				</form>
+			</c:if>
 
-				<!-- RT -->
-				<c:if test="${!empty status.retweetedStatus}">
-					<tr>
-						<td>
-							<a rel="leanModal" href="#div787" onclick="getValue(${status.retweetedStatus.user.id});">
-								<img src="${status.retweetedStatus.user.profileImageURL}" />
-							</a>
-						</td>
-						<td>${fn:escapeXml(status.retweetedStatus.text)}</td>
-					</tr>
-					<tr>
-						<td>
-							<a rel="leanModal" href="#div787" onclick="getValue(${status.retweetedStatus.user.id});">
-								${fn:escapeXml(status.retweetedStatus.user.screenName)}
-							</a>
-						</td>
-						<td>${status.user.screenName} retweeted
-							${fn:escapeXml(status.retweetedStatus.createdAt)}</td>
-					</tr>
-				</c:if>
+			<form action="main" method="post">
+				<input type="hidden" name="paging" value="${pagingNo + 1}">
+				<input type="submit" value="次のページへ" />
+			</form>
+		</div>
+		<!-- ヘッダ終了 -->
 
+		<!-- ナビゲーション開始 -->
+		<div id="nav_tl">［サイドバー］</div>
+		<!-- ナビゲーション終了 -->
+
+		<!-- メインカラム開始 -->
+		<div id="content_tl">
+			<c:forEach var="timeLineList" items="${statusList}">
+				<table frame="hsides" rules="rows" id="timeline">
+					<c:forEach items="${timeLineList}" var="status">
+
+						<c:if test="${empty status.retweetedStatus}">
+							<!-- 通常ツイート -->
+							<tr>
+								<td id="icon_tl"><a rel="leanModal" href="#prof"
+									onclick="getValue(${status.user.id});"><img
+										src="${status.user.profileImageURL}" /></a></td>
+								<td>${fn:escapeXml(status.text)}</td>
+							</tr>
+							<tr>
+								<td><a rel="leanModal" href="#prof">${fn:escapeXml(status.user.name)}</a></td>
+								<td>${fn:escapeXml(status.createdAt)}</td>
+							</tr>
+						</c:if>
+
+						<c:if test="${!empty status.retweetedStatus}">
+							<!-- RT -->
+							<tr>
+								<td><a rel="leanModal" href="#prof"
+									onclick="getValue(${status.retweetedStatus.user.id});"> <img
+										src="${status.retweetedStatus.user.profileImageURL}" />
+								</a></td>
+								<td>${fn:escapeXml(status.retweetedStatus.text)}</td>
+							</tr>
+							<tr>
+								<td><a rel="leanModal" href="#prof"
+									onclick="getValue(${status.retweetedStatus.user.id});">
+										${fn:escapeXml(status.retweetedStatus.user.name)} </a></td>
+								<td>${status.user.screenName}retweeted
+									${fn:escapeXml(status.retweetedStatus.createdAt)}</td>
+							</tr>
+						</c:if>
+
+					</c:forEach>
+				</table>
 			</c:forEach>
-		</table>
-	</c:forEach>
-	<input id="temp" type="hidden" />
 
-	<div id="div787">
-		<table>
-			<tbody>
-				<tr>
-					<td id="icon"></td>
-				</tr>
-				<tr>
-					<td id="name"></td>
-				</tr>
-				<tr>
-					<td id="screenname"></td>
-				</tr>
-				<tr>
-					<td id="desc"></td>
-				</tr>
-				<tr>
-					<td id="relation"></td>
-				</tr>
-				<tr>
-					<td><input type="button" id="friendshipbutton" /></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+		</div>
+		<!-- メインカラム終了 -->
 
-	<script type="text/javascript">
+		<!-- フッタ開始 -->
+		<div id="footer_tl">
+			<form action="tweet" method="post">
+				<textarea name="tweet_text" rows="3"></textarea>
+				<input type="submit" value="Tweet" />
+			</form>
+		</div>
+		<!-- フッタ終了 -->
+
+		<!-- ユーザ情報 -->
+		<input id="temp" type="hidden" />
+		<div id="prof">
+			<table id="prof_table">
+				<tbody>
+					<tr>
+						<td id="icon"></td>
+					</tr>
+					<tr>
+						<td id="name"></td>
+					</tr>
+					<tr>
+						<td id="screenname"></td>
+					</tr>
+					<tr>
+						<td id="desc"></td>
+					</tr>
+					<tr>
+						<td id="relation"></td>
+					</tr>
+					<tr>
+						<td><input type="button" id="friendshipbutton" /></td>
+					</tr>
+					<tr>
+						<td class="modal_close"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<script type="text/javascript">
 
 function getValue(id){
 	getProfile(id);
@@ -148,8 +180,10 @@ $( 'a[rel*=leanModal]').leanModal({
     closeButton: ".modal_close"  // 閉じるボタンのCSS classを指定
 });
 
-
-
 </script>
+	</div>
+	<!-- コンテナ終了 -->
+
+
 </body>
 </html>

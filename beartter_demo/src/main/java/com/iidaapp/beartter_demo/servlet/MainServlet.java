@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
+
 import twitter4j.Paging;
 import twitter4j.ResponseList;
 import twitter4j.Status;
@@ -33,7 +35,7 @@ public class MainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		execute(req, resp);
-	}
+	}	
 
 
 	@Override
@@ -88,6 +90,13 @@ public class MainServlet extends HttpServlet {
 		// // TODO Auto-generated catch block
 		// e.printStackTrace();
 		// }
+		String error = (String) session.getAttribute("error");
+
+		if(!StringUtils.isEmpty(error)){
+			req.setAttribute("error", error);
+			session.removeAttribute("error");
+		}
+
 		req.setAttribute("statusList", statusList);
 		session.setAttribute("pagingNo", pagingNo);
 		session.setAttribute("twitter", twitter);

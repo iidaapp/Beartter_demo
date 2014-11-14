@@ -30,7 +30,7 @@ function getProfile(userid) {
 		$("#icon").empty().append("<img src='" + image + "'>");
 
 		var screen_name = htmlspecialchars(user.screen_name);
-		$("#screenname").empty().append(screen_name);
+		$("#screenname").empty().append("@" + screen_name);
 
 		var name = htmlspecialchars(user.name);
 		$("#name").empty().append(name);

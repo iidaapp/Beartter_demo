@@ -11,6 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "errorServlet", urlPatterns = { "/error" })
 public class ErrorServlet extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3820104047647816529L;
+
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -30,8 +36,13 @@ public class ErrorServlet extends HttpServlet {
 		String errorDiscription = (String) req.getSession().getAttribute("errorDescription");
 		req.getSession().invalidate();
 		req.setAttribute("errorDiscription", errorDiscription);
-		
-		req.getRequestDispatcher("/page/Error.jsp");
+
+		try {
+			req.getRequestDispatcher("/page/Error.jsp").forward(req, resp);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 }
