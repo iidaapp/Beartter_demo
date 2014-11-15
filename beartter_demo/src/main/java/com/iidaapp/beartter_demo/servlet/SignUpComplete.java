@@ -78,11 +78,15 @@ public class SignUpComplete extends HttpServlet {
 		accessTokenEntity.setAddDate(new Timestamp(System.currentTimeMillis()));
 		accessTokenEntity.setModifyDate(new Timestamp(System.currentTimeMillis()));
 
+		CharacterParamEntity characterParamEntity = new CharacterParamEntity();
+		characterParamEntity.setBeartterId(beartterId);
+
 		try {
-			DbUtils.insertUserinfoEntity(userinfoEntity);
-			DbUtils.insertAccessToken(accessTokenEntity);
+			
+			DbUtils.insertSignUpData(userinfoEntity, accessTokenEntity, characterParamEntity);
+
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 			session.setAttribute("errorDescription", e.getCause());
 			req.getRequestDispatcher("error");

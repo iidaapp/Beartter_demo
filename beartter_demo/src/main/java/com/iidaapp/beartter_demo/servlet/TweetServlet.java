@@ -1,12 +1,15 @@
 package com.iidaapp.beartter_demo.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.xmlrpc.XmlRpcException;
 
 import com.iidaapp.beartter_demo.util.TweetAnalysisUtil;
 
@@ -28,25 +31,26 @@ public class TweetServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		Twitter twitter = (Twitter) req.getSession().getAttribute("twitter");
+		String beartterId = (String) req.getSession().getAttribute("beartterId");
 		String tweetText = req.getParameter("tweet_text");
 
-		if(!validationTweetText(tweetText)) {
+		if (!validationTweetText(tweetText)) {
+
 			req.getSession().setAttribute("error", "400");
 			resp.sendRedirect("main");
 			return;
 		}
 
-		TweetAnalysisUtil.executeAnalysis(tweetText);
-
 		try {
+			TweetAnalysisUtil.executeAnalysis(tweetText, beartterId);
 
 			twitter.updateStatus(tweetText);
 
 		} catch (TwitterException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 
-			if(e.getErrorCode() == 187) {
+			if (e.getErrorCode() == 187) {
 
 				req.getSession().setAttribute("error", "187");
 				resp.sendRedirect("main");
@@ -54,6 +58,16 @@ public class TweetServlet extends HttpServlet {
 			} else {
 				resp.sendRedirect("error");
 			}
+
+		} catch (XmlRpcException e1) {
+
+			e1.printStackTrace();
+			resp.sendRedirect("error");
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			resp.sendRedirect("error");
 		}
 
 		resp.sendRedirect("main");
@@ -62,7 +76,7 @@ public class TweetServlet extends HttpServlet {
 
 	private boolean validationTweetText(String tweetText) {
 
-		if(tweetText.length() > 140 || tweetText.length() == 0)
+		if (tweetText.length() > 140 || tweetText.length() == 0)
 			return false;
 
 		return true;
