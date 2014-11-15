@@ -18,44 +18,6 @@ USE `beartter_db`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `access_token`
---
-
-DROP TABLE IF EXISTS `access_token`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `access_token` (
-  `beartter_id` varchar(50) NOT NULL,
-  `oauth_token` varchar(50) DEFAULT NULL,
-  `oauth_secret` varchar(45) DEFAULT NULL,
-  `user_id` bigint(20) DEFAULT NULL,
-  `screen_name` varchar(20) DEFAULT NULL,
-  `add_date` datetime DEFAULT NULL,
-  `modify_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`beartter_id`),
-  UNIQUE KEY `userid_UNIQUE` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `character_param`
---
-
-DROP TABLE IF EXISTS `character_param`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `character_param` (
-  `beartter_id` varchar(50) NOT NULL,
-  `pretty` int(11) DEFAULT '0',
-  `knowledge` int(11) DEFAULT '0',
-  `art` int(11) DEFAULT '0',
-  `cheerful` int(11) DEFAULT '0',
-  `nerd` int(11) DEFAULT '0',
-  PRIMARY KEY (`beartter_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `cname_type`
 --
 
@@ -69,6 +31,16 @@ CREATE TABLE `cname_type` (
   PRIMARY KEY (`cname`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cname_type`
+--
+
+LOCK TABLES `cname_type` WRITE;
+/*!40000 ALTER TABLE `cname_type` DISABLE KEYS */;
+INSERT INTO `cname_type` VALUES ('animal','pretty',1),('art','art',1),('book','knowledge',1),('elec','knowledge',1),('food','cheerful',1),('game','nerd',1),('geography','knowledge',1),('idol','pretty',2),('movie','art',1),('music','art',1),('science','knowledge',1),('society','knowledge',1),('sports','cheerful',1),('tv','cheerful',1),('web','nerd',1);
+/*!40000 ALTER TABLE `cname_type` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `part_of_speech_type`
@@ -86,22 +58,14 @@ CREATE TABLE `part_of_speech_type` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `userinfo`
+-- Dumping data for table `part_of_speech_type`
 --
 
-DROP TABLE IF EXISTS `userinfo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `userinfo` (
-  `beartter_id` varchar(50) NOT NULL,
-  `email_address` varchar(200) DEFAULT NULL,
-  `password` varchar(45) DEFAULT NULL,
-  `birth_date` date DEFAULT NULL,
-  `add_date` datetime DEFAULT NULL,
-  `modify_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`beartter_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `part_of_speech_type` WRITE;
+/*!40000 ALTER TABLE `part_of_speech_type` DISABLE KEYS */;
+INSERT INTO `part_of_speech_type` VALUES ('助詞','knowledge',1),('動詞','cheerful',1),('名詞','pretty',1),('形容詞','art',1);
+/*!40000 ALTER TABLE `part_of_speech_type` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -112,4 +76,4 @@ CREATE TABLE `userinfo` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-16  0:28:03
+-- Dump completed on 2014-11-16  0:31:33
