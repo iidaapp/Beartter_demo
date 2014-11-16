@@ -16,6 +16,7 @@ import twitter4j.auth.AccessToken;
 
 import com.iidaapp.beartter_demo.db.DbUtils;
 import com.iidaapp.beartter_demo.entity.AccessTokenEntity;
+import com.iidaapp.beartter_demo.entity.CharacterParamEntity;
 import com.iidaapp.beartter_demo.entity.UserinfoEntity;
 import com.iidaapp.beartter_demo.util.BeartterUtils;
 import com.iidaapp.beartter_demo.util.SignUpForm;

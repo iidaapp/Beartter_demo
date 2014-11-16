@@ -25,6 +25,11 @@ import twitter4j.auth.AccessToken;
 import com.iidaapp.beartter_demo.db.DbUtils;
 import com.iidaapp.beartter_demo.entity.AccessTokenEntity;
 
+/**
+ * メイン画面表示処理
+ * @author iida
+ *
+ */
 @WebServlet(name = "mainServlet", urlPatterns = "/main")
 public class MainServlet extends HttpServlet {
 
@@ -35,7 +40,7 @@ public class MainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		execute(req, resp);
-	}	
+	}
 
 
 	@Override
@@ -48,15 +53,21 @@ public class MainServlet extends HttpServlet {
 	private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
 		HttpSession session = req.getSession(false);
-		if(session == null) {
+		if (session == null) {
 			req.setAttribute("errorDescription", "session is null.");
 			req.getRequestDispatcher("error");
 			return;
 		}
-
+		
 		String beartterId = (String) session.getAttribute("beartterId");
+		if(StringUtils.isEmpty(beartterId)){
+			req.setAttribute("errorDescription", "session is clear.");
+			req.getRequestDispatcher("error");
+			return;
+		}
+
 		String pagingNoString = req.getParameter("paging");
-		if(pagingNoString == null)
+		if (pagingNoString == null)
 			pagingNoString = "1";
 		Integer pagingNo = Integer.parseInt(pagingNoString);
 
@@ -69,7 +80,7 @@ public class MainServlet extends HttpServlet {
 		} catch (SQLException e) {
 			session.setAttribute("errorDescription", e.getCause());
 			req.getRequestDispatcher("error");
-		} 
+		}
 
 		List<ResponseList<Status>> statusList = new ArrayList<ResponseList<Status>>();
 		AccessToken accessToken = new AccessToken(accessTokenEntity.getoAuthToken(), accessTokenEntity.getoAuthSecret());
@@ -92,7 +103,7 @@ public class MainServlet extends HttpServlet {
 		// }
 		String error = (String) session.getAttribute("error");
 
-		if(!StringUtils.isEmpty(error)){
+		if (!StringUtils.isEmpty(error)) {
 			req.setAttribute("error", error);
 			session.removeAttribute("error");
 		}

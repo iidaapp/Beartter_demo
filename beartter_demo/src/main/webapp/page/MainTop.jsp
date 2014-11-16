@@ -76,11 +76,17 @@
 				<input type="hidden" name="paging" value="${pagingNo + 1}">
 				<input type="submit" value="次のページへ" />
 			</form>
+			
+			<form action="logout" method="post">
+				<input type="submit" value="ログアウト" />
+			</form>
 		</div>
 		<!-- ヘッダ終了 -->
 
 		<!-- ナビゲーション開始 -->
-		<div id="nav_tl">［サイドバー］</div>
+		<div id="nav_tl">
+			<img alt="character" src="/beartter_demo/staticcontents/img/default_character.png">
+		</div>
 		<!-- ナビゲーション終了 -->
 
 		<!-- メインカラム開始 -->

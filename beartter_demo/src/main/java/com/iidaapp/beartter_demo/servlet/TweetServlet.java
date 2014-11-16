@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.xmlrpc.XmlRpcException;
 
 import com.iidaapp.beartter_demo.util.TweetAnalysisUtil;
@@ -30,8 +31,14 @@ public class TweetServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 
-		Twitter twitter = (Twitter) req.getSession().getAttribute("twitter");
 		String beartterId = (String) req.getSession().getAttribute("beartterId");
+		if (StringUtils.isEmpty(beartterId)) {
+			req.setAttribute("errorDescription", "session is clear.");
+			req.getRequestDispatcher("error");
+			return;
+		}
+
+		Twitter twitter = (Twitter) req.getSession().getAttribute("twitter");
 		String tweetText = req.getParameter("tweet_text");
 
 		if (!validationTweetText(tweetText)) {

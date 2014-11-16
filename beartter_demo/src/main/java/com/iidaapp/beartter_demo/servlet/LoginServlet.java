@@ -15,6 +15,11 @@ import twitter4j.TwitterFactory;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
 
+/**
+ * ログイン処理クラス
+ * @author iida
+ *
+ */
 @WebServlet(name="loginServlet", urlPatterns="/login")
 public class LoginServlet extends HttpServlet {
 
@@ -23,6 +28,22 @@ public class LoginServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		// 共通処理へ
+		execute(req, resp);
+
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		// 共通処理へ
+		execute(req, resp);
+	}
+	
+	
+	private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
 
 		System.out.println("LoginServlet Start");
 

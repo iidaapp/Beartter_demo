@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.iidaapp.beartter_demo.entity.AccessTokenEntity;
+import com.iidaapp.beartter_demo.entity.CharacterParamEntity;
 import com.iidaapp.beartter_demo.entity.UserinfoEntity;
-import com.iidaapp.beartter_demo.servlet.CharacterParamEntity;
 import com.iidaapp.beartter_demo.util.CnameTypeEntity;
 import com.iidaapp.beartter_demo.util.PartOfSpeechTypeEntity;
 

@@ -19,7 +19,12 @@ import twitter4j.auth.RequestToken;
 
 import com.iidaapp.beartter_demo.db.DbUtils;
 
-@WebServlet(name="twitterCallbackServlet", urlPatterns="/callback")
+/**
+ * TwitterOAuth認証からのコールバック処理
+ * @author iida
+ *
+ */
+@WebServlet(name = "twitterCallbackServlet", urlPatterns = "/callback")
 public class CallbackServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -28,19 +33,25 @@ public class CallbackServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		// 共通処理へ
 		execute(req, resp);
 	}
+
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		// 共通処理へ
 		execute(req, resp);
 	}
-	
+
+
 	private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
 		HttpSession session = req.getSession(false);
-		if(session == null) {
+		if (session == null) {
+			// セッションがNULLの場合はエラー画面へ
+
 			resp.sendRedirect("error");
 			return;
 		}
@@ -60,7 +71,7 @@ public class CallbackServlet extends HttpServlet {
 			session.removeAttribute("RequestToken");
 
 			// アクセストークンがNULLの場合は取得ミスにより、ログを出力してエラー画面へ遷移
-			if(accessToken == null) {
+			if (accessToken == null) {
 				// TODO ログ出力方法
 				System.out.println("no accesstoken");
 				session.setAttribute("errorDescription", "Session don't have Accesstoken.");
@@ -72,12 +83,13 @@ public class CallbackServlet extends HttpServlet {
 			String beartterId = DbUtils.selectBeartterIdFromAccessToken(accessToken.getUserId());
 
 			// beartterIdが0の場合、SELECT取得なし。会員登録画面へ遷移
-			if(StringUtils.isEmpty(beartterId)) {
+			if (StringUtils.isEmpty(beartterId)) {
 
 				// アクセストークン、Twitterインスタンスをセッションに再格納
 				session.setAttribute("AccessToken", accessToken);
 				session.setAttribute("Twitter", twitter);
 
+				// 会員登録画面へ
 				resp.sendRedirect("signup");
 				return;
 			}
@@ -89,6 +101,7 @@ public class CallbackServlet extends HttpServlet {
 
 			// beartterIdの格納
 			session.setAttribute("beartterId", beartterId);
+			// Main画面へ遷移
 			resp.sendRedirect("main");
 			return;
 
@@ -96,7 +109,9 @@ public class CallbackServlet extends HttpServlet {
 
 			// Extentionをキャッチした場合、ログを出力してエラー画面へ遷移。
 			e.printStackTrace();
+			// エラー文言をセッションに格納
 			session.setAttribute("errorDescription", e.getCause());
+			// エラー画面へ
 			resp.sendRedirect("error");
 			return;
 		}

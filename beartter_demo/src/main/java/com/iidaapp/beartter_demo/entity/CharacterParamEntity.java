@@ -1,5 +1,10 @@
-package com.iidaapp.beartter_demo.servlet;
+package com.iidaapp.beartter_demo.entity;
 
+/**
+ * CharacterParamテーブルエンティティクラス
+ * @author iida
+ *
+ */
 public class CharacterParamEntity {
 
 	private String beartterId;
