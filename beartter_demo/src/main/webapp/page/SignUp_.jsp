@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="/beartter_demo/staticcontents/js/bootstrap.min.js"></script>
 <link href="/beartter_demo/staticcontents/css/bootstrap.min.css" rel="stylesheet">
@@ -23,7 +23,7 @@
 				</button>
 
 				<!-- LOGO -->
-				<a class="navbar-brand" href="#"> <img src="images/logo-nav.png" alt="">
+				<a class="navbar-brand" href="#"> <img src="/beartter_demo/staticcontents/img/icon.png" alt="">
 				</a>
 
 			</div>
@@ -33,20 +33,11 @@
 
 				<!-- NAVIGATION LINK -->
 				<ul class="nav navbar-nav navbar-left main-navigation small-text">
-					<li class="not-active"><a href="#section2">Why Us?</a></li>
-					<li><a href="#section5">Benefits</a></li>
-					<li><a href="#section6">Pricing</a></li>
-					<li><a href="#section7">Explore</a></li>
-					<li><a href="#section10">Testimonials</a></li>
-					<!-- <li><a href="http://example.com" class="external">External Link Example</a></li> -->
+					<li class="not-active"><a href="#section2">これなに？</a></li>
+					<li><a href="#section5">使い方</a></li>
+					<li><a href="#section6">利用規約</a></li>
 				</ul>
 
-				<!-- LOGIN REGISTER -->
-				<ul class="nav navbar-nav navbar-right login-register small-text">
-					<li class="login js-login"><a href="#">Login</a></li>
-					<li class="register-button js-register inpage-scroll"><a href="#section11"
-						class="navbar-register-button">Get Started</a></li>
-				</ul>
 			</div>
 		</div>
 		<!-- /END CONTAINER -->
@@ -73,7 +64,8 @@
 				<div class="intro-section">
 
 					<!-- WELCOM MESSAGE -->
-					<h1 class="intro white-text">Simple, Reliable and Awesome.</h1>
+					<img src="/beartter_demo/staticcontents/img/default_character.png" alt="Probono Paprika" class="img-responsive center-block">
+					<h1 class="intro white-text">BEATTER（仮）</h1>
 					<h5 class="white-text">Tablet publishing HTML5 mobile first really simple syndication
 						meetups</h5>
 
@@ -90,7 +82,10 @@
 
 	</div>
 
-
-	<div class="container"></div>
+<section id="about" class="about">
+        <div class="container">
+          <p>プロボノパプリカは自分のできることを表明して、ボランティア団体とマッチングできるサービスです。<br>とはいってもまだ開発途中なので、表明した人たちを一覧するだけ。<br>ボランティア団体の方がこのページを見て、声をかけてくれるのを待つというだけのものです。</p>
+        </div>
+      </section>
 </body>
 </html>
