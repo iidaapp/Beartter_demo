@@ -1,0 +1,18 @@
+html, body {
+	height: 100%;
+	margin: 10px;
+}
+
+body {
+	text-align: center;
+/* 	background: url(../img/background-images/1.jpg) no-repeat center top fixed;
+	-webkit-background-size: cover;
+	background-size: cover; */
+}
+
+.only-logo .navbar-header {
+	margin: auto;
+	float: none;
+}
+
+

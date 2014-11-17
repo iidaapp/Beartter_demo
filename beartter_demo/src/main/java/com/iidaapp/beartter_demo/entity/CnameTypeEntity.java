@@ -1,4 +1,4 @@
-package com.iidaapp.beartter_demo.util;
+package com.iidaapp.beartter_demo.entity;
 
 public class CnameTypeEntity {
 

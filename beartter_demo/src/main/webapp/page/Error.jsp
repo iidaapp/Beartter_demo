@@ -10,6 +10,6 @@
 申し訳ありませんがログインしなおしてください。<br />
 ${errorDiscription}<br />
 <br />
-<a href="Top.jsp">top</a>
+<a href="page/Top.jsp">top</a>
 </body>
 </html>

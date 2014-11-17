@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -12,10 +13,13 @@
 	type="text/javascript"></script>
 <script src="/beartter_demo/staticcontents/js/common.js"
 	type="text/javascript"></script>
+<script src="/beartter_demo/staticcontents/js/bootstrap.min.js"></script>
 <script type="text/javascript" script-name="syncopate"
 	src="http://use.edgefonts.net/syncopate.js"></script>
 <link rel="stylesheet" href="/beartter_demo/staticcontents/css/Main.css"
 	type="text/css" />
+<link href="/beartter_demo/staticcontents/css/bootstrap.min.css"
+	rel="stylesheet">
 
 <title>Insert title here</title>
 <!--         <script type="text/javascript">
@@ -59,24 +63,17 @@
 		<!-- ヘッダ開始 -->
 		<div id="header_tl">
 			TOP画面 <br /> <br />
-			<c:if test="${!empty error and (error eq 187) }">
-				<div id="error_msg">二重投稿は出来ません</div>
-			</c:if>
-			<c:if test="${!empty error and (error eq 400) }">
-				<div id="error_msg">Tweetは1文字以上140文字以下でお願いします</div>
-			</c:if>
+
+			<form action="main" method="post">
+				<input type="hidden" name="paging" value="${pagingNo + 1}">
+				<input type="submit" value="次のページへ" />
+			</form>
 			<c:if test="${!empty pagingNo and !(pagingNo eq 1)}">
 				<form action="main" method="post">
 					<input type="hidden" name="paging" value="${pagingNo - 1}">
 					<input type="submit" value="前のページへ" />
 				</form>
 			</c:if>
-
-			<form action="main" method="post">
-				<input type="hidden" name="paging" value="${pagingNo + 1}">
-				<input type="submit" value="次のページへ" />
-			</form>
-			
 			<form action="logout" method="post">
 				<input type="submit" value="ログアウト" />
 			</form>
@@ -85,7 +82,20 @@
 
 		<!-- ナビゲーション開始 -->
 		<div id="nav_tl">
-			<img alt="character" src="/beartter_demo/staticcontents/img/default_character.png">
+			<form action="tweet" method="post">
+				<textarea name="tweet_text" id="tweet_text"></textarea>
+				<input type="submit" value="Tweet" />
+			</form>
+			<img alt="character"
+				src="/beartter_demo/staticcontents/img/default_character.jpg">
+			<c:if test="${!empty error and (error eq 187) }">
+				<div id="error_msg">二重投稿は出来ません</div>
+			</c:if>
+			<c:if test="${!empty error and (error eq 400) }">
+				<div id="error_msg">Tweetは1文字以上140文字以下でお願いします</div>
+			</c:if>
+
+
 		</div>
 		<!-- ナビゲーション終了 -->
 
@@ -101,7 +111,7 @@
 								<td id="icon_tl"><a rel="leanModal" href="#prof"
 									onclick="getValue(${status.user.id});"><img
 										src="${status.user.profileImageURL}" /></a></td>
-								<td>${fn:escapeXml(status.text)}</td>
+								<td>${fn:replace(fn:escapeXml(status.text),newLine, "<br />")}</td>
 							</tr>
 							<tr>
 								<td><a rel="leanModal" href="#prof">${fn:escapeXml(status.user.name)}</a></td>
@@ -135,12 +145,7 @@
 		<!-- メインカラム終了 -->
 
 		<!-- フッタ開始 -->
-		<div id="footer_tl">
-			<form action="tweet" method="post">
-				<textarea name="tweet_text" rows="3"></textarea>
-				<input type="submit" value="Tweet" />
-			</form>
-		</div>
+		<div id="footer_tl"></div>
 		<!-- フッタ終了 -->
 
 		<!-- ユーザ情報 -->

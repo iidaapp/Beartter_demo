@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,11 +7,13 @@
 <title>Top</title>
 </head>
 <body>
-<div id="logo">
-<p>GOOD DESIGN LOGO</p>
-</div>
-<div>
-<a href="http://127.0.0.1:8082/beartter_demo/login"><img src = "/beartter_demo/staticcontents/img/sign-in-with-twitter-gray.png" /></a>
-</div>
+	<div id="logo">
+		<p>GOOD DESIGN LOGO</p>
+	</div>
+	<div>
+		<a href="http://127.0.0.1:8082/beartter_demo/login">
+			<img src="/beartter_demo/staticcontents/img/sign-in-with-twitter-gray.png" />
+		</a>
+	</div>
 </body>
 </html>

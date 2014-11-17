@@ -53,21 +53,21 @@ public class MainServlet extends HttpServlet {
 	private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
 		HttpSession session = req.getSession(false);
-		if (session == null) {
+		if(session == null) {
 			req.setAttribute("errorDescription", "session is null.");
 			req.getRequestDispatcher("error");
 			return;
 		}
-		
+
 		String beartterId = (String) session.getAttribute("beartterId");
-		if(StringUtils.isEmpty(beartterId)){
+		if(StringUtils.isEmpty(beartterId)) {
 			req.setAttribute("errorDescription", "session is clear.");
 			req.getRequestDispatcher("error");
 			return;
 		}
 
 		String pagingNoString = req.getParameter("paging");
-		if (pagingNoString == null)
+		if(pagingNoString == null)
 			pagingNoString = "1";
 		Integer pagingNo = Integer.parseInt(pagingNoString);
 
@@ -103,12 +103,13 @@ public class MainServlet extends HttpServlet {
 		// }
 		String error = (String) session.getAttribute("error");
 
-		if (!StringUtils.isEmpty(error)) {
+		if(!StringUtils.isEmpty(error)) {
 			req.setAttribute("error", error);
 			session.removeAttribute("error");
 		}
 
 		req.setAttribute("statusList", statusList);
+		req.setAttribute("newLine", "\n");
 		session.setAttribute("pagingNo", pagingNo);
 		session.setAttribute("twitter", twitter);
 

@@ -15,6 +15,8 @@ import org.atilika.kuromoji.Token;
 import org.atilika.kuromoji.Tokenizer;
 
 import com.iidaapp.beartter_demo.db.DbUtils;
+import com.iidaapp.beartter_demo.entity.CnameTypeEntity;
+import com.iidaapp.beartter_demo.entity.PartOfSpeechTypeEntity;
 
 public class TweetAnalysisUtil {
 
@@ -64,7 +66,6 @@ public class TweetAnalysisUtil {
 			System.out.println(word);
 		}
 
-		// 結果を出力してみる
 		for (Token token : tokens) {
 			partOfSpeechAnalyse(token.getPartOfSpeech(), beartterId);
 		}
