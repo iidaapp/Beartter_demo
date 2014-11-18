@@ -1,6 +1,6 @@
 html, body {
 	height: 100%;
-	margin: 10px;
+	margin: 50px 0 0 0;
 }
 
 body {
@@ -10,9 +10,5 @@ body {
 	background-size: cover; */
 }
 
-.only-logo .navbar-header {
-	margin: auto;
-	float: none;
-}
 
 
