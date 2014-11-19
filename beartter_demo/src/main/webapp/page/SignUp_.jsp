@@ -9,11 +9,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Bootstrap -->
-<link href="../staticcontents/css/bootstrap.css" rel="stylesheet">
-<link href="../staticcontents/css/bootstrap-theme.css" rel="stylesheet">
-
-<!-- Mine -->
-<link href="../staticcontents/css/signup.css" rel="stylesheet">
+<link href="/beartter_demo/staticcontents/css/bootstrap.css" rel="stylesheet">
+<link href="/beartter_demo/staticcontents/css/bootstrap-theme.css" rel="stylesheet">
+<!-- mine -->
+<link href="/beartter_demo/staticcontents/css/signup.css" rel="stylesheet">
 
 </head>
 <body>
@@ -33,7 +32,7 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">新規登録 <span class="sr-only">(current)</span></a></li>
+					<li class="active"><a href="#">新規登録</a></li>
 				</ul>
 
 			</div>
@@ -43,7 +42,7 @@
 	</nav>
 
 
-	<h3 class="">Sign up for Mapbox</h3>
+	<h3 class="">Sign up for Beartter（仮）</h3>
 	<div>
 		<img src="http://abs.twimg.com/sticky/default_profile_images/default_profile_3_normal.png" />
 		<%-- 				<img src="${profileImageUrl}" /> --%>
@@ -73,43 +72,58 @@
 	<div class="form-block">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
 
-					<form method="post" id="custom_form" name="custom_form" action="/beartter_demo/confirm" role="form">
-						<div class="form-group">
-							<label for="userName">Beartterユーザー名</label> <input type="text" id="userName" name="userName"
-								class="form-control" <c:if test="${!empty signUpForm}">value="${signUpForm.userName}"</c:if>>
-						</div>
-						<div class="form-group">
-							<label for="mailAddress">メールアドレス</label> <input type="text" id="mailAddress"
-								name="mailAddress" class="form-control">
-						</div>
+				<form class="form-horizontal" method="post" id="custom_form" name="custom_form"
+					action="/beartter_demo/confirm" role="form">
 
-						<div class="form-group">
-							<div class="form-group">
-								<label for="birth_day">誕生日</label>
-								<div class="form-inline">
-									<input type="text" name="year" size="4" class="form-control" <c:if test="${!empty signUpForm}">value="${signUpForm.year}"</c:if>>年 
-									<input type="text" name="month" size="2" class="form-control" <c:if test="${!empty signUpForm}">value="${signUpForm.month}"</c:if>>月 
-									<input type="text" name="day" size="2" class="form-control" <c:if test="${!empty signUpForm}">value="${signUpForm.day}"</c:if>>日
-								</div>
-							</div>
+					<div class="form-group">
+						<label for="userName" class="control-label col-sm-4">Beartterユーザー名</label>
+						<div class="col-sm-4">
+							<input type="text" id="userName" name="userName" class="form-control"
+								<c:if test="${!empty signUpForm}">value="${signUpForm.userName}"</c:if>>
 						</div>
+					</div>
 
-						<div class="form-group">
-							<label for="password">パスワード</label>
+					<div class="form-group">
+						<label for="mailAddress" class="control-label col-sm-4">メールアドレス</label>
+						<div class="col-sm-4">
+							<input type="text" id="mailAddress" name="mailAddress" class="form-control">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-sm-4">誕生日</label>
+						<div class="col-sm-4 form-date">
+							<input type="text" class="form-control form-year" placeholder="yyyy" name="year"
+								<c:if test="${!empty signUpForm}">value="${signUpForm.year}"</c:if>>
+								<span>年</span>
+							<input type="text" class="form-control form-monthday" placeholder="MM" name="month"
+								<c:if test="${!empty signUpForm}">value="${signUpForm.month}"</c:if>>
+								<span>月</span>
+							<input type="text" class="form-control form-monthday" placeholder="dd" name="day"
+								<c:if test="${!empty signUpForm}">value="${signUpForm.day}"</c:if>>
+								<span>日</span>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="password" class="control-label col-sm-4">パスワード</label>
+						<div class="col-sm-4">
 							<input type="password" name="password" class="form-control" size="45">
 						</div>
+					</div>
 
-						<div class="form-group">
-							<label for="passwordretry">パスワード確認</label> <input type="password" name="passwordConfirm" class="form-control" size="45">
+					<div class="form-group">
+						<label for="passwordretry" class="control-label col-sm-4">パスワード確認</label>
+						<div class="col-sm-4">
+							<input type="password" name="passwordConfirm" class="form-control" size="45">
 						</div>
+					</div>
 
-						<button type="submit" class="btn btn-default" id="submit">Submit</button>
-					</form>
-				</div>
-
+					<button type="submit" class="btn btn-default" id="submit">Submit</button>
+				</form>
 			</div>
+
 		</div>
 	</div>
 

@@ -5,10 +5,31 @@ html, body {
 
 body {
 	text-align: center;
-/* 	background: url(../img/background-images/1.jpg) no-repeat center top fixed;
-	-webkit-background-size: cover;
-	background-size: cover; */
 }
 
+.form-year {
+	width: 60px;
+	display: inline-block;
+}
 
+.form-monthday {
+	width: 50px;
+	display: inline-block;
+}
 
+span.has-error {
+	color: #a94442;
+}
+
+.description {
+	text-align: left;
+}
+
+.twitterName {
+	text-align: right;
+	padding: 6px 12px;
+}
+
+.screenName{
+	padding: 6px 12px;
+}

@@ -69,6 +69,7 @@ public class SignUpConfirm extends HttpServlet {
 
 		// 入力情報をセッションに格納
 		session.setAttribute("signUpForm", signUpForm);
+		resp.setCharacterEncoding("UTF-8");
 
 		// ひとつでも空欄の入力がある場合、入力画面へ遷移
 		if(!results.isCheckAllValueExistInSignUpForm()) {
