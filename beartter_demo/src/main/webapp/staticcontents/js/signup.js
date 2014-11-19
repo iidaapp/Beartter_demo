@@ -48,15 +48,18 @@ $(document).ready(
 									},
 									year : {
 										required : true,
-										maxlength : 4
+										maxlength : 4,
+										yearValidation : true
 									},
 									month : {
 										required : true,
-										maxlength : 2
+										maxlength : 2,
+										monthdayValidation : true
 									},
 									day : {
 										required : true,
-										maxlength : 2
+										maxlength : 2,
+										monthdayValidation : true
 									},
 									password : {
 										required : true,
@@ -140,5 +143,37 @@ jQuery.validator.addMethod(
 		},
 
 		"正しいメールアドレスの形式で入力して下さい"
+
+		);
+
+jQuery.validator.addMethod(
+
+		"yearValidation",
+
+		function(value, element) {
+
+			reg = new RegExp("\\d{4}");
+
+			return this.optional(element) || reg.test(value);
+
+		},
+
+		"例の通りに入力してください"
+
+		);
+
+jQuery.validator.addMethod(
+
+		"monthdayValidation",
+
+		function(value, element) {
+
+			reg = new RegExp("\\d{2}");
+
+			return this.optional(element) || reg.test(value);
+
+		},
+
+		"例の通りに入力してください"
 
 		);

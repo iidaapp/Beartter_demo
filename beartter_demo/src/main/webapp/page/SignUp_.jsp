@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
@@ -9,10 +11,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Bootstrap -->
-<link href="/beartter_demo/staticcontents/css/bootstrap.css" rel="stylesheet">
-<link href="/beartter_demo/staticcontents/css/bootstrap-theme.css" rel="stylesheet">
+<link href="/beartter_demo/staticcontents/css/bootstrap.css"
+	rel="stylesheet">
+<link href="/beartter_demo/staticcontents/css/bootstrap-theme.css"
+	rel="stylesheet">
 <!-- mine -->
-<link href="/beartter_demo/staticcontents/css/signup.css" rel="stylesheet">
+<link href="/beartter_demo/staticcontents/css/signup.css"
+	rel="stylesheet">
 
 </head>
 <body>
@@ -20,17 +25,20 @@
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-					data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span>
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/beartter_demo/"><img src="../staticcontents/img/icon.png"
-					height="20" width="20" alt="icon"></a>
+				<a class="navbar-brand" href="/beartter_demo/"><img
+					src="../staticcontents/img/icon.png" height="20" width="20"
+					alt="icon"></a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">新規登録</a></li>
 				</ul>
@@ -43,89 +51,60 @@
 
 
 	<h3 class="">Sign up for Beartter（仮）</h3>
-	<div>
-		<img src="http://abs.twimg.com/sticky/default_profile_images/default_profile_3_normal.png" />
-		<%-- 				<img src="${profileImageUrl}" /> --%>
-	</div>
 
+	<div class="container">
 
-	<div>TwitterName : ${screenName}</div>
+		<p>
+			<img
+				src="http://abs.twimg.com/sticky/default_profile_images/default_profile_3_normal.png" />
+			<%-- 				<img src="${profileImageUrl}" /> --%>
+		</p>
 
-	<div id="errorMessage">
-		<c:if test="${!empty ValueExist and !ValueExist}">
-					空欄あり
-				</c:if>
-		<c:if test="${!empty UniqueEMailAddress and !UniqueEMailAddress}">
-					メールアドレス使用済み
-				</c:if>
-		<c:if test="${!empty UniqueUserName and !UniqueUserName}">
-					ユーザー名使用済み
-				</c:if>
-		<c:if test="${!empty CorrectEmailAddress and !CorrectEmailAddress}">
-					Emailの形式じゃない
-				</c:if>
-		<c:if test="${!empty CorrectBirthDate and !CorrectBirthDate}">
-					年月日の形式じゃない
-				</c:if>
-	</div>
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+				<ul class="list-unstyled">
+					<li>
+						<h3 class="panel-title">TwitterName</h3>
+					</li>
+					<li>
+					<p>${screenName}${screenName}${screenName}${screenName}${screenName}${screenName}${screenName}${screenName}${screenName}${screenName}
+					</p>
+					</li>
 
-	<div class="form-block">
-		<div class="container">
-			<div class="row">
+					<li>
+						<h3 class="panel-title">Beartterユーザー名</h3>
+					</li>
+					<li>${fn:escapeXml(signUpForm.userName)}</li>
 
-				<form class="form-horizontal" method="post" id="custom_form" name="custom_form"
-					action="/beartter_demo/confirm" role="form">
+					<li>
+						<h3 class="panel-title">メールアドレス</h3>
+					</li>
+					<li>${fn:escapeXml(signUpForm.mailAddress)}</li>
 
-					<div class="form-group">
-						<label for="userName" class="control-label col-sm-4">Beartterユーザー名</label>
-						<div class="col-sm-4">
-							<input type="text" id="userName" name="userName" class="form-control"
-								<c:if test="${!empty signUpForm}">value="${signUpForm.userName}"</c:if>>
-						</div>
-					</div>
+					<li>
+						<h3 class="panel-title">誕生日</h3>
+					</li>
+					<li>${signUpForm.year}年
+						${signUpForm.month} 月 ${signUpForm.day} 日
+					</li>
 
-					<div class="form-group">
-						<label for="mailAddress" class="control-label col-sm-4">メールアドレス</label>
-						<div class="col-sm-4">
-							<input type="text" id="mailAddress" name="mailAddress" class="form-control">
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label class="control-label col-sm-4">誕生日</label>
-						<div class="col-sm-4 form-date">
-							<input type="text" class="form-control form-year" placeholder="yyyy" name="year"
-								<c:if test="${!empty signUpForm}">value="${signUpForm.year}"</c:if>>
-								<span>年</span>
-							<input type="text" class="form-control form-monthday" placeholder="MM" name="month"
-								<c:if test="${!empty signUpForm}">value="${signUpForm.month}"</c:if>>
-								<span>月</span>
-							<input type="text" class="form-control form-monthday" placeholder="dd" name="day"
-								<c:if test="${!empty signUpForm}">value="${signUpForm.day}"</c:if>>
-								<span>日</span>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="password" class="control-label col-sm-4">パスワード</label>
-						<div class="col-sm-4">
-							<input type="password" name="password" class="form-control" size="45">
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="passwordretry" class="control-label col-sm-4">パスワード確認</label>
-						<div class="col-sm-4">
-							<input type="password" name="passwordConfirm" class="form-control" size="45">
-						</div>
-					</div>
-
-					<button type="submit" class="btn btn-default" id="submit">Submit</button>
-				</form>
+					<li>
+						<h3 class="panel-title">パスワード</h3>
+					</li>
+					<li>(入力されたパスワード)</li>
+				</ul>
 			</div>
-
 		</div>
 	</div>
 
+	<p>以上の内容で登録してよろしいですか？</p>
+	<form name="send" action="complete">
+		<input type="submit" class="validate btn btn-default" id="submit"
+			value="登録">
+	</form>
+	<form name="return" action="signup">
+		<input type="submit" class="validate btn btn-default" id="submit"
+			value="戻る">
+	</form>
 </body>
 </html>

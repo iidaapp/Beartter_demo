@@ -112,7 +112,8 @@ public class SignUpConfirm extends HttpServlet {
 		req.setAttribute("UniqueEMailAddress", results.isUniqueEMailAddress());
 		req.setAttribute("UniqueUserName", results.isUniqueUserNameSignUpForm());
 		req.setAttribute("CorrectEmailAddress", results.isCorrectEmailAddress());
-		req.setAttribute("CorrectBirthDate", results.isCorrectEmailAddress());
+		req.setAttribute("CorrectBirthDate", results.isCorrectBirthDate());
+		req.setAttribute("CorrectDigit", results.isCorrectDigit());
 
 		return;
 	}
@@ -132,6 +133,7 @@ public class SignUpConfirm extends HttpServlet {
 		results.setUniqueUserNameSignUpForm(BeartterUtils.isUniqueUserNameSignUpForm(signUpForm.getUserName()));
 		results.setCorrectEmailAddress(BeartterUtils.isCorrectEmailAddress(signUpForm.getMailAddress()));
 		results.setCorrectBirthDate(BeartterUtils.isCorrectBirthDate(signUpForm.getYear(), signUpForm.getMonth(), signUpForm.getDay()));
+		results.setCorrectDigit(BeartterUtils.isCorrectDigit(signUpForm));
 
 		return results;
 	}

@@ -8,10 +8,11 @@ public class SignUpFormValidateResults {
 	private boolean isUniqueEMailAddress;
 	private boolean isCorrectEmailAddress;
 	private boolean isCorrectBirthDate;
+	private boolean isCorrectDigit;
 
 
 	public boolean successAllValidate() {
-		if (checkAllValueExistInSignUpForm && isSamePassword && isUniqueUserNameSignUpForm && isUniqueEMailAddress && isCorrectEmailAddress && isCorrectBirthDate)
+		if (checkAllValueExistInSignUpForm && isSamePassword && isUniqueUserNameSignUpForm && isUniqueEMailAddress && isCorrectEmailAddress && isCorrectBirthDate && isCorrectDigit)
 			return true;
 
 		return false;
@@ -80,6 +81,16 @@ public class SignUpFormValidateResults {
 
 	public void setCorrectBirthDate(boolean isCorrectBirthDate) {
 		this.isCorrectBirthDate = isCorrectBirthDate;
+	}
+
+
+	public boolean isCorrectDigit() {
+		return isCorrectDigit;
+	}
+
+
+	public void setCorrectDigit(boolean isCorrectDigit) {
+		this.isCorrectDigit = isCorrectDigit;
 	}
 
 }

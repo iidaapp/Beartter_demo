@@ -56,14 +56,16 @@
 			<span id="mailaddress-error" class="has-error">正しいメールアドレスの形式で入力して下さい。<br /></span>
 		</c:if>
 		<c:if test="${!empty CorrectBirthDate and !CorrectBirthDate}">
-			<span id="birthdate-error" class="has-error">例の通りに正しい年月日の形式で入力して下さい。<br /></span>
+			<span id="birthdate-error" class="has-error">正しい年月日の形式で入力して下さい。<br /></span>
+		</c:if>
+		<c:if test="${!empty CorrectDigit and !CorrectDigit}">
+			<span id="birthdate-error" class="has-error">正しい桁数で入力して下さい。<br /></span>
 		</c:if>
 
 	</p>
 
 	<p>
-		<img src="http://abs.twimg.com/sticky/default_profile_images/default_profile_3_normal.png" />
-		<%-- 				<img src="${profileImageUrl}" /> --%>
+		<img src="${profileImageUrl}" />
 	</p>
 
 
@@ -81,7 +83,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="userName" class="control-label col-sm-4">Beartterユーザー名 </label>
+						<label for="userName" class="control-label col-sm-4">Beartterユーザー名</label>
 						<div class="col-sm-4">
 							<input type="text" id="userName" name="userName" class="form-control" maxlength="50"
 								<c:if test="${!empty signUpForm}">value="${signUpForm.userName}"</c:if>>
@@ -92,7 +94,8 @@
 					<div class="form-group">
 						<label for="mailAddress" class="control-label col-sm-4">メールアドレス</label>
 						<div class="col-sm-4">
-							<input type="text" id="mailAddress" name="mailAddress" class="form-control" maxlength="200">
+							<input type="text" id="mailAddress" name="mailAddress" class="form-control" maxlength="200"
+							<c:if test="${!empty signUpForm}">value="${signUpForm.mailAddress}"</c:if>>
 						</div>
 						<div class="description col-sm-4">(200字以内)</div>
 					</div>
@@ -128,7 +131,7 @@
 						</div>
 					</div>
 
-					<button type="submit" class="validate btn btn-default" id="submit">Submit</button>
+					<input type="submit" class="validate btn btn-default" id="submit">Submit</button>
 				</form>
 			</div>
 

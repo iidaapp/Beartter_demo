@@ -98,4 +98,19 @@ public class BeartterUtils {
 		return birthDate;
 	}
 
+
+	public static boolean isCorrectDigit(SignUpForm signUpForm) {
+		if(signUpForm.getUserName().length() <= 50
+				&& signUpForm.getMailAddress().length() <= 45
+				&& signUpForm.getYear().length() == 4
+				&& signUpForm.getMonth().length() == 2
+				&& signUpForm.getDay().length() == 2
+				&& signUpForm.getPassword().length() <= 45
+				&& signUpForm.getPasswordConfirm().length() <= 45)
+			
+			return true;
+
+		return false;
+	}
+
 }
