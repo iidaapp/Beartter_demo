@@ -30,8 +30,8 @@
 					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/beartter_demo/"><img
-					src="/beartter_demo/staticcontents/img/icon.png" height="20" width="20" alt="icon"></a>
+				<a class="navbar-brand" href="/beartter_demo/main">
+				<img src="/beartter_demo/staticcontents/img/icon.png" height="20" width="20" alt="icon"></a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -84,6 +84,7 @@
 
 					</div>
 					<div class="modal-footer">
+						<img src="${profileImageUrl}" />
 						<button type="button" class="btn btn-default" data-dismiss="modal">back</button>
 						<button type="submit" class="btn btn-primary">Tweet</button>
 					</div>
@@ -98,85 +99,97 @@
 
 
 	<div id="nav_tl">
-
-		<img alt="character" src="/beartter_demo/staticcontents/img/default_character.jpg">
+		<table>
+			<tr>
+				<td>
+					<div class="arrow_box">
+						<p>ほげほげほげほげ</p>
+						<div id="talk-span">
+						<input type="text">
+						</div>
+					</div>
+				</td>
+				<td><img alt="character"
+					src="/beartter_demo/staticcontents/img/default_character.png">
+				</td>
+		</table>
 	</div>
 
-	<div id="content_tl">
 
-		<table frame="hsides" rules="rows" id="timeline">
+	<div id="container">
+	<div class="panel panel-default  col-xs-8 col-xs-offset-2">
+		<table id="timeline" class="table table-bordered table-striped">
 
 			<!-- RT -->
-			<tbody>
 				<tr>
-					<td><a rel="leanModal" href="#prof" onclick="getValue(89377434);"> <img
+					<td class="left"><a rel="leanModal" href="#prof" onclick="getValue(89377434);"> <img
 							src="http://pbs.twimg.com/profile_images/499845730501013504/UYjXiXHI_normal.jpeg">
 					</a></td>
 					<td>「オール沖縄」は、沖縄をひとつにするのではなく、多様な沖縄をつなぎあうネットワークだといいなと、そこには希望を持ちたい。
 						翁長新知事が掲げる「アイデンティティ」が試される（新城和博）｜ポリタス 「沖縄県知事選2014」から考える http://t.co/kautebA6j2</td>
 				</tr>
 				<tr>
-					<td><a rel="leanModal" href="#prof" onclick="getValue(89377434);"> 熊本 博之 </a></td>
+					<td class="left"><a rel="leanModal" href="#prof" onclick="getValue(89377434);"> 熊本 博之 </a></td>
 					<td>tsudaretweeted Thu Nov 20 12:58:41 JST 2014</td>
 				</tr>
 
 				<!-- RT -->
 				<tr>
-					<td><a rel="leanModal" href="#prof" onclick="getValue(86910048);"> <img
+					<td class="left"><a rel="leanModal" href="#prof" onclick="getValue(86910048);"> <img
 							src="http://pbs.twimg.com/profile_images/514053059257704451/u6hTZmGk_normal.jpeg">
 					</a></td>
 					<td>総選挙もあるし、沖縄のこと続いていくのでみつめてこうと思います http://t.co/UqGTaAU0Fg</td>
 				</tr>
 				<tr>
-					<td><a rel="leanModal" href="#prof" onclick="getValue(86910048);"> アラカキヒロコ </a></td>
+					<td class="left"><a rel="leanModal" href="#prof" onclick="getValue(86910048);"> アラカキヒロコ </a></td>
 					<td>tsudaretweeted Thu Nov 20 12:37:54 JST 2014</td>
 				</tr>
 
 				<!-- RT -->
 				<tr>
-					<td><a rel="leanModal" href="#prof" onclick="getValue(86910048);"> <img
+					<td class="left"><a rel="leanModal" href="#prof" onclick="getValue(86910048);"> <img
 							src="http://pbs.twimg.com/profile_images/514053059257704451/u6hTZmGk_normal.jpeg">
 					</a></td>
 					<td>実家で「東京では沖縄って観光のイメージでしか見てなくて基地問題とか全然みんな知らないよ」とぼやいたら、父に「北方領土のことをどれだけ知っているのか」と諭されたことがある。周縁の宿命でもあるのかもしれない。それでも、今回ポリタスの沖縄県知事選特集は本当に嬉しかった。</td>
 				</tr>
 				<tr>
-					<td><a rel="leanModal" href="#prof" onclick="getValue(86910048);"> アラカキヒロコ </a></td>
+					<td class="left"><a rel="leanModal" href="#prof" onclick="getValue(86910048);"> アラカキヒロコ </a></td>
 					<td>tsudaretweeted Thu Nov 20 12:25:26 JST 2014</td>
 				</tr>
 
 				<!-- RT -->
 				<tr>
-					<td><a rel="leanModal" href="#prof" onclick="getValue(86910048);"> <img
+					<td class="left"><a rel="leanModal" href="#prof" onclick="getValue(86910048);"> <img
 							src="http://pbs.twimg.com/profile_images/514053059257704451/u6hTZmGk_normal.jpeg">
 					</a></td>
 					<td>沖縄がすきです。だから不当だと思ったら腹がたつし無視されると悲しい。沖縄問題が解決するとは思ってないけどなるべくましな未来があってほしい。でもそれは日本のなるべくましな未来ともつながってると思うので。</td>
 				</tr>
 				<tr>
-					<td><a rel="leanModal" href="#prof" onclick="getValue(86910048);"> アラカキヒロコ </a></td>
+					<td class="left"><a rel="leanModal" href="#prof" onclick="getValue(86910048);"> アラカキヒロコ </a></td>
 					<td>tsudaretweeted Thu Nov 20 12:22:32 JST 2014</td>
 				</tr>
 
 				<!-- RT -->
 				<tr>
-					<td><a rel="leanModal" href="#prof" onclick="getValue(86910048);"> <img
+					<td class="left"><a rel="leanModal" href="#prof" onclick="getValue(86910048);"> <img
 							src="http://pbs.twimg.com/profile_images/514053059257704451/u6hTZmGk_normal.jpeg">
 					</a></td>
 					<td>沖縄問題を沖縄以外で語っても多くの人は興味を示さないっていう侘しさと無力感を知ってるし、人生をかけて沖縄を見つめている研究者の方々と出会ってからは、知見とデリカシーが求められる問題に素人の自分が杜撰なこと言いたくなくていつもなかなか公に言葉を発せない。</td>
 				</tr>
 				<tr>
-					<td><a rel="leanModal" href="#prof" onclick="getValue(86910048);"> アラカキヒロコ </a></td>
+					<td class="left"><a rel="leanModal" href="#prof" onclick="getValue(86910048);"> アラカキヒロコ </a></td>
 					<td>tsudaretweeted Thu Nov 20 12:17:04 JST 2014</td>
 				</tr>
 
 				<!-- RT -->
 				<tr>
-					<td><a rel="leanModal" href="#prof" onclick="getValue(86910048);"> <img
+					<td class="left"><a rel="leanModal" href="#prof" onclick="getValue(86910048);"> <img
 							src="http://pbs.twimg.com/profile_images/514053059257704451/u6hTZmGk_normal.jpeg">
 					</a></td>
 					<td>沖縄県知事選挙のあとも問題は続いてくし進展してる。今回ポリタスを引用してツイートしまくってたのは、沖縄を知って欲しいと単純に思ったから。それと、沖縄で育った日々で自分の中に培われた負の想いは建設的な形で出したかったから。</td>
 				</tr>
 				<tr>
-					<td><a rel="leanModal" href="#prof" onclick="getValue(86910048);"> アラカキヒロコ </a></td>
+					<td class="left"><a rel="leanModal" href="#prof" onclick="getValue(86910048);"> アラカキヒロコ </a></td>
 					<td>tsudaretweeted Thu Nov 20 12:16:41 JST 2014</td>
 				</tr>
 
@@ -187,7 +200,7 @@
 					<td>読モの私服が買えるフリマアプリ「Bijoux de Marche」配信 http://t.co/uzTN5qGvcj http://t.co/UmuVAHCXdK</td>
 				</tr>
 				<tr>
-					<td><a rel="leanModal" href="#prof">Fashionsnap.com</a></td>
+					<td class="left"><a rel="leanModal" href="#prof">Fashionsnap.com</a></td>
 					<td>Thu Nov 20 15:01:17 JST 2014</td>
 				</tr>
 
@@ -198,33 +211,33 @@
 					<td>円、118円台後半に下げ幅拡大 ７年３カ月ぶり円安 http://t.co/etn7ZcHfXN</td>
 				</tr>
 				<tr>
-					<td><a rel="leanModal" href="#prof">日本経済新聞 電子版</a></td>
+					<td class="left"><a rel="leanModal" href="#prof">日本経済新聞 電子版</a></td>
 					<td>Thu Nov 20 15:01:03 JST 2014</td>
 				</tr>
 
 				<!-- RT -->
 				<tr>
-					<td><a rel="leanModal" href="#prof" onclick="getValue(150144770);"> <img
+					<td class="left"><a rel="leanModal" href="#prof" onclick="getValue(150144770);"> <img
 							src="http://pbs.twimg.com/profile_images/450827794159648769/yGVJoUgW_normal.jpeg">
 					</a></td>
 					<td>決して反対する事がおかしい、とか間違いだなんて思ってるのではなく、僕はSNSがどんな考えの人も自由闊達に意見を呟ける場であって欲しいんだ。僕らはムードにコントロールされやすい。そことは切り離した所での一人一人の判断や選択が大切。ポリタスの重要性もきっとその辺にあるんだろうな。</td>
 				</tr>
 				<tr>
-					<td><a rel="leanModal" href="#prof" onclick="getValue(150144770);"> 松岡英明☪12/21LIVE
+					<td class="left"><a rel="leanModal" href="#prof" onclick="getValue(150144770);"> 松岡英明☪12/21LIVE
 							GATE </a></td>
 					<td>tsudaretweeted Thu Nov 20 11:48:30 JST 2014</td>
 				</tr>
 
 				<!-- RT -->
 				<tr>
-					<td><a rel="leanModal" href="#prof" onclick="getValue(135190213);"> <img
+					<td class="left"><a rel="leanModal" href="#prof" onclick="getValue(135190213);"> <img
 							src="http://pbs.twimg.com/profile_images/838210303/IMGP2637_normal.JPG">
 					</a></td>
 					<td>基地保有市の支持が圧倒的。やっぱり可視化されているものはすごくわかりやすい。 / 【沖縄県知事選】地域別得票数データから見る第12回沖縄県知事選挙（ポリタス編集部）
 						｜ポリタス 「沖縄県知事選2014」... http://t.co/A4d3HKfk7Z #NewsPicks</td>
 				</tr>
 				<tr>
-					<td><a rel="leanModal" href="#prof" onclick="getValue(135190213);"> Fujioka Satoko </a></td>
+					<td class="left"><a rel="leanModal" href="#prof" onclick="getValue(135190213);"> Fujioka Satoko </a></td>
 					<td>tsudaretweeted Thu Nov 20 13:31:43 JST 2014</td>
 				</tr>
 
@@ -236,20 +249,20 @@
 						http://t.co/HqQ206sOBi</td>
 				</tr>
 				<tr>
-					<td><a rel="leanModal" href="#prof">VOGUE JAPAN</a></td>
+					<td class="left"><a rel="leanModal" href="#prof">VOGUE JAPAN</a></td>
 					<td>Thu Nov 20 15:00:19 JST 2014</td>
 				</tr>
 
 				<!-- RT -->
 				<tr>
-					<td><a rel="leanModal" href="#prof" onclick="getValue(2511640327);"> <img
+					<td class="left"><a rel="leanModal" href="#prof" onclick="getValue(2511640327);"> <img
 							src="http://pbs.twimg.com/profile_images/486041044111212545/fo3IFfUp_normal.jpeg">
 					</a></td>
 					<td>@takapon_jp 意外と深く考えないで、行動力だけでなんとかなる人って自分の周りも多いんだよな。きっとやってみることが大事なんだな。
 						BARホリエモンチャンネル×しごとバー！〜ECサイトプロ編vol.3〜http://t.co/juvzoDmPef #ホリエモンチャンネル</td>
 				</tr>
 				<tr>
-					<td><a rel="leanModal" href="#prof" onclick="getValue(2511640327);"> 愛らんど太郎 </a></td>
+					<td class="left"><a rel="leanModal" href="#prof" onclick="getValue(2511640327);"> 愛らんど太郎 </a></td>
 					<td>takapon_jpretweeted Thu Nov 20 14:58:10 JST 2014</td>
 				</tr>
 
@@ -261,7 +274,7 @@
 						http://t.co/cxoVtYtbwt</td>
 				</tr>
 				<tr>
-					<td><a rel="leanModal" href="#prof">Fashion Press</a></td>
+					<td class="left"><a rel="leanModal" href="#prof">Fashion Press</a></td>
 					<td>Thu Nov 20 14:53:56 JST 2014</td>
 				</tr>
 
@@ -273,7 +286,7 @@
 						エボラ出血熱の基本情報」へのリンクを追加。⇒http://t.co/eCNWWsbgz8</td>
 				</tr>
 				<tr>
-					<td><a rel="leanModal" href="#prof">首相官邸（災害情報）</a></td>
+					<td class="left"><a rel="leanModal" href="#prof">首相官邸（災害情報）</a></td>
 					<td>Thu Nov 20 14:46:36 JST 2014</td>
 				</tr>
 
@@ -285,7 +298,7 @@
 						http://t.co/Chlpw2cyou http://t.co/mFixJRL8du</td>
 				</tr>
 				<tr>
-					<td><a rel="leanModal" href="#prof">VOGUE JAPAN</a></td>
+					<td class="left"><a rel="leanModal" href="#prof">VOGUE JAPAN</a></td>
 					<td>Thu Nov 20 14:45:21 JST 2014</td>
 				</tr>
 
@@ -297,20 +310,20 @@
 						http://t.co/VFAPIRHdCR</td>
 				</tr>
 				<tr>
-					<td><a rel="leanModal" href="#prof">Fashion Press</a></td>
+					<td class="left"><a rel="leanModal" href="#prof">Fashion Press</a></td>
 					<td>Thu Nov 20 14:40:02 JST 2014</td>
 				</tr>
 
 				<!-- RT -->
 				<tr>
-					<td><a rel="leanModal" href="#prof" onclick="getValue(554157023);"> <img
+					<td class="left"><a rel="leanModal" href="#prof" onclick="getValue(554157023);"> <img
 							src="http://pbs.twimg.com/profile_images/2410751083/yqkgn33gcasuswfekbd9_normal.jpeg">
 					</a></td>
 					<td>【新着イベント】11/24 Mon 藤井直敬 × 高橋建滋「仮想現実の世界へようこそ〜ムック『xReality』が魅せる未来〜」『xReality
 						』刊行記念開催決定！http://t.co/67Iuhv3rOO @takapon_jp</td>
 				</tr>
 				<tr>
-					<td><a rel="leanModal" href="#prof" onclick="getValue(554157023);"> B&amp;B </a></td>
+					<td class="left"><a rel="leanModal" href="#prof" onclick="getValue(554157023);"> B&amp;B </a></td>
 					<td>takapon_jpretweeted Thu Nov 20 14:17:18 JST 2014</td>
 				</tr>
 
@@ -322,7 +335,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td><a rel="leanModal" href="#prof">堀江貴文(Takafumi Horie)</a></td>
+					<td class="left"><a rel="leanModal" href="#prof">堀江貴文(Takafumi Horie)</a></td>
 					<td>Thu Nov 20 14:34:26 JST 2014</td>
 				</tr>
 
@@ -334,7 +347,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td><a rel="leanModal" href="#prof">堀江貴文(Takafumi Horie)</a></td>
+					<td class="left"><a rel="leanModal" href="#prof">堀江貴文(Takafumi Horie)</a></td>
 					<td>Thu Nov 20 14:34:23 JST 2014</td>
 				</tr>
 
@@ -346,13 +359,12 @@
 					</td>
 				</tr>
 				<tr>
-					<td><a rel="leanModal" href="#prof">堀江貴文(Takafumi Horie)</a></td>
+					<td class="left"><a rel="leanModal" href="#prof">堀江貴文(Takafumi Horie)</a></td>
 					<td>Thu Nov 20 14:34:19 JST 2014</td>
 				</tr>
 
-			</tbody>
 		</table>
-
+</div>
 
 	</div>
 
