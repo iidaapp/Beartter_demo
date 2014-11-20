@@ -107,7 +107,7 @@ $(document).ready(
 			// Validation成功時の遷移先
 			$("input.validate").click(function() {
 				if ($("#custom_form").valid() == true) {
-					location.href = "/beartter_demo/confirm"
+					$(form).submit();
 				}
 				return false;
 			});

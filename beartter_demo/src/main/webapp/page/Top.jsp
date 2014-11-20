@@ -39,7 +39,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 
-					<li><a href="#about">これなに？ <span class="sr-only">(current)</span></a></li>
+					<li><a href="#about">これなに？</a></li>
 					<li><a href="#howtouse">使い方</a></li>
 					<li><a href="#policies">利用規約</a></li>
 

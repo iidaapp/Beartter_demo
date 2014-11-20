@@ -131,7 +131,7 @@
 						</div>
 					</div>
 
-					<input type="submit" class="validate btn btn-default" id="submit">Submit</button>
+					<input type="submit" class="validate btn btn-default" id="submit" value="次へ">
 				</form>
 			</div>
 

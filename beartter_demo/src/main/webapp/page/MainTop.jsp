@@ -14,12 +14,10 @@
 <script src="/beartter_demo/staticcontents/js/common.js"
 	type="text/javascript"></script>
 <script src="/beartter_demo/staticcontents/js/bootstrap.min.js"></script>
-<script type="text/javascript" script-name="syncopate"
-	src="http://use.edgefonts.net/syncopate.js"></script>
+<script type="text/javascript" script-name="syncopate" src="http://use.edgefonts.net/syncopate.js"></script>
 <link rel="stylesheet" href="/beartter_demo/staticcontents/css/Main.css"
 	type="text/css" />
-<link href="/beartter_demo/staticcontents/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="/beartter_demo/staticcontents/css/bootstrap.min.css" rel="stylesheet">
 
 <title>Insert title here</title>
 <!--         <script type="text/javascript">

@@ -33,3 +33,7 @@ span.has-error {
 .screenName{
 	padding: 6px 12px;
 }
+
+.panel .panel-body{
+	word-break: break-all;
+}

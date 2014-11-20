@@ -1,0 +1,28 @@
+html, body {
+	height: 100%;
+	margin: 50px 0 0 0;
+}
+
+body {
+	text-align: center;
+}
+
+div.modal-button {
+	
+	margin: 8px 15px 8px 15px;
+}
+
+div.modal-body{
+	height: 150px;
+}
+
+
+textarea#tweet_text{
+	width: 100%;
+	height: 100%;
+	resize:none;
+}
+.dropdown-header {
+  color: #428bca;
+  font-size: 18px;
+}
