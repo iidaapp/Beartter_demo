@@ -1,23 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
-
 <head>
+<jsp:include page="/page/util/ImplementsJquery.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<jsp:include page="util/ImplementsJquery.jsp" />
-<script src="/beartter_demo/staticcontents/js/jquery.leanModal.min.js"
-	type="text/javascript"></script>
+<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Bootstrap -->
+<link href="/beartter_demo/staticcontents/css/bootstrap.css" rel="stylesheet">
+<link href="/beartter_demo/staticcontents/css/bootstrap-theme.css" rel="stylesheet">
+<script src="/beartter_demo/staticcontents/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- mine -->
+<link href="/beartter_demo/staticcontents/css/animate.css" rel="stylesheet">
+<script src="/beartter_demo/staticcontents/js/jquery.leanModal.min.js" type="text/javascript"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+<script type="text/javascript" script-name="syncopate" src="http://use.edgefonts.net/syncopate.js"></script>
+<link rel="stylesheet" href="/beartter_demo/staticcontents/css/main.css" type="text/css" />
+
 <script src="/beartter_demo/staticcontents/js/common.js"
 	type="text/javascript"></script>
-<script src="/beartter_demo/staticcontents/js/bootstrap.min.js"></script>
-<script type="text/javascript" script-name="syncopate" src="http://use.edgefonts.net/syncopate.js"></script>
-<link rel="stylesheet" href="/beartter_demo/staticcontents/css/Main.css"
-	type="text/css" />
-<link href="/beartter_demo/staticcontents/css/bootstrap.min.css" rel="stylesheet">
+
+
 
 <title>Insert title here</title>
 <!--         <script type="text/javascript">
@@ -52,129 +58,214 @@
             }
         </script> -->
 </head>
-<body class="tl">
+<body>
 
-	<!-- コンテナ開始 -->
-	<div id="container_tl">
+	<!-- container -->
+	<div class="container">
 
+		<!-- navigation -->
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+						data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/beartter_demo/main"> <img
+						src="/beartter_demo/staticcontents/img/icon.png" height="20" width="20" alt="icon"></a>
+				</div>
 
-		<!-- ヘッダ開始 -->
-		<div id="header_tl">
-			TOP画面 <br /> <br />
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li><a href="#howtouse">How to</a></li>
+					</ul>
 
-			<form action="main" method="post">
-				<input type="hidden" name="paging" value="${pagingNo + 1}">
-				<input type="submit" value="次のページへ" />
-			</form>
-			<c:if test="${!empty pagingNo and !(pagingNo eq 1)}">
-				<form action="main" method="post">
-					<input type="hidden" name="paging" value="${pagingNo - 1}">
-					<input type="submit" value="前のページへ" />
-				</form>
-			</c:if>
-			<form action="logout" method="post">
-				<input type="submit" value="ログアウト" />
-			</form>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<div class="modal-button">
+								<a data-toggle="modal" href="#tweetModal" class="btn btn-primary">Tweet</a>
+							</div>
+						</li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
+							role="button" aria-expanded="false"> Config <span class="caret"></span>
+						</a>
+							<ul class="dropdown-menu" role="menu">
+								<li class="dropdown-header">
+									${fn:escapeXml(beartterId)}
+								</li>
+								<li class="divider"></li>
+								<li><a href="#">Settings</a></li>
+								<li><a href="logout">Logout</a></li>
+							</ul></li>
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container-fluid -->
+		</nav>
+		<!-- end navigation -->
+
+		<!-- tweet modal -->
+		<div class="modal fade" id="tweetModal" tabindex="-1" role="dialog"
+			aria-labelledby="tweetModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="tweetModalLabel">New Tweet</h4>
+					</div>
+					<form action="/beartter_demo/tweet" method="post">
+						<div class="modal-body">
+							<textarea name="tweet_text" id="tweet_text"></textarea>
+
+						</div>
+						<div class="modal-footer">
+							<img src="${profileImageUrl}" />
+							<button type="button" class="btn btn-default" data-dismiss="modal">back</button>
+							<button type="submit" class="btn btn-primary">Tweet</button>
+						</div>
+					</form>
+
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
 		</div>
-		<!-- ヘッダ終了 -->
+		<!-- end tweet modal -->
 
-		<!-- ナビゲーション開始 -->
-		<div id="nav_tl">
-			<form action="tweet" method="post">
-				<textarea name="tweet_text" id="tweet_text"></textarea>
-				<input type="submit" value="Tweet" />
-			</form>
-			<img alt="character"
-				src="/beartter_demo/staticcontents/img/default_character.jpg">
-			<c:if test="${!empty error and (error eq 187) }">
-				<div id="error_msg">二重投稿は出来ません</div>
-			</c:if>
-			<c:if test="${!empty error and (error eq 400) }">
-				<div id="error_msg">Tweetは1文字以上140文字以下でお願いします</div>
-			</c:if>
+		<!-- user modal -->
+		<div class="modal fade" id="userModal" tabindex="-1" role="dialog"
+			aria-labelledby="userModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="tweetModalLabel">User Profile</h4>
+					</div>
 
+					<input id="temp" type="hidden" />
 
+					<div>
+						<table id="prof">
+							<tbody>
+								<tr>
+									<td id="icon"></td>
+								</tr>
+								<tr>
+									<td id="name"></td>
+								</tr>
+								<tr>
+									<td id="screenname"></td>
+								</tr>
+								<tr>
+									<td id="desc"></td>
+								</tr>
+								<tr>
+									<td id="relation"></td>
+								</tr>
+								<tr>
+									<td><input class="btn btn-primary" type="button" id="friendshipbutton" /></td>
+								</tr>
+								<tr>
+									<td class="modal_close"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
 		</div>
-		<!-- ナビゲーション終了 -->
+		<!-- end user modal -->
 
-		<!-- メインカラム開始 -->
-		<div id="content_tl">
-			<c:forEach var="timeLineList" items="${statusList}">
-				<table frame="hsides" rules="rows" id="timeline">
-					<c:forEach items="${timeLineList}" var="status">
 
-						<c:if test="${empty status.retweetedStatus}">
-							<!-- 通常ツイート -->
-							<tr>
-								<td id="icon_tl"><a rel="leanModal" href="#prof"
-									onclick="getValue(${status.user.id});"><img
-										src="${status.user.profileImageURL}" /></a></td>
-								<td>${fn:replace(fn:escapeXml(status.text),newLine, "<br />")}</td>
-							</tr>
-							<tr>
-								<td><a rel="leanModal" href="#prof">${fn:escapeXml(status.user.name)}</a></td>
-								<td>${fn:escapeXml(status.createdAt)}</td>
-							</tr>
-						</c:if>
+		<!-- user profile -->
 
-						<c:if test="${!empty status.retweetedStatus}">
-							<!-- RT -->
-							<tr>
-								<td><a rel="leanModal" href="#prof"
-									onclick="getValue(${status.retweetedStatus.user.id});"> <img
-										src="${status.retweetedStatus.user.profileImageURL}" />
-								</a></td>
-								<td>${fn:escapeXml(status.retweetedStatus.text)}</td>
-							</tr>
-							<tr>
-								<td><a rel="leanModal" href="#prof"
-									onclick="getValue(${status.retweetedStatus.user.id});">
-										${fn:escapeXml(status.retweetedStatus.user.name)} </a></td>
-								<td>${status.user.screenName}retweeted
-									${fn:escapeXml(status.retweetedStatus.createdAt)}</td>
-							</tr>
-						</c:if>
 
-					</c:forEach>
-				</table>
-			</c:forEach>
 
-		</div>
-		<!-- メインカラム終了 -->
-
-		<!-- フッタ開始 -->
-		<div id="footer_tl"></div>
-		<!-- フッタ終了 -->
-
-		<!-- ユーザ情報 -->
-		<input id="temp" type="hidden" />
-		<div id="prof">
-			<table id="prof_table">
-				<tbody>
-					<tr>
-						<td id="icon"></td>
-					</tr>
-					<tr>
-						<td id="name"></td>
-					</tr>
-					<tr>
-						<td id="screenname"></td>
-					</tr>
-					<tr>
-						<td id="desc"></td>
-					</tr>
-					<tr>
-						<td id="relation"></td>
-					</tr>
-					<tr>
-						<td><input type="button" id="friendshipbutton" /></td>
-					</tr>
-					<tr>
-						<td class="modal_close"></td>
-					</tr>
-				</tbody>
+		<!-- character -->
+		<div id="div1">
+			<table>
+				<tr>
+					<td>
+						<div class="arrow_box">
+							<p>何について調べますか？</p>
+							<div id="talk-span">
+								<input type="text" />
+							</div>
+							<button id="talk-button" type="button" class="btn btn-normal">検索</button>
+						</div>
+					</td>
+					<td><img alt="character" src="/beartter_demo/staticcontents/img/default_character.jpg">
+					</td>
 			</table>
 		</div>
+
+
+
+
+
+
+		<!-- timeline -->
+		<div class="row">
+			<div class=" col-xs-8 col-xs-offset-2 " id="timeline">
+
+				<c:forEach var="timeLineList" items="${statusList}">
+
+					<!-- table -->
+					<table class="table table-bordered table-striped">
+
+						<c:forEach items="${timeLineList}" var="status">
+
+							<c:if test="${empty status.retweetedStatus}">
+								<!-- normal -->
+								<tr>
+									<td id="icon_tl" class="left"><a data-toggle="modal" href="#userModal"
+										onclick="getValue(${status.user.id});"> <img src="${status.user.profileImageURL}" />
+									</a></td>
+									<td id="text_tl">${fn:replace(fn:escapeXml(status.text),newLine, "<br />")}</td>
+								</tr>
+								<tr>
+									<td class="left"><a data-toggle="modal" href="#userModal"
+										onclick="getValue(${status.user.id});"> ${fn:escapeXml(status.user.name)} </a></td>
+									<td id="desc_tl">${fn:escapeXml(status.createdAt)}</td>
+								</tr>
+							</c:if>
+
+							<c:if test="${!empty status.retweetedStatus}">
+								<!-- RT -->
+								<tr>
+									<td class="left"><a data-toggle="modal" href="#userModal"
+										onclick="getValue(${status.retweetedStatus.user.id});"> <img
+											src="${status.retweetedStatus.user.profileImageURL}" />
+									</a></td>
+									<td id="text_tl">${fn:escapeXml(status.retweetedStatus.text)}</td>
+								</tr>
+								<tr>
+									<td class="left"><a data-toggle="modal" href="#userModal"
+										onclick="getValue(${status.retweetedStatus.user.id});">
+											${fn:escapeXml(status.retweetedStatus.user.name)} </a></td>
+									<td id="desc_tl">${status.user.screenName}retweeted
+										${fn:escapeXml(status.retweetedStatus.createdAt)}</td>
+								</tr>
+							</c:if>
+
+						</c:forEach>
+					</table>
+				</c:forEach>
+
+			</div>
+		</div>
+		<!-- end timeline -->
+</div>
 
 		<script type="text/javascript">
 
@@ -189,9 +280,15 @@ $( 'a[rel*=leanModal]').leanModal({
     closeButton: ".modal_close"  // 閉じるボタンのCSS classを指定
 });
 
+$(function() {
+    // #div1をdrag可能に
+$("#div1").draggable();
+
+});
+
 </script>
-	</div>
-	<!-- コンテナ終了 -->
+	
+
 
 
 </body>

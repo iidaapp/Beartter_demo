@@ -16,8 +16,18 @@
 <!-- mine -->
 <link href="/beartter_demo/staticcontents/css/animate.css" rel="stylesheet">
 <script src="/beartter_demo/staticcontents/js/jquery.leanModal.min.js" type="text/javascript"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 <script type="text/javascript" script-name="syncopate" src="http://use.edgefonts.net/syncopate.js"></script>
 <link rel="stylesheet" href="/beartter_demo/staticcontents/css/Main_.css" type="text/css" />
+
+<script>
+
+$(function() {
+        // #div1をdrag可能に
+    $("#div1").draggable();
+
+});
+</script>
 
 </head>
 <body>
@@ -98,19 +108,20 @@
 	<!-- /.modal -->
 
 
-	<div id="nav_tl">
+	<div id="div1">
 		<table>
 			<tr>
 				<td>
 					<div class="arrow_box">
-						<p>ほげほげほげほげ</p>
+						<p>何について調べますか？</p>
 						<div id="talk-span">
-						<input type="text">
+						<input type="text" />
 						</div>
+												<button id="talk-button" type="button" >検索</button>
 					</div>
 				</td>
 				<td><img alt="character"
-					src="/beartter_demo/staticcontents/img/default_character.png">
+					src="/beartter_demo/staticcontents/img/default_character.jpg">
 				</td>
 		</table>
 	</div>

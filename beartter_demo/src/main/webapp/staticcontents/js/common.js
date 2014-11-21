@@ -53,13 +53,13 @@ function getFriendship(userid) {
 
 		if (json.isSourceFollowingTarget) {
 
-			elm.className = "remove-css";
+			elm.className = "remove-css btn btn-danger";
 			elm.value = "Remove";
 			elm.onclick = new Function("sendRemove(" + userid + ");");
 
 		} else if (!json.isSourceFollowingTarget && !json.isFollowRequestSent) {
 
-			elm.className = "follow-css";
+			elm.className = "follow-css btn btn-primary";
 			elm.value = "Follow";
 			elm.onclick = new Function("sendFollow(" + userid + ");");
 
@@ -119,4 +119,9 @@ function sendFollow(userid) {
 
 	asyncRequest("sendfollow", "userId=" + userid, sendFollow);
 	getFriendship(userid);
+}
+
+function getValue(id){
+	getProfile(id);
+	getFriendship(id);
 }

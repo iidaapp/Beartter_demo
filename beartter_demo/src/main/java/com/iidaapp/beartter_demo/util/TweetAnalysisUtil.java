@@ -86,6 +86,7 @@ public class TweetAnalysisUtil {
 		String parameterName = cnameEntity.getParameterName();
 		int parameterValue = cnameEntity.getParameterValue();
 
+		// TODO パラメータのカンスト値が必要
 		DbUtils.updateCharacterParam(parameterName, parameterValue, beartterId);
 
 		return;
@@ -108,6 +109,7 @@ public class TweetAnalysisUtil {
 		String parameterName = entity.getParameterName();
 		int parameterValue = entity.getParameterValue();
 
+		// TODO パラメータのカンスト値が必要
 		DbUtils.updateCharacterParam(parameterName, parameterValue, beartterId);
 
 		return;
