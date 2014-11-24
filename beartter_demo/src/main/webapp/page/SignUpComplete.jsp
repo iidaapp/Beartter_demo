@@ -46,7 +46,7 @@
 
 	<h3 class="">Sign up for Beartter（仮）</h3>
 	<h4>登録完了！</h4>
-	<img src="/beartter_demo/staticcontents/img/default_character.jpg" alt="character" class="img-responsive center-block animated bounceInDown">
+	<img src="/beartter_demo/staticcontents/img/default_character.jsp" alt="character" class="img-responsive center-block animated bounceInDown">
 	<p class="animated bounceInDown">ようこそ</p>
 
 	<form action="main">

@@ -57,7 +57,7 @@
 
 	<div class="mainimage" id="mainimage">
 		<div class="container">
-			<img src="/beartter_demo/staticcontents/img/default_character.jpg" alt="character"
+			<img src="/beartter_demo/staticcontents/img/default_character.png" alt="character"
 				class="img-responsive center-block">
 			<p class="catchcopy lead text-center">Share it to be able to your</p>
 			<a href="/beartter_demo/login"><img class="center-block" alt="twitter" src="/beartter_demo/staticcontents/img/sign-in-with-twitter-gray.png"></a>

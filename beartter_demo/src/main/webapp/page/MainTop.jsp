@@ -15,7 +15,6 @@
 <script src="/beartter_demo/staticcontents/js/bootstrap.min.js" type="text/javascript"></script>
 <!-- mine -->
 <link href="/beartter_demo/staticcontents/css/animate.css" rel="stylesheet">
-<script src="/beartter_demo/staticcontents/js/jquery.leanModal.min.js" type="text/javascript"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 <script type="text/javascript" script-name="syncopate" src="http://use.edgefonts.net/syncopate.js"></script>
 <link rel="stylesheet" href="/beartter_demo/staticcontents/css/main.css" type="text/css" />
@@ -68,17 +67,20 @@
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-						data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span>
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href="/beartter_demo/main"> <img
-						src="/beartter_demo/staticcontents/img/icon.png" height="20" width="20" alt="icon"></a>
+						src="/beartter_demo/staticcontents/img/icon.png" height="20"
+						width="20" alt="icon"></a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<div class="collapse navbar-collapse"
+					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li><a href="#howtouse">How to</a></li>
 					</ul>
@@ -86,19 +88,19 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li>
 							<div class="modal-button">
-								<a data-toggle="modal" href="#tweetModal" class="btn btn-primary">Tweet</a>
+								<a data-toggle="modal" href="#tweetModal"
+									class="btn btn-primary">Tweet</a>
 							</div>
 						</li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
-							role="button" aria-expanded="false"> Config <span class="caret"></span>
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-expanded="false">
+								Config <span class="caret"></span>
 						</a>
 							<ul class="dropdown-menu" role="menu">
-								<li class="dropdown-header">
-									${fn:escapeXml(beartterId)}
-								</li>
+								<li class="dropdown-header">${fn:escapeXml(beartterId)}</li>
 								<li class="divider"></li>
-								<li><a href="#">Settings</a></li>
-								<li><a href="logout">Logout</a></li>
+								<li><a href="settings">Settings</a></li>
+								<li><a href="#logoutModal" data-toggle="modal">Logout</a></li>
 							</ul></li>
 					</ul>
 				</div>
@@ -126,7 +128,8 @@
 						</div>
 						<div class="modal-footer">
 							<img src="${profileImageUrl}" />
-							<button type="button" class="btn btn-default" data-dismiss="modal">back</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">back</button>
 							<button type="submit" class="btn btn-primary">Tweet</button>
 						</div>
 					</form>
@@ -171,7 +174,8 @@
 									<td id="relation"></td>
 								</tr>
 								<tr>
-									<td><input class="btn btn-primary" type="button" id="friendshipbutton" /></td>
+									<td><input class="btn btn-primary" type="button"
+										id="friendshipbutton" /></td>
 								</tr>
 								<tr>
 									<td class="modal_close"></td>
@@ -186,10 +190,30 @@
 		</div>
 		<!-- end user modal -->
 
+		<!-- logout modal -->
+		<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+			aria-labelledby="logoutModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="logoutModalLabel">ログアウトしますか？</h4>
+					</div>
 
-		<!-- user profile -->
+					<div class="modal-footer">
+						<form action="logoutcomplete">
+							<button type="submit" class="btn btn-primary">Logout</button>
+						</form>
+					</div>
 
-
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- end tweet modal -->
 
 		<!-- character -->
 		<div id="div1">
@@ -201,10 +225,11 @@
 							<div id="talk-span">
 								<input type="text" />
 							</div>
-							<button id="talk-button" type="button" class="btn btn-normal">検索</button>
+							<button id="talk-button" type="button" class="btn btn-default">検索</button>
 						</div>
 					</td>
-					<td><img alt="character" src="/beartter_demo/staticcontents/img/default_character.jpg">
+					<td><img alt="character"
+						src="/beartter_demo/staticcontents/img/default_character.png">
 					</td>
 			</table>
 		</div>
@@ -216,7 +241,32 @@
 
 		<!-- timeline -->
 		<div class="row">
-			<div class=" col-xs-8 col-xs-offset-2 " id="timeline">
+
+	<c:if test="${!empty error and (error eq 187) }">
+		<div class="alert alert-danger">
+			<a class="close" data-dismiss="alert">×</a> 
+			二重投稿は出来ません
+		</div>
+	</c:if>
+	<c:if test="${!empty error and (error eq 400) }">
+		<div class="alert alert-danger">
+			<a class="close" data-dismiss="alert">×</a>
+			Tweetは1文字以上140文字以下でお願いします
+		</div>
+	</c:if>
+
+
+			<div class="col-xs-2" id="back">
+
+			<form action="main" method="post">
+					<button type="submit" class="btn btn-default <c:if test="${pagingNo == 1}">disabled</c:if>">
+						<img alt="back" src="/beartter_demo/staticcontents/img/rewind44.png">
+					<span>back</span>
+				</button>
+			<input type="hidden" name="paging" value="${pagingNo - 1}" />
+			</form>
+			</div>
+			<div class=" col-xs-8" id="timeline">
 
 				<c:forEach var="timeLineList" items="${statusList}">
 
@@ -228,14 +278,16 @@
 							<c:if test="${empty status.retweetedStatus}">
 								<!-- normal -->
 								<tr>
-									<td id="icon_tl" class="left"><a data-toggle="modal" href="#userModal"
-										onclick="getValue(${status.user.id});"> <img src="${status.user.profileImageURL}" />
+									<td id="icon_tl" class="left"><a data-toggle="modal"
+										href="#userModal" onclick="getValue(${status.user.id});">
+											<img src="${status.user.profileImageURL}" />
 									</a></td>
 									<td id="text_tl">${fn:replace(fn:escapeXml(status.text),newLine, "<br />")}</td>
 								</tr>
 								<tr>
 									<td class="left"><a data-toggle="modal" href="#userModal"
-										onclick="getValue(${status.user.id});"> ${fn:escapeXml(status.user.name)} </a></td>
+										onclick="getValue(${status.user.id});">
+											${fn:escapeXml(status.user.name)} </a></td>
 									<td id="desc_tl">${fn:escapeXml(status.createdAt)}</td>
 								</tr>
 							</c:if>
@@ -263,22 +315,26 @@
 				</c:forEach>
 
 			</div>
+		<div class="col-xs-2" id="back">
+			<form action="main" method="post">
+				<button type="submit" class="btn btn-default">
+					<span>next</span>
+					<img alt="back" src="/beartter_demo/staticcontents/img/fast44.png">
+				</button>
+			<input type="hidden" name="paging" value="${pagingNo + 1}" />
+			</form>
 		</div>
-		<!-- end timeline -->
-</div>
 
-		<script type="text/javascript">
+		</div>
+
+	</div>
+
+	<script type="text/javascript">
 
 function getValue(id){
 	getProfile(id);
 	getFriendship(id);
 }
-
-$( 'a[rel*=leanModal]').leanModal({
-    top: 50,                     // モーダルウィンドウの縦位置を指定
-    overlay : 0.5,               // 背面の透明度 
-    closeButton: ".modal_close"  // 閉じるボタンのCSS classを指定
-});
 
 $(function() {
     // #div1をdrag可能に
