@@ -87,18 +87,19 @@
 						<button type="button" class="close" data-dismiss="modal">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h4 class="modal-title" id="deleteModalLabel">本当に退会しますか？</h4>
+						<h4 class="modal-title" id="deleteModalLabel">確認</h4>
 					</div>
-					<form action="/beartter_demo/tweet" method="post">
+					<form action="/beartter_demo/secede" method="post">
 						<div class="modal-body">
-							<ul class="list-unstyled">
-								<li>保存されている情報はすべて消去されます。</li>
-								<li>退会の取り消しはできません。</li>
-								<li>本当に退会いたしますか？</li>
+							<ul class="list-unstyled" style="text-align: left;">
+								<li>・保存されている情報はすべて消去されます。</li>
+								<li>・退会の取り消しはできません。</li>
+								<li></li>
 							</ul>
+							<p>本当に退会いたしますか？</p>
+							<p><img src="${profileImageUrl}" /></p>
 						</div>
 						<div class="modal-footer">
-							<img src="${profileImageUrl}" />
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">back</button>
 							<button type="submit" class="btn btn-danger">退会</button>

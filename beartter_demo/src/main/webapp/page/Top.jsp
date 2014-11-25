@@ -55,10 +55,14 @@
 		<!-- /.container-fluid -->
 	</nav>
 
-	<div class="mainimage" id="mainimage">
+	<div class="mainimage " id="mainimage">
 		<div class="container">
-			<img src="/beartter_demo/staticcontents/img/default_character.png" alt="character"
+			<div class="row">
+				<div class="col-xs-8 col-xs-offset-2">
+			<img src="/beartter_demo/staticcontents/img/default_character.jpg" alt="character"
 				class="img-responsive center-block">
+				</div>
+			</div>
 			<p class="catchcopy lead text-center">Share it to be able to your</p>
 			<a href="/beartter_demo/login"><img class="center-block" alt="twitter" src="/beartter_demo/staticcontents/img/sign-in-with-twitter-gray.png"></a>
 		</div>

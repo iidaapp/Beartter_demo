@@ -370,4 +370,10 @@ public class DbUtils {
 		return entity;
 	}
 
+
+	public static void removeAllData(String beartterId) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

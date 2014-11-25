@@ -220,7 +220,7 @@
 			<table>
 				<tr>
 					<td>
-						<div class="arrow_box">
+						<div class="arrow_box" id="talk">
 							<p>何について調べますか？</p>
 							<div id="talk-span">
 								<input type="text" />
@@ -228,12 +228,11 @@
 							<button id="talk-button" type="button" class="btn btn-default">検索</button>
 						</div>
 					</td>
-					<td><img alt="character"
-						src="/beartter_demo/staticcontents/img/default_character.png">
+					<td>
+						<img alt="character" src="/beartter_demo/staticcontents/img/default_character.jpg" class="img-responsive" onclick="changeArrowBoxDisp()">
 					</td>
 			</table>
 		</div>
-
 
 
 
@@ -334,6 +333,15 @@
 function getValue(id){
 	getProfile(id);
 	getFriendship(id);
+}
+
+function changeArrowBoxDisp(){
+	var element = document.getElementById('talk');
+	if((element.currentStyle || document.defaultView.getComputedStyle(element, '')).visibility == "hidden"){
+		element.style.visibility = "visible";
+	}else{
+		element.style.visibility = "hidden";
+	}
 }
 
 $(function() {
