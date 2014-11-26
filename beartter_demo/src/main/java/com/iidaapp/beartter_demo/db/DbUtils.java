@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import com.iidaapp.beartter_demo.entity.CharacterParamEntity;
 import com.iidaapp.beartter_demo.entity.CnameTypeEntity;
 import com.iidaapp.beartter_demo.entity.PartOfSpeechTypeEntity;
 import com.iidaapp.beartter_demo.entity.UserinfoEntity;
+import com.iidaapp.beartter_demo.util.BeartterProperties;
 
 public class DbUtils {
 
@@ -21,7 +23,7 @@ public class DbUtils {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Connection con = null;
-		String sql = "SELECT beartter_id FROM beartter_db.access_token where user_id = ?";
+		String sql = BeartterProperties.SQL_SELECT_BEARTTER_ID_FROM_ACCESS_TOKEN;
 
 		try {
 
@@ -60,7 +62,7 @@ public class DbUtils {
 		ResultSet rs = null;
 		Connection con = null;
 		int resultCount = 0;
-		String sql = "SELECT COUNT(*) FROM beartter_db.userinfo where beartter_id = ?";
+		String sql = BeartterProperties.SQL_COUNT_USERINFO_BY_BEARTTER_ID;
 
 		try {
 
@@ -99,7 +101,7 @@ public class DbUtils {
 		ResultSet rs = null;
 		Connection con = null;
 		int resultCount = 0;
-		String sql = "SELECT COUNT(*) FROM beartter_db.userinfo where email_address = ?";
+		String sql = BeartterProperties.SQL_COUNT_USERINFO_BY_EMAIL_ADDRESS;
 
 		try {
 
@@ -138,14 +140,15 @@ public class DbUtils {
 		PreparedStatement stmtAccessToken = null;
 
 		Connection con = null;
-		String sqlCharacterParam = "insert into beartter_db.character_param values (?, 0, 0, 0, 0, 0)";
-		String sqlUserinfo = "insert into beartter_db.userinfo values (?, ?, ?, ?, ?, ?)";
-		String sqlAccessToken = "insert into beartter_db.access_token values (?, ?, ?, ?, ?, ?, ?)";
+		String sqlCharacterParam = BeartterProperties.SQL_INSERT_CHARACTER_PARAM;
+		String sqlUserinfo = BeartterProperties.SQL_INSERT_USERINFO;
+		String sqlAccessToken = BeartterProperties.SQL_INSERT_ACCESS_TOKEN;
 
 		try {
 
 			// コネクション取得
 			con = DbConnection.getConnection();
+			con.setAutoCommit(false);
 
 			// 実行
 			stmtCharacterParam = con.prepareStatement(sqlCharacterParam);
@@ -174,9 +177,12 @@ public class DbUtils {
 			stmtUserinfo.executeUpdate();
 			stmtAccessToken.executeUpdate();
 
+			con.commit();
+
 		} catch (Exception e) {
 
 			e.printStackTrace();
+			con.rollback();
 			throw new RuntimeException();
 
 		} finally {
@@ -201,7 +207,7 @@ public class DbUtils {
 		ResultSet rs;
 		Connection con = null;
 		List<AccessTokenEntity> entityList = new ArrayList<AccessTokenEntity>();
-		String sql = "select * from beartter_db.access_token where beartter_id = ?";
+		String sql = BeartterProperties.SQL_SELECT_ACCESS_TOKEN_FROM_ACCESS_TOKEN;
 
 		try {
 			con = DbConnection.getConnection();
@@ -241,7 +247,7 @@ public class DbUtils {
 		ResultSet rs;
 		Connection con = null;
 		AccessTokenEntity entity = new AccessTokenEntity();
-		String sql = "select * from beartter_db.access_token where beartter_id = ?";
+		String sql = BeartterProperties.SQL_SELECT_ACCESS_TOKEN_FROM_ACCESS_TOKEN;
 
 		try {
 			con = DbConnection.getConnection();
@@ -280,7 +286,7 @@ public class DbUtils {
 		ResultSet rs;
 		Connection con = null;
 		CnameTypeEntity entity = new CnameTypeEntity();
-		String sql = "select * from beartter_db.cname_type where cname = ?";
+		String sql = BeartterProperties.SQL_SELECT_CNAME_TYPE_BY_CNAME;
 
 		try {
 			con = DbConnection.getConnection();
@@ -312,12 +318,13 @@ public class DbUtils {
 
 		PreparedStatement stmt = null;
 		Connection con = null;
-		String sql = "update beartter_db.character_param set " + parameterName + " = ? where beartter_id = ?";
+		String sql = BeartterProperties.SQL_UPDATE_CHARACTER_PARAM;
+		String sqlReplaced = MessageFormat.format(sql, parameterName);
 
 		try {
 			con = DbConnection.getConnection();
 
-			stmt = con.prepareStatement(sql);
+			stmt = con.prepareStatement(sqlReplaced);
 			stmt.setInt(1, parameterValue);
 			stmt.setString(2, beartterId);
 
@@ -343,7 +350,7 @@ public class DbUtils {
 		ResultSet rs;
 		Connection con = null;
 		PartOfSpeechTypeEntity entity = new PartOfSpeechTypeEntity();
-		String sql = "select * from beartter_db.part_of_speech_type where part_of_speech = ?";
+		String sql = BeartterProperties.SQL_SELECT_PART_OF_SPEECH_TYPE;
 
 		try {
 			con = DbConnection.getConnection();
@@ -371,9 +378,50 @@ public class DbUtils {
 	}
 
 
-	public static void removeAllData(String beartterId) {
-		// TODO Auto-generated method stub
+	public static void removeAllData(String beartterId) throws SQLException {
 		
+		PreparedStatement stmt1 = null;
+		PreparedStatement stmt2 = null;
+		PreparedStatement stmt3 = null;
+		Connection con = null;
+		String deleteAccessToken = BeartterProperties.SQL_DELETE_ACCESS_TOKEN;
+		String deleteCharacterParam = BeartterProperties.SQL_DELETE_CHARACTER_PARAM;
+		String deleteUserinfo = BeartterProperties.SQL_DELETE_USERINFO;
+
+		try {
+			con = DbConnection.getConnection();
+
+			con.setAutoCommit(false);
+
+			stmt1 = con.prepareStatement(deleteAccessToken);
+			stmt1.setString(1, beartterId);
+			stmt1.executeUpdate();
+			
+			stmt2 = con.prepareStatement(deleteCharacterParam);
+			stmt2.setString(1, beartterId);
+			stmt2.executeUpdate();
+			
+			stmt3 = con.prepareStatement(deleteUserinfo);
+			stmt3.setString(1, beartterId);
+			stmt3.executeUpdate();
+
+			con.commit();
+
+		} catch (Exception e) {
+			con.rollback();
+			throw new RuntimeException();
+		} finally {
+			if (stmt1 != null)
+				stmt1.close();
+			if (stmt2 != null)
+				stmt2.close();
+			if (stmt3 != null)
+				stmt3.close();
+			
+			if (con != null)
+				con.close();
+
+		}
 	}
 
 }

@@ -20,6 +20,21 @@ public class BeartterProperties {
 	public static String MESSAGE_ERROR_NULL_ACCESS_TOKEN;
 	public static String MESSAGE_ERROR_NULL_BEARTTER_ID;
 	public static String MESSAGE_ERROR_NULL_SESSION;
+	
+	// SQL Properties
+	public static String SQL_SELECT_BEARTTER_ID_FROM_ACCESS_TOKEN;
+	public static String SQL_COUNT_USERINFO_BY_BEARTTER_ID;
+	public static String SQL_COUNT_USERINFO_BY_EMAIL_ADDRESS;
+	public static String SQL_INSERT_CHARACTER_PARAM;
+	public static String SQL_INSERT_USERINFO;
+	public static String SQL_INSERT_ACCESS_TOKEN;
+	public static String SQL_SELECT_ACCESS_TOKEN_FROM_ACCESS_TOKEN;
+	public static String SQL_SELECT_CNAME_TYPE_BY_CNAME;
+	public static String SQL_UPDATE_CHARACTER_PARAM;
+	public static String SQL_SELECT_PART_OF_SPEECH_TYPE;
+	public static String SQL_DELETE_ACCESS_TOKEN;
+	public static String SQL_DELETE_CHARACTER_PARAM;
+	public static String SQL_DELETE_USERINFO;
 
 	static{
 
@@ -38,7 +53,19 @@ public class BeartterProperties {
 		MESSAGE_ERROR_NULL_SESSION = properties.getProperty("property.message.error.null_session");
 
 		// SQL Properties
-		
+		SQL_SELECT_BEARTTER_ID_FROM_ACCESS_TOKEN = properties.getProperty("property.sql.select_beartter_id_from_access_token");
+		SQL_COUNT_USERINFO_BY_BEARTTER_ID = properties.getProperty("property.sql.count_userinfo_by_beartter_id");
+		SQL_COUNT_USERINFO_BY_EMAIL_ADDRESS = properties.getProperty("property.sql.count_userinfo_by_email_address");
+		SQL_INSERT_CHARACTER_PARAM = properties.getProperty("property.sql.insert_character_param");
+		SQL_INSERT_USERINFO = properties.getProperty("property.sql.insert_userinfo");
+		SQL_INSERT_ACCESS_TOKEN = properties.getProperty("property.sql.insert_access_token");
+		SQL_SELECT_ACCESS_TOKEN_FROM_ACCESS_TOKEN = properties.getProperty("property.sql.select_access_token_from_access_token");
+		SQL_SELECT_CNAME_TYPE_BY_CNAME = properties.getProperty("property.sql.select_cname_type_by_cname");
+		SQL_UPDATE_CHARACTER_PARAM = properties.getProperty("property.sql.udpate_character_param");
+		SQL_SELECT_PART_OF_SPEECH_TYPE = properties.getProperty("property.sql.select_part_of_speech_type");
+		SQL_DELETE_ACCESS_TOKEN = properties.getProperty("property.sql.delete_access_token");
+		SQL_DELETE_CHARACTER_PARAM = properties.getProperty("property.sql.delete_character_param");
+		SQL_DELETE_USERINFO = properties.getProperty("property.sql.delete_userinfo");
 	}
 
 	

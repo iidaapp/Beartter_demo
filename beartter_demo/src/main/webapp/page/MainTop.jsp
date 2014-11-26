@@ -229,7 +229,7 @@
 						</div>
 					</td>
 					<td>
-						<img alt="character" src="/beartter_demo/staticcontents/img/default_character.jpg" class="img-responsive" onclick="changeArrowBoxDisp()">
+						<img alt="character" src="/beartter_demo/staticcontents/img/default_character.png" class="img-responsive" onclick="changeArrowBoxDisp()">
 					</td>
 			</table>
 		</div>

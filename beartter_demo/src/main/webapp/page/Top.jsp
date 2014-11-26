@@ -59,7 +59,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-8 col-xs-offset-2">
-			<img src="/beartter_demo/staticcontents/img/default_character.jpg" alt="character"
+			<img src="/beartter_demo/staticcontents/img/default_character.png" alt="character"
 				class="img-responsive center-block">
 				</div>
 			</div>
