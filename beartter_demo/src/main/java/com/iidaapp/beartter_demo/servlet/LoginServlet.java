@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.iidaapp.beartter_demo.util.BeartterProperties;
+
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -45,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 	private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
 
-		System.out.println("LoginServlet Start");
+		System.out.println(BeartterProperties.MESSAGE_START_LOGIN_SERVLET);
 
 		// TwitterFactoryの設定
 		ConfigurationBuilder cb = new ConfigurationBuilder();
@@ -60,7 +62,7 @@ public class LoginServlet extends HttpServlet {
 
 		try {
 			// リクエストトークン取得
-			RequestToken requestToken = twitter.getOAuthRequestToken("http://127.0.0.1:8082/beartter_demo/callback");
+			RequestToken requestToken = twitter.getOAuthRequestToken(BeartterProperties.VALUE_TWITTER_CALLBACK_URL);
 
 			// セッションに各情報を格納
 			session.setAttribute("RequestToken", requestToken);

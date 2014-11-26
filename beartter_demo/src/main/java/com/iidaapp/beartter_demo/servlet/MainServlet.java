@@ -25,6 +25,7 @@ import twitter4j.auth.AccessToken;
 
 import com.iidaapp.beartter_demo.db.DbUtils;
 import com.iidaapp.beartter_demo.entity.AccessTokenEntity;
+import com.iidaapp.beartter_demo.util.BeartterProperties;
 
 /**
  * メイン画面表示処理
@@ -57,14 +58,20 @@ public class MainServlet extends HttpServlet {
 
 		HttpSession session = req.getSession(false);
 		if (session == null) {
-			req.setAttribute("errorDescription", "session is null.");
+			// TODO ログ出力方法
+			System.out.println(BeartterProperties.MESSAGE_ERROR_NULL_SESSION);
+
+			req.setAttribute("errorDescription", BeartterProperties.MESSAGE_ERROR_NULL_SESSION);
 			req.getRequestDispatcher("error");
 			return;
 		}
 
 		String beartterId = (String) session.getAttribute("beartterId");
 		if (StringUtils.isEmpty(beartterId)) {
-			req.setAttribute("errorDescription", "session is clear.");
+			// TODO ログ出力方法
+			System.out.println(BeartterProperties.MESSAGE_ERROR_NULL_BEARTTER_ID);
+
+			req.setAttribute("errorDescription", BeartterProperties.MESSAGE_ERROR_NULL_BEARTTER_ID);
 			req.getRequestDispatcher("error");
 			return;
 		}
@@ -98,12 +105,14 @@ public class MainServlet extends HttpServlet {
 			return;
 		}
 
+		// TODO ストリームによるTLの取得処理の実装
+
 		// try {
 		// TestStream.testStream(beartterId);
 		// } catch (SQLException e) {
-		// // TODO Auto-generated catch block
 		// e.printStackTrace();
 		// }
+
 		String error = (String) session.getAttribute("error");
 
 		if (!StringUtils.isEmpty(error)) {

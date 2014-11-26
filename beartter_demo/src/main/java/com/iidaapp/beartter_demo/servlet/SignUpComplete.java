@@ -12,12 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
+
 import twitter4j.auth.AccessToken;
 
 import com.iidaapp.beartter_demo.db.DbUtils;
 import com.iidaapp.beartter_demo.entity.AccessTokenEntity;
 import com.iidaapp.beartter_demo.entity.CharacterParamEntity;
 import com.iidaapp.beartter_demo.entity.UserinfoEntity;
+import com.iidaapp.beartter_demo.util.BeartterProperties;
 import com.iidaapp.beartter_demo.util.BeartterUtils;
 import com.iidaapp.beartter_demo.util.SignUpForm;
 
@@ -44,10 +47,13 @@ public class SignUpComplete extends HttpServlet {
 	private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
 		HttpSession session = req.getSession(false);
-		if(session == null) {
-			System.out.println("session is null");
-			req.setAttribute("errorDescription","session is null");
+		if (session == null) {
+			// TODO ログ出力方法
+			System.out.println(BeartterProperties.MESSAGE_ERROR_NULL_SESSION);
+
+			req.setAttribute("errorDescription", BeartterProperties.MESSAGE_ERROR_NULL_SESSION);
 			req.getRequestDispatcher("error");
+			return;
 		}
 
 		// Twitter情報、ユーザー情報のDBへの登録

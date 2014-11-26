@@ -23,6 +23,7 @@ public class DbConnection {
 
 		} catch (Exception e) {
 			// ドライバが見つからないため、RuntimeExceptionとしてthrow
+			e.printStackTrace();
 			throw new RuntimeException();
 		}
 	}

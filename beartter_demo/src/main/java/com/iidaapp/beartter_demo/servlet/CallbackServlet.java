@@ -18,6 +18,7 @@ import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
 import com.iidaapp.beartter_demo.db.DbUtils;
+import com.iidaapp.beartter_demo.util.BeartterProperties;
 
 /**
  * TwitterOAuth認証からのコールバック処理
@@ -73,8 +74,8 @@ public class CallbackServlet extends HttpServlet {
 			// アクセストークンがNULLの場合は取得ミスにより、ログを出力してエラー画面へ遷移
 			if (accessToken == null) {
 				// TODO ログ出力方法
-				System.out.println("no accesstoken");
-				session.setAttribute("errorDescription", "Session don't have Accesstoken.");
+				System.out.println(BeartterProperties.MESSAGE_ERROR_NULL_ACCESS_TOKEN);
+				session.setAttribute("errorDescription", BeartterProperties.MESSAGE_ERROR_NULL_ACCESS_TOKEN);
 				resp.sendRedirect("error");
 				return;
 			}

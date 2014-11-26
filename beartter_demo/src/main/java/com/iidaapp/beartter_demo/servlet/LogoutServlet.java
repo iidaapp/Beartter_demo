@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.iidaapp.beartter_demo.util.BeartterProperties;
+
 /**
  * ログアウト処理クラス
  * @author iida
@@ -43,7 +45,9 @@ public class LogoutServlet extends HttpServlet {
 		// beartterIdがなければ通常遷移ではないため、エラー画面へ遷移
 		String beartterId = (String) req.getSession().getAttribute("beartterId");
 		if(StringUtils.isEmpty(beartterId)){
-			req.setAttribute("errorDescription", "session is clear.");
+			// TODO ログ出力方法
+			System.out.println(BeartterProperties.MESSAGE_ERROR_NULL_BEARTTER_ID);
+			req.setAttribute("errorDescription", BeartterProperties.MESSAGE_ERROR_NULL_BEARTTER_ID);
 			req.getRequestDispatcher("error");
 			return;
 		}

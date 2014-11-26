@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.iidaapp.beartter_demo.util.BeartterProperties;
+
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterObjectFactory;
@@ -58,8 +60,8 @@ public class GetProfileServlet extends HttpServlet {
 		if (StringUtils.isEmpty(json))
 			return;
 
-		// 文字コード設定
-		resp.setCharacterEncoding("UTF-8");
+		// 文字コード設定(UTF-8)
+		resp.setCharacterEncoding(BeartterProperties.VALUE_CHARACTER_ENCODING);
 		// 結果を返す
 		PrintWriter writer = null;
 
