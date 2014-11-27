@@ -7,7 +7,7 @@
     <updateXml>true</updateXml>
     <warLocation></warLocation>
     <extraInfo></extraInfo>
-    <webPath>/beartter_demo</webPath>
+    <webPath>/beartter</webPath>
     <webClassPathEntries>
         <webClassPathEntry>/beartter_demo/src/main/webapp/WEB-INF/classes</webClassPathEntry>
         <webClassPathEntry>org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER</webClassPathEntry>

@@ -59,6 +59,7 @@
 						class="img-responsive center-block">
 				</div>
 			</div>
+			<h1 class="text-center">Beartter(β)</h1>
 			<p class="catchcopy lead text-center">Tweet something for you and me.</p>
 			<a href="/beartter/login"><img class="center-block" alt="twitter"
 				src="/beartter/staticcontents/img/sign-in-with-twitter-gray.png"></a>
@@ -99,6 +100,7 @@
 	<section id="contact" class="contact">
 		<div class="container">
 			<h4>Contact me</h4>
+			<p>ご意見、ご要望等ありましたら以下のTwitterアカウントまでご連絡ください。</p>
 			<div class="copyright text-center">製作：@iidaapp</div>
 		</div>
 		<!-- /.container -->
