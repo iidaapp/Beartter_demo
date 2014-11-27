@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * 共通エラー処理
  * @author iida
@@ -16,21 +19,19 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "errorServlet", urlPatterns = { "/error" })
 public class ErrorServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
+	private static Logger log = LoggerFactory.getLogger(ErrorServlet.class);
 	private static final long serialVersionUID = -3820104047647816529L;
 
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp){
 
 		execute(req, resp);
 	}
 
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp){
 
 		execute(req, resp);
 	}
@@ -38,21 +39,17 @@ public class ErrorServlet extends HttpServlet {
 
 	private void execute(HttpServletRequest req, HttpServletResponse resp) {
 
-		// セッションからエラー文言を取得
-		String errorDiscription = (String) req.getSession().getAttribute("errorDescription");
-
 		// セッションの情報をすべてクリア
 		req.getSession().invalidate();
-		// 画面表示用にエラー文言をセット
-		req.setAttribute("errorDiscription", errorDiscription);
 
 		try {
 			// エラー画面へ遷移
-			req.getRequestDispatcher("/page/Error.jsp").forward(req, resp);
+			req.getRequestDispatcher("/page/error/Error.jsp").forward(req, resp);
+			return;
 		} catch (ServletException | IOException e) {
 
-			// TODO Servlet全体のエラー処理
-			e.printStackTrace();
+			log.error(e.toString());
+			return;
 		}
 
 	}

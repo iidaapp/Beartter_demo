@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <html>
 <head>
-<jsp:include page="/page/util/ImplementsJquery.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Secede</title>
+<title>404</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap -->
 <link href="/beartter_demo/staticcontents/css/bootstrap.css" rel="stylesheet">
 <link href="/beartter_demo/staticcontents/css/bootstrap-theme.css" rel="stylesheet">
 <!-- mine -->
-<link href="/beartter_demo/staticcontents/css/signup.css" rel="stylesheet">
+<link href="/beartter_demo/staticcontents/css/top.css" rel="stylesheet">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>script>
+      <![endif]-->
+
 </head>
 <body>
+
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -22,13 +31,12 @@
 					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/beartter_demo/"><img
-					src="/beartter_demo/staticcontents/img/icon.png" height="20" width="20" alt="icon"></a>
+				<a class="navbar-brand" href="/beartter_demo/"><img src="/beartter_demo/staticcontents/img/icon.png" height="20"
+					width="20" alt="icon"></a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
 
 			</div>
 			<!-- /.navbar-collapse -->
@@ -36,15 +44,16 @@
 		<!-- /.container-fluid -->
 	</nav>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-8 col-xs-offset-2">
-				<img src="/beartter_demo/staticcontents/img/default_character.png"
-					alt="character" class="img-responsive center-block">
+	<div class="mainimage " id="mainimage">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-8 col-xs-offset-2">
+			<img src="/beartter_demo/staticcontents/img/default_character.png" alt="character"
+				class="img-responsive center-block">
+				</div>
 			</div>
+			<p class="catchcopy lead text-center">Woops...that page does not exist...</p>
 		</div>
-		<p class="catchcopy lead text-center">Good Bye...</p>
-
 	</div>
 </body>
 </html>

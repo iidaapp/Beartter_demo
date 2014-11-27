@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import twitter4j.auth.AccessToken;
 
@@ -27,33 +28,36 @@ import com.iidaapp.beartter_demo.util.SignUpForm;
 @WebServlet(name="signUpComplete", urlPatterns="/complete")
 public class SignUpComplete extends HttpServlet {
 
+	private static Logger log = LoggerFactory.getLogger(SignUpComplete.class);
 	private static final long serialVersionUID = 1L;
 
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp){
 
 		execute(req, resp);
 	}
 
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp){
 
 		execute(req, resp);
 	}
 
 
-	private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+	private void execute(HttpServletRequest req, HttpServletResponse resp){
 
 		HttpSession session = req.getSession(false);
-		if (session == null) {
-			// TODO ログ出力方法
-			System.out.println(BeartterProperties.MESSAGE_ERROR_NULL_SESSION);
-
-			req.setAttribute("errorDescription", BeartterProperties.MESSAGE_ERROR_NULL_SESSION);
-			req.getRequestDispatcher("error");
-			return;
+		if(session == null) {
+			log.error(BeartterProperties.MESSAGE_ERROR_NULL_SESSION);
+			try {
+				resp.sendRedirect("error");
+				return;
+			} catch (IOException e1) {
+				log.error(e1.toString());
+				return;
+			}
 		}
 
 		// Twitter情報、ユーザー情報のDBへの登録
@@ -94,9 +98,14 @@ public class SignUpComplete extends HttpServlet {
 
 		} catch (SQLException e) {
 
-			e.printStackTrace();
-			session.setAttribute("errorDescription", e.getCause());
-			req.getRequestDispatcher("error");
+			log.error(e.toString());
+			try {
+				resp.sendRedirect("error");
+				return;
+			} catch (IOException e1) {
+				log.error(e1.toString());
+				return;
+			}
 		}
 
 		session.removeAttribute("signUpForm");
@@ -106,6 +115,20 @@ public class SignUpComplete extends HttpServlet {
 		session.removeAttribute("profileImageUrl");
 
 		session.setAttribute("beartterId", beartterId);
-		req.getRequestDispatcher("/page/SignUpComplete.jsp").forward(req, resp);
+		try {
+			req.getRequestDispatcher("/page/SignUpComplete.jsp").forward(req, resp);
+		} catch (ServletException e) {
+			log.error(e.toString());
+			try {
+				resp.sendRedirect("error");
+				return;
+			} catch (IOException e1) {
+				log.error(e1.toString());
+				return;
+			}
+		} catch (IOException e) {
+			log.error(e.toString());
+			return;
+		}
 	}
 }

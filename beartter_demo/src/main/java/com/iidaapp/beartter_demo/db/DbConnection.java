@@ -8,9 +8,12 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSourceFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DbConnection {
 
+	private static Logger log = LoggerFactory.getLogger(DbConnection.class);
 	private static DataSource ds;
 
 	static {
@@ -23,7 +26,7 @@ public class DbConnection {
 
 		} catch (Exception e) {
 			// ドライバが見つからないため、RuntimeExceptionとしてthrow
-			e.printStackTrace();
+			log.error(e.toString());
 			throw new RuntimeException();
 		}
 	}

@@ -2,11 +2,13 @@ package com.iidaapp.beartter_demo.servlet;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * ログアウト処理完了クラス
@@ -16,11 +18,12 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name="logoutComplete", urlPatterns="/logoutcomplete")
 public class LogoutComplete extends HttpServlet {
 
+	private static Logger log = LoggerFactory.getLogger(LogoutComplete.class);
 	private static final long serialVersionUID = 8133799937746863575L;
 
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp){
 
 		// 共通処理へ
 		execute(req, resp);
@@ -28,18 +31,24 @@ public class LogoutComplete extends HttpServlet {
 
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp){
 
 		// 共通処理へ
 		execute(req, resp);
 	}
 
 
-	private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+	private void execute(HttpServletRequest req, HttpServletResponse resp){
 
 		// セッション内容をすべて破棄してTOPページに遷移
 		req.getSession().invalidate();
-		resp.sendRedirect("page/Top.jsp");
+		try {
+			resp.sendRedirect("page/Top.jsp");
+			return;
+		} catch (IOException e) {
+			log.error(e.toString());
+			return;
+		}
 	}
 
 	

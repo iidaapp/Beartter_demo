@@ -4,9 +4,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class BeartterProperties {
 
+	private static Logger log = LoggerFactory.getLogger(BeartterProperties.class);
 	private static final String propsName = "beartter.properties";
 
 	// Value Properties
@@ -20,6 +24,7 @@ public class BeartterProperties {
 	public static String MESSAGE_ERROR_NULL_ACCESS_TOKEN;
 	public static String MESSAGE_ERROR_NULL_BEARTTER_ID;
 	public static String MESSAGE_ERROR_NULL_SESSION;
+	public static String MESSAGE_ERROR_NULL_TWITTER;
 	
 	// SQL Properties
 	public static String SQL_SELECT_BEARTTER_ID_FROM_ACCESS_TOKEN;
@@ -51,6 +56,7 @@ public class BeartterProperties {
 		MESSAGE_ERROR_NULL_ACCESS_TOKEN = properties.getProperty("property.message.error.null_access_token");
 		MESSAGE_ERROR_NULL_BEARTTER_ID = properties.getProperty("property.message.error.null_beartter_id");
 		MESSAGE_ERROR_NULL_SESSION = properties.getProperty("property.message.error.null_session");
+		MESSAGE_ERROR_NULL_TWITTER = properties.getProperty("property.message.error.null_twitter");
 
 		// SQL Properties
 		SQL_SELECT_BEARTTER_ID_FROM_ACCESS_TOKEN = properties.getProperty("property.sql.select_beartter_id_from_access_token");
@@ -82,7 +88,7 @@ public class BeartterProperties {
 			is.close();
 		} catch (IOException e) {
 			// プロパティファイルが見つからないため、RuntimeExceptionとしてthrow
-			e.printStackTrace();
+			log.error(e.toString());
 			throw new RuntimeException();
 		}
 

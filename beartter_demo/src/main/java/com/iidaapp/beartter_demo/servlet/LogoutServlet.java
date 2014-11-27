@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.iidaapp.beartter_demo.util.BeartterProperties;
 
@@ -20,12 +22,12 @@ import com.iidaapp.beartter_demo.util.BeartterProperties;
 @WebServlet(name = "logoutServlet", urlPatterns = "/logout")
 public class LogoutServlet extends HttpServlet {
 
-
+	private static Logger log = LoggerFactory.getLogger(LogoutServlet.class);
 	private static final long serialVersionUID = 7107661025445474060L;
 
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp){
 
 		// 共通処理へ
 		execute(req, resp);
@@ -33,7 +35,7 @@ public class LogoutServlet extends HttpServlet {
 
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp){
 
 		// 共通処理へ
 		execute(req, resp);
@@ -44,12 +46,16 @@ public class LogoutServlet extends HttpServlet {
 
 		// beartterIdがなければ通常遷移ではないため、エラー画面へ遷移
 		String beartterId = (String) req.getSession().getAttribute("beartterId");
-		if(StringUtils.isEmpty(beartterId)){
-			// TODO ログ出力方法
-			System.out.println(BeartterProperties.MESSAGE_ERROR_NULL_BEARTTER_ID);
-			req.setAttribute("errorDescription", BeartterProperties.MESSAGE_ERROR_NULL_BEARTTER_ID);
-			req.getRequestDispatcher("error");
-			return;
+		if(StringUtils.isEmpty(beartterId)) {
+
+			log.error(BeartterProperties.MESSAGE_ERROR_NULL_BEARTTER_ID);
+			try {
+				resp.sendRedirect("error");
+				return;
+			} catch (IOException e1) {
+				log.error(e1.toString());
+				return;
+			}
 		}
 
 		try {
@@ -58,13 +64,14 @@ public class LogoutServlet extends HttpServlet {
 			return;
 
 		} catch (ServletException | IOException e) {
-			// TODO サーブレットエラー処理
-			e.printStackTrace();
+
+			log.error(e.toString());
 			try {
 				resp.sendRedirect("error");
+				return;
 			} catch (IOException e1) {
-
-				e1.printStackTrace();
+				log.error(e1.toString());
+				return;
 			}
 		}
 

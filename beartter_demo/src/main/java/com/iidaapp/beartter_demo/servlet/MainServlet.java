@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import twitter4j.Paging;
 import twitter4j.ResponseList;
@@ -35,11 +37,12 @@ import com.iidaapp.beartter_demo.util.BeartterProperties;
 @WebServlet(name = "mainServlet", urlPatterns = "/main")
 public class MainServlet extends HttpServlet {
 
+	private static Logger log = LoggerFactory.getLogger(MainServlet.class);
 	private static final long serialVersionUID = 1L;
 
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp){
 
 		// 共通処理へ
 		execute(req, resp);
@@ -47,33 +50,37 @@ public class MainServlet extends HttpServlet {
 
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp){
 
 		// 共通処理へ
 		execute(req, resp);
 	}
 
 
-	private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+	private void execute(HttpServletRequest req, HttpServletResponse resp){
 
 		HttpSession session = req.getSession(false);
 		if (session == null) {
-			// TODO ログ出力方法
-			System.out.println(BeartterProperties.MESSAGE_ERROR_NULL_SESSION);
-
-			req.setAttribute("errorDescription", BeartterProperties.MESSAGE_ERROR_NULL_SESSION);
-			req.getRequestDispatcher("error");
+			log.error(BeartterProperties.MESSAGE_ERROR_NULL_SESSION);
+			try {
+				resp.sendRedirect("error");
+			} catch (IOException e1) {
+				log.error(e1.toString());
+			}
 			return;
 		}
 
 		String beartterId = (String) session.getAttribute("beartterId");
-		if (StringUtils.isEmpty(beartterId)) {
-			// TODO ログ出力方法
-			System.out.println(BeartterProperties.MESSAGE_ERROR_NULL_BEARTTER_ID);
+		if(StringUtils.isEmpty(beartterId)) {
 
-			req.setAttribute("errorDescription", BeartterProperties.MESSAGE_ERROR_NULL_BEARTTER_ID);
-			req.getRequestDispatcher("error");
-			return;
+			log.error(BeartterProperties.MESSAGE_ERROR_NULL_BEARTTER_ID);
+			try {
+				resp.sendRedirect("error");
+				return;
+			} catch (IOException e1) {
+				log.error(e1.toString());
+				return;
+			}
 		}
 
 		String pagingNoString = req.getParameter("paging");
@@ -88,8 +95,15 @@ public class MainServlet extends HttpServlet {
 		try {
 			accessTokenEntity = DbUtils.selectAccessTokenFromAccessToken(beartterId);
 		} catch (SQLException e) {
-			session.setAttribute("errorDescription", e.getCause());
-			req.getRequestDispatcher("error");
+			
+			log.error(e.toString());
+			try {
+				resp.sendRedirect("error");
+				return;
+			} catch (IOException e1) {
+				log.error(e1.toString());
+				return;
+			}
 		}
 
 		List<ResponseList<Status>> statusList = new ArrayList<ResponseList<Status>>();
@@ -99,10 +113,14 @@ public class MainServlet extends HttpServlet {
 		try {
 			statusList.add(twitter.getHomeTimeline(paging));
 		} catch (TwitterException e) {
-			e.printStackTrace();
-			session.setAttribute("errorDescription", e.getCause());
-			req.getRequestDispatcher("error");
-			return;
+			log.error(e.toString());
+			try {
+				resp.sendRedirect("error");
+				return;
+			} catch (IOException e1) {
+				log.error(e1.toString());
+				return;
+			}
 		}
 
 		// TODO ストリームによるTLの取得処理の実装
@@ -123,9 +141,14 @@ public class MainServlet extends HttpServlet {
 		try {
 			user = twitter.verifyCredentials();
 		} catch (TwitterException e) {
-			// TODO ログ出力方法
-			e.printStackTrace();
-			req.getRequestDispatcher("/error").forward(req, resp);
+			log.error(e.toString());
+			try {
+				resp.sendRedirect("error");
+				return;
+			} catch (IOException e1) {
+				log.error(e1.toString());
+				return;
+			}
 		}
 
 		req.setAttribute("statusList", statusList);
@@ -135,7 +158,21 @@ public class MainServlet extends HttpServlet {
 		session.setAttribute("profileImageUrl", user.getProfileImageURL());
 
 		// 遷移
-		req.getRequestDispatcher("/page/MainTop.jsp").forward(req, resp);
+		try {
+			req.getRequestDispatcher("/page/MainTop.jsp").forward(req, resp);
+		} catch (ServletException e) {
+			log.error(e.toString());
+			try {
+				resp.sendRedirect("error");
+				return;
+			} catch (IOException e1) {
+				log.error(e1.toString());
+				return;
+			}
+		} catch (IOException e) {
+			log.error(e.toString());
+			return;
+		}
 		return;
 	}
 }

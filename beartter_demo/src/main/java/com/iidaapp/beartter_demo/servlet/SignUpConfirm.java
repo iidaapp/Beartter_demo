@@ -10,33 +10,37 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.iidaapp.beartter_demo.util.BeartterUtils;
 import com.iidaapp.beartter_demo.util.SignUpForm;
 import com.iidaapp.beartter_demo.util.SignUpFormValidateResults;
 
-@WebServlet(name="signUpConfirm", urlPatterns="/confirm")
+@WebServlet(name = "signUpConfirm", urlPatterns = "/confirm")
 public class SignUpConfirm extends HttpServlet {
 
+	private static Logger log = LoggerFactory.getLogger(SignUpConfirm.class);
 	private static final long serialVersionUID = 1L;
 
-	
+
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 
 		execute(req, resp);
 	}
 
+
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 
 		execute(req, resp);
 
 	}
 
 
-	private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+	private void execute(HttpServletRequest req, HttpServletResponse resp) {
 
-		// ログ出力
 		// TODO ログ出力方法
 		System.out.println("SignUpConfirm Start");
 
@@ -60,8 +64,14 @@ public class SignUpConfirm extends HttpServlet {
 		try {
 			results = validateSignUpForm(signUpForm);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e.toString());
+			try {
+				resp.sendRedirect("error");
+				return;
+			} catch (IOException e1) {
+				log.error(e1.toString());
+				return;
+			}
 		}
 
 		// バリデーション結果情報をセッションに格納
@@ -74,19 +84,55 @@ public class SignUpConfirm extends HttpServlet {
 		// ひとつでも空欄の入力がある場合、入力画面へ遷移
 		if(!results.isCheckAllValueExistInSignUpForm()) {
 
-			req.getRequestDispatcher("signup").forward(req, resp);
+			try {
+				req.getRequestDispatcher("signup").forward(req, resp);
+			} catch (ServletException e) {
+				log.error(e.toString());
+				try {
+					resp.sendRedirect("error");
+				} catch (IOException e1) {
+					log.error(e1.toString());
+					return;
+				}
+			} catch (IOException e) {
+				log.error(e.toString());
+			}
 			return;
 		}
 
 		// すべてのバリデーションがOKの場合確認画面へ遷移
 		if(results.successAllValidate()) {
 
-			req.getRequestDispatcher("/page/SignUpConfirm.jsp").forward(req, resp);
+			try {
+				req.getRequestDispatcher("/page/SignUpConfirm.jsp").forward(req, resp);
+			} catch (ServletException e) {
+				log.error(e.toString());
+				try {
+					resp.sendRedirect("error");
+				} catch (IOException e1) {
+					log.error(e1.toString());
+					return;
+				}
+			} catch (IOException e) {
+				log.error(e.toString());
+			}
 			return;
 		}
 
 		// ひとつでもバリデーションがNGの場合、入力画面へ遷移
-		req.getRequestDispatcher("signup").forward(req, resp);
+		try {
+			req.getRequestDispatcher("signup").forward(req, resp);
+		} catch (ServletException e) {
+			log.error(e.toString());
+			try {
+				resp.sendRedirect("error");
+			} catch (IOException e1) {
+				log.error(e1.toString());
+				return;
+			}
+		} catch (IOException e) {
+			log.error(e.toString());
+		}
 		return;
 	}
 

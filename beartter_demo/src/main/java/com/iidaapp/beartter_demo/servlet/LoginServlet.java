@@ -2,20 +2,22 @@ package com.iidaapp.beartter_demo.servlet;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.iidaapp.beartter_demo.util.BeartterProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
+
+import com.iidaapp.beartter_demo.util.BeartterProperties;
 
 /**
  * ログイン処理クラス
@@ -25,11 +27,12 @@ import twitter4j.conf.ConfigurationBuilder;
 @WebServlet(name="loginServlet", urlPatterns="/login")
 public class LoginServlet extends HttpServlet {
 
+	private static Logger log = LoggerFactory.getLogger(LoginServlet.class);
 	private static final long serialVersionUID = 1L;
 
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp){
 
 		// 共通処理へ
 		execute(req, resp);
@@ -37,17 +40,17 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp){
 
 		// 共通処理へ
 		execute(req, resp);
 	}
 	
 	
-	private void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	private void execute(HttpServletRequest req, HttpServletResponse resp){
 
 
-		System.out.println(BeartterProperties.MESSAGE_START_LOGIN_SERVLET);
+		log.info(BeartterProperties.MESSAGE_START_LOGIN_SERVLET);
 
 		// TwitterFactoryの設定
 		ConfigurationBuilder cb = new ConfigurationBuilder();
@@ -81,13 +84,25 @@ public class LoginServlet extends HttpServlet {
 
 			// リダイレクト
 			resp.sendRedirect(url);
+			
 
 		} catch (TwitterException e) {
 
-			// TODO ログ出力方法
-			e.printStackTrace();
-			session.setAttribute("errorDescription", e.getCause());
-			resp.sendRedirect("error");
+			log.error(e.toString());
+			try {
+				resp.sendRedirect("error");
+			} catch (IOException e1) {
+				log.error(e1.toString());
+			}
+
+		}catch (IOException e) {
+
+			log.error(e.toString());
+			try {
+				resp.sendRedirect("error");
+			} catch (IOException e1) {
+				log.error(e1.toString());
+			}
 
 		}
 	}

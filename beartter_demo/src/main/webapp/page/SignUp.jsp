@@ -5,7 +5,7 @@
 <head>
 <jsp:include page="/page/util/ImplementsJquery.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>SignUp</title>
 <!-- Bootstrap -->
 <link href="/beartter_demo/staticcontents/css/bootstrap.css" rel="stylesheet">
 <link href="/beartter_demo/staticcontents/css/bootstrap-theme.css" rel="stylesheet">
