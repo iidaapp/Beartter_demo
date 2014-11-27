@@ -10,15 +10,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Bootstrap -->
-<link href="/beartter_demo/staticcontents/css/bootstrap.css" rel="stylesheet">
-<link href="/beartter_demo/staticcontents/css/bootstrap-theme.css" rel="stylesheet">
-<script src="/beartter_demo/staticcontents/js/bootstrap.min.js" type="text/javascript"></script>
+<link href="/beartter/staticcontents/css/bootstrap.css" rel="stylesheet">
+<link href="/beartter/staticcontents/css/bootstrap-theme.css" rel="stylesheet">
+<script src="/beartter/staticcontents/js/bootstrap.min.js" type="text/javascript"></script>
 <!-- mine -->
-<link href="/beartter_demo/staticcontents/css/animate.css" rel="stylesheet">
-<script src="/beartter_demo/staticcontents/js/jquery.leanModal.min.js" type="text/javascript"></script>
+<link href="/beartter/staticcontents/css/animate.css" rel="stylesheet">
+<script src="/beartter/staticcontents/js/jquery.leanModal.min.js" type="text/javascript"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 <script type="text/javascript" script-name="syncopate" src="http://use.edgefonts.net/syncopate.js"></script>
-<link rel="stylesheet" href="/beartter_demo/staticcontents/css/Main_.css" type="text/css" />
+<link rel="stylesheet" href="/beartter/staticcontents/css/Main_.css" type="text/css" />
 
 <script>
 
@@ -40,8 +40,8 @@ $(function() {
 					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/beartter_demo/main">
-				<img src="/beartter_demo/staticcontents/img/icon.png" height="20" width="20" alt="icon"></a>
+				<a class="navbar-brand" href="/beartter/main">
+				<img src="/beartter/staticcontents/img/icon.png" height="20" width="20" alt="icon"></a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -88,7 +88,7 @@ $(function() {
 					</button>
 					<h4 class="modal-title" id="tweetModalLabel">New Tweet</h4>
 				</div>
-				<form action="/beartter_demo/tweet" method="post">
+				<form action="/beartter/tweet" method="post">
 					<div class="modal-body">
 							<textarea name="tweet_text" id="tweet_text"></textarea>
 
@@ -121,7 +121,7 @@ $(function() {
 					</div>
 				</td>
 				<td><img alt="character"
-					src="/beartter_demo/staticcontents/img/default_character.jpg">
+					src="/beartter/staticcontents/img/default_character.jpg">
 				</td>
 		</table>
 	</div>

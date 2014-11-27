@@ -10,11 +10,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Bootstrap -->
-<link href="/beartter_demo/staticcontents/css/bootstrap.css" rel="stylesheet">
-<link href="/beartter_demo/staticcontents/css/bootstrap-theme.css" rel="stylesheet">
+<link href="/beartter/staticcontents/css/bootstrap.css" rel="stylesheet">
+<link href="/beartter/staticcontents/css/bootstrap-theme.css" rel="stylesheet">
 <!-- mine -->
-<link href="/beartter_demo/staticcontents/css/signup.css" rel="stylesheet">
-<link href="/beartter_demo/staticcontents/css/animate.css" rel="stylesheet">
+<link href="/beartter/staticcontents/css/signup.css" rel="stylesheet">
+<link href="/beartter/staticcontents/css/animate.css" rel="stylesheet">
 
 </head>
 <body>
@@ -27,8 +27,8 @@
 					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/beartter_demo/"><img
-					src="/beartter_demo/staticcontents/img/icon.png" height="20" width="20" alt="icon"></a>
+				<a class="navbar-brand" href="/beartter/"><img
+					src="/beartter/staticcontents/img/icon.png" height="20" width="20" alt="icon"></a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -46,7 +46,7 @@
 
 	<h3 class="">Sign up for Beartter（仮）</h3>
 	<h4>登録完了！</h4>
-	<img src="/beartter_demo/staticcontents/img/default_character.png" alt="character" class="img-responsive center-block animated bounceInDown">
+	<img src="/beartter/staticcontents/img/default_character.png" alt="character" class="img-responsive center-block animated bounceInDown">
 	<p class="animated bounceInDown">ようこそ</p>
 
 	<form action="main">

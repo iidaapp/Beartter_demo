@@ -10,16 +10,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Bootstrap -->
-<link href="/beartter_demo/staticcontents/css/bootstrap.css" rel="stylesheet">
-<link href="/beartter_demo/staticcontents/css/bootstrap-theme.css" rel="stylesheet">
-<script src="/beartter_demo/staticcontents/js/bootstrap.min.js" type="text/javascript"></script>
+<link href="/beartter/staticcontents/css/bootstrap.css" rel="stylesheet">
+<link href="/beartter/staticcontents/css/bootstrap-theme.css" rel="stylesheet">
+<script src="/beartter/staticcontents/js/bootstrap.min.js" type="text/javascript"></script>
 <!-- mine -->
-<link href="/beartter_demo/staticcontents/css/animate.css" rel="stylesheet">
+<link href="/beartter/staticcontents/css/animate.css" rel="stylesheet">
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 <script type="text/javascript" script-name="syncopate" src="http://use.edgefonts.net/syncopate.js"></script>
-<link rel="stylesheet" href="/beartter_demo/staticcontents/css/main.css" type="text/css" />
+<link rel="stylesheet" href="/beartter/staticcontents/css/main.css" type="text/css" />
 
-<script src="/beartter_demo/staticcontents/js/common.js"
+<script src="/beartter/staticcontents/js/common.js"
 	type="text/javascript"></script>
 
 
@@ -73,8 +73,8 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/beartter_demo/main"> <img
-						src="/beartter_demo/staticcontents/img/icon.png" height="20"
+					<a class="navbar-brand" href="/beartter/main"> <img
+						src="/beartter/staticcontents/img/icon.png" height="20"
 						width="20" alt="icon"></a>
 				</div>
 
@@ -121,7 +121,7 @@
 						</button>
 						<h4 class="modal-title" id="tweetModalLabel">New Tweet</h4>
 					</div>
-					<form action="/beartter_demo/tweet" method="post">
+					<form action="/beartter/tweet" method="post">
 						<div class="modal-body">
 							<textarea name="tweet_text" id="tweet_text"></textarea>
 
@@ -229,7 +229,7 @@
 						</div>
 					</td>
 					<td>
-						<img alt="character" src="/beartter_demo/staticcontents/img/default_character.png" class="img-responsive" onclick="changeArrowBoxDisp()">
+						<img alt="character" src="/beartter/staticcontents/img/default_character.png" class="img-responsive" onclick="changeArrowBoxDisp()">
 					</td>
 			</table>
 		</div>
@@ -259,7 +259,7 @@
 
 			<form action="main" method="post">
 					<button type="submit" class="btn btn-default <c:if test="${pagingNo == 1}">disabled</c:if>">
-						<img alt="back" src="/beartter_demo/staticcontents/img/rewind44.png">
+						<img alt="back" src="/beartter/staticcontents/img/rewind44.png">
 					<span>back</span>
 				</button>
 			<input type="hidden" name="paging" value="${pagingNo - 1}" />
@@ -318,7 +318,7 @@
 			<form action="main" method="post">
 				<button type="submit" class="btn btn-default">
 					<span>next</span>
-					<img alt="back" src="/beartter_demo/staticcontents/img/fast44.png">
+					<img alt="back" src="/beartter/staticcontents/img/fast44.png">
 				</button>
 			<input type="hidden" name="paging" value="${pagingNo + 1}" />
 			</form>

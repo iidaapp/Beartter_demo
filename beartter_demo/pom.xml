@@ -3,15 +3,15 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.iidaapp</groupId>
-	<artifactId>beartter_demo</artifactId>
+	<artifactId>beartter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>beartter_demo</name>
+	<name>beartter</name>
 	<url>http://maven.apache.org</url>
 
 	<build>
-		<finalName>beartter_demo</finalName>
+		<finalName>beartter</finalName>
 		<outputDirectory>src\main\webapp\WEB-INF\classes</outputDirectory>
 		<testOutputDirectory>src\main\webapp\WEB-INF\test-classes</testOutputDirectory>
 		<plugins>

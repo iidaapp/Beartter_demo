@@ -1,5 +1,5 @@
-.container{
-	word-wrap : break-word ;
+.container {
+	word-wrap: break-word;
 }
 
 .catchcopy {
@@ -14,61 +14,46 @@
 	margin-bottom: 30px;
 }
 
-.about {
-	min-height: 600px;
-	background: #FF796B no-repeat;
-}
-
-.about .container {
-	padding: 30px;
-}
-
-.about .container p {
-	padding: 20px;
-	font-size: @font-size-base+ 4;
-	color: #FFFFFF;
+#about{
+	color: #E496B7;
+	border-left:10px solid #E496B7;
+	border-bottom: 1px dashed #E496B7;
 }
 
 .howtouse {
 	min-height: 600px;
 	width: 100%;
-	overflow:hidden;
+	overflow: hidden;
 }
 
-.howtouse .container{
+.howtouse .container {
 	margin-left: 0;
 	margin-right: 0;
 	width: 100%;
 	padding-left: 0;
 	padding-right: 0;
-	
 }
 
-.howtouse .worker .container,
-.howtouse .client .container
-{
-		width: 100%;
+.howtouse .worker .container, .howtouse .client .container {
+	width: 100%;
 }
 
-.howtouse .worker,
-.howtouse .client {
-height:100%;
+.howtouse .worker, .howtouse .client {
+	height: 100%;
 	width: 50%;
 	float: left;
 	padding: 20px;
-	color: #5E8061;
-	font-size: 15px;
+
 	padding-bottom: 32768px;
-margin-bottom: -32768px;
+	margin-bottom: -32768px;
 }
 
 .howtouse .worker {
-	background: #B8E986;
+
 }
 
 .howtouse .client {
-
-	background: #F8E71C;
+	
 }
 
 .howtouse .target {
