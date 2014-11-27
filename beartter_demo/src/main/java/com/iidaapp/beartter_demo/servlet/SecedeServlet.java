@@ -1,6 +1,7 @@
 package com.iidaapp.beartter_demo.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -51,8 +52,27 @@ public class SecedeServlet extends HttpServlet {
 			return;
 		}
 
-		DbUtils.removeAllData(beartterId);
+		try {
+			DbUtils.removeAllData(beartterId);
+		} catch (SQLException e) {
+			// TODO Error処理
+			e.printStackTrace();
+			req.getRequestDispatcher("error");
+			return;
+		}
 		
+		// すべてのセッションの削除
+		req.getSession().invalidate();
+		
+		try {
+			req.getRequestDispatcher("/page/Secede.jsp").forward(req, resp);
+			return;
+		} catch (ServletException | IOException e) {
+			// Error処理
+			e.printStackTrace();
+			req.getRequestDispatcher("error");
+			return;
+		}
 	}
 
 }
