@@ -41,14 +41,10 @@
 				<ul class="nav navbar-nav">
 
 					<li><a href="#howtouse">これなに？</a></li>
-					<li><a href="#policies">利用規約</a></li>
-
-				</ul>
-
-				<ul class="nav navbar-nav navbar-right">
-
 					<li><a href="#contact">お問い合わせ</a></li>
+
 				</ul>
+
 			</div>
 			<!-- /.navbar-collapse -->
 		</div>
@@ -59,7 +55,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-8 col-xs-offset-2">
-					<img src="/beartter/staticcontents/img/default_character.jpg" alt="character"
+					<img src="/beartter/staticcontents/img/default_character.png" alt="character"
 						class="img-responsive center-block">
 				</div>
 			</div>
@@ -93,21 +89,10 @@
 		</div>
 		<div class="client">
 			<div class="container">
-				<p>hogehogehogehogehogehogehogehogehogehogehogehogehogehoge</p>
+				<div class="image">
+				<img alt="main" src="/beartter/staticcontents/img/Main.png" class="img-responsive" />
+				</div>
 			</div>
-		</div>
-	</section>
-
-	<section id="policies" class="policies">
-		<div class="container">
-			<p>
-				hogehogehogehogehogehogehogehogehogehogehogehogehogehoge<br />
-				hogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehoge<br />
-				hogehogehogehogehogehogehogehogehogehogehogehogehogehoge<br />
-				hogehogehogehogehogehogehogehogehogehogehogehogehogehoge<br />
-				hogehogehogehogehogehogehogehogehogehogehogehogehogehoge<br />
-				hogehogehogehogehogehogehogehogehogehogehogehogehogehoge<br />
-			</p>
 		</div>
 	</section>
 

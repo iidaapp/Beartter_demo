@@ -20,10 +20,18 @@
 	border-bottom: 1px dashed #E496B7;
 }
 
+.box .image {
+	display: table-cell; /* p要素でテーブルの構造を表現 */
+	vertical-align: middle; /* 画像を垂直に */
+	text-align: center; /* 画像を中央に */
+	line-height: 0;
+}
+
 .howtouse {
 	min-height: 600px;
 	width: 100%;
 	overflow: hidden;
+	height: 100%;
 }
 
 .howtouse .container {
@@ -36,6 +44,10 @@
 
 .howtouse .worker .container, .howtouse .client .container {
 	width: 100%;
+}
+
+.howtouse .client .container{
+	height: 100%;
 }
 
 .howtouse .worker, .howtouse .client {
