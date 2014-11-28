@@ -9,10 +9,18 @@ public class SignUpFormValidateResults {
 	private boolean isCorrectEmailAddress;
 	private boolean isCorrectBirthDate;
 	private boolean isCorrectDigit;
+	private boolean isCorrectPassword;
 
 
 	public boolean successAllValidate() {
-		if (checkAllValueExistInSignUpForm && isSamePassword && isUniqueUserNameSignUpForm && isUniqueEMailAddress && isCorrectEmailAddress && isCorrectBirthDate && isCorrectDigit)
+		if (checkAllValueExistInSignUpForm 
+				&& isSamePassword 
+				&& isUniqueUserNameSignUpForm 
+				&& isUniqueEMailAddress 
+				&& isCorrectEmailAddress 
+				&& isCorrectBirthDate 
+				&& isCorrectDigit
+				&& isCorrectPassword)
 			return true;
 
 		return false;
@@ -91,6 +99,16 @@ public class SignUpFormValidateResults {
 
 	public void setCorrectDigit(boolean isCorrectDigit) {
 		this.isCorrectDigit = isCorrectDigit;
+	}
+
+
+	public boolean isCorrectPassword() {
+		return isCorrectPassword;
+	}
+
+
+	public void setCorrectPassword(boolean isCorrectPassword) {
+		this.isCorrectPassword = isCorrectPassword;
 	}
 
 }

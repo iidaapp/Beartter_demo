@@ -40,7 +40,7 @@
 	</nav>
 
 
-	<h3 class="">Sign up for Beartter（仮）</h3>
+	<h3 class="">Sign up for Beartter(β)</h3>
 
 	<p id="errorMessage">
 		<c:if test="${!empty ValueExist and !ValueExist}">
@@ -60,6 +60,9 @@
 		</c:if>
 		<c:if test="${!empty CorrectDigit and !CorrectDigit}">
 			<span id="birthdate-error" class="has-error">正しい桁数で入力して下さい。<br /></span>
+		</c:if>
+		<c:if test="${!empty CorrectPassword and !CorrectPassword}">
+			<span id="birthdate-error" class="has-error">正しいパスワードの形式で入力して下さい。<br /></span>
 		</c:if>
 
 	</p>
@@ -120,7 +123,7 @@
 						<div class="col-sm-4">
 							<input type="password" id="password" name="password" class="form-control" maxlength="45">
 						</div>
-						<div class="description col-sm-4">(45字以内)</div>
+						<div class="description col-sm-4">(半角のみ 45字以内)</div>
 					</div>
 
 					<div class="form-group">
@@ -131,11 +134,40 @@
 						</div>
 					</div>
 
+					<p>下記「ご利用上の注意」を読み、同意頂けましたら「次へ」ボタンを押下してください。</p>
 					<input type="submit" class="validate btn btn-default" id="submit" value="次へ">
 				</form>
 			</div>
 
 		</div>
+	</div>
+	<br />
+	<div class="row rules">
+		<div class="col-xs-6 col-xs-offset-3">
+			<div class="descrule">
+
+				<h3>ご利用上の注意</h3>
+
+				<ul class="list-unstyled list">
+					<li class="column">１、Beartter(β) （以下、「本サービス」）について</li>
+					<ul>
+						<li>本サービスは「@iidaapp」が提供するWebサービスです。</li>
+						<li>本サービスは名称のとおりベータ版です。開発が平行して続いているため、「利用者」へ告知せずに仕様変更、データ削除、「ご利用上の注意」の変更が行われる可能性があります。</li>
+					</ul>
+					<li class="column">２、「ご利用上の注意」への同意</li>
+					<ul>
+						<li>本サービスを利用する全てのユーザーはこの「ご利用上の注意」に同意したものとします。</li>
+					</ul>
+					<li class="column">３、免責事項</li>
+					<ul>
+						<li>本サービスは開発中であるため、その動作を保証しません。</li>
+						<li>本サービスを利用して起きたいかなる損害について、「@iidaapp」は責任を負いません。</li>
+					</ul>
+				</ul>
+
+			</div>
+		</div>
+
 	</div>
 
 	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"

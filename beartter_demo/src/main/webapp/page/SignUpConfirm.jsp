@@ -43,7 +43,7 @@
 	</nav>
 
 
-	<h3 class="">Sign up for Beartter（仮）</h3>
+	<h3 class="">Sign up for Beartter(β)</h3>
 
 	<div class="container">
 

@@ -2,6 +2,7 @@ package com.iidaapp.beartter_demo.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +14,8 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.iidaapp.beartter_demo.util.BeartterUtils;
+import com.iidaapp.beartter_demo.util.BeartterProperties;
+import com.iidaapp.beartter_demo.util.ValidationUtils;
 import com.iidaapp.beartter_demo.util.SignUpForm;
 import com.iidaapp.beartter_demo.util.SignUpFormValidateResults;
 
@@ -41,8 +43,7 @@ public class SignUpConfirm extends HttpServlet {
 
 	private void execute(HttpServletRequest req, HttpServletResponse resp) {
 
-		// TODO ログ出力方法
-		System.out.println("SignUpConfirm Start");
+		log.info(BeartterProperties.MESSAGE_START_SIGNUP_CONFIRM_SERVLET);
 
 		// セッションの取得
 		HttpSession session = req.getSession();
@@ -63,7 +64,7 @@ public class SignUpConfirm extends HttpServlet {
 		SignUpFormValidateResults results = null;
 		try {
 			results = validateSignUpForm(signUpForm);
-		} catch (SQLException e) {
+		} catch (SQLException | ParseException e) {
 			log.error(e.toString());
 			try {
 				resp.sendRedirect("error");
@@ -160,26 +161,28 @@ public class SignUpConfirm extends HttpServlet {
 		req.setAttribute("CorrectEmailAddress", results.isCorrectEmailAddress());
 		req.setAttribute("CorrectBirthDate", results.isCorrectBirthDate());
 		req.setAttribute("CorrectDigit", results.isCorrectDigit());
+		req.setAttribute("CorrectPassword", results.isCorrectPassword());
 
 		return;
 	}
 
 
-	private SignUpFormValidateResults validateSignUpForm(SignUpForm signUpForm) throws SQLException {
+	private SignUpFormValidateResults validateSignUpForm(SignUpForm signUpForm) throws SQLException, ParseException {
 
 		SignUpFormValidateResults results = new SignUpFormValidateResults();
-		if(!BeartterUtils.checkValueExistInSignUpForm(signUpForm)) {
+		if(!ValidationUtils.checkValueExistInSignUpForm(signUpForm)) {
 			results.setCheckValueExistInSignUpForm(false);
 			return results;
 		}
 
 		results.setCheckValueExistInSignUpForm(true);
-		results.setSamePassword(BeartterUtils.isSamePassword(signUpForm.getPassword(), signUpForm.getPasswordConfirm()));
-		results.setUniqueEMailAddress(BeartterUtils.isUniqueEmailAddress(signUpForm.getMailAddress()));
-		results.setUniqueUserNameSignUpForm(BeartterUtils.isUniqueUserNameSignUpForm(signUpForm.getUserName()));
-		results.setCorrectEmailAddress(BeartterUtils.isCorrectEmailAddress(signUpForm.getMailAddress()));
-		results.setCorrectBirthDate(BeartterUtils.isCorrectBirthDate(signUpForm.getYear(), signUpForm.getMonth(), signUpForm.getDay()));
-		results.setCorrectDigit(BeartterUtils.isCorrectDigit(signUpForm));
+		results.setSamePassword(ValidationUtils.isSamePassword(signUpForm.getPassword(), signUpForm.getPasswordConfirm()));
+		results.setUniqueEMailAddress(ValidationUtils.isUniqueEmailAddress(signUpForm.getMailAddress()));
+		results.setUniqueUserNameSignUpForm(ValidationUtils.isUniqueUserNameSignUpForm(signUpForm.getUserName()));
+		results.setCorrectEmailAddress(ValidationUtils.isCorrectEmailAddress(signUpForm.getMailAddress()));
+		results.setCorrectBirthDate(ValidationUtils.isCorrectBirthDate(signUpForm.getYear(), signUpForm.getMonth(), signUpForm.getDay()));
+		results.setCorrectDigit(ValidationUtils.isCorrectDigit(signUpForm));
+		results.setCorrectPassword(ValidationUtils.isCorrectPassword(signUpForm.getPassword()));
 
 		return results;
 	}

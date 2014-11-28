@@ -7,7 +7,6 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 public class BeartterProperties {
 
 	private static Logger log = LoggerFactory.getLogger(BeartterProperties.class);
@@ -19,13 +18,20 @@ public class BeartterProperties {
 
 	// Message Properties
 	public static String MESSAGE_START_LOGIN_SERVLET;
+	public static String MESSAGE_START_CALLBACK_SERVLET;
+	public static String MESSAGE_START_SIGNUP_SERVLET;
+	public static String MESSAGE_START_SIGNUP_CONFIRM_SERVLET;
+	public static String MESSAGE_START_GET_FRIENDSHIP_SERVLET;
+	public static String MESSAGE_START_GET_PROFILE_SERVLET;
+	public static String MESSAGE_START_ERROR_SERVLET;
+	public static String MESSAGE_START_LIMIT_SERVLET;
 
 	// Error Message Properties
 	public static String MESSAGE_ERROR_NULL_ACCESS_TOKEN;
 	public static String MESSAGE_ERROR_NULL_BEARTTER_ID;
 	public static String MESSAGE_ERROR_NULL_SESSION;
 	public static String MESSAGE_ERROR_NULL_TWITTER;
-	
+
 	// SQL Properties
 	public static String SQL_SELECT_BEARTTER_ID_FROM_ACCESS_TOKEN;
 	public static String SQL_COUNT_USERINFO_BY_BEARTTER_ID;
@@ -41,7 +47,7 @@ public class BeartterProperties {
 	public static String SQL_DELETE_CHARACTER_PARAM;
 	public static String SQL_DELETE_USERINFO;
 
-	static{
+	static {
 
 		Properties properties = getResourceAsProperties();
 
@@ -51,6 +57,13 @@ public class BeartterProperties {
 
 		// Message Properties
 		MESSAGE_START_LOGIN_SERVLET = properties.getProperty("property.message.start_login_servlet");
+		MESSAGE_START_CALLBACK_SERVLET = properties.getProperty("property.message.start_callback_servlet");
+		MESSAGE_START_SIGNUP_SERVLET = properties.getProperty("property.message.start_singup_servlet");
+		MESSAGE_START_SIGNUP_CONFIRM_SERVLET = properties.getProperty("property.message.start_singup_confirm_servlet");
+		MESSAGE_START_GET_FRIENDSHIP_SERVLET = properties.getProperty("property.message.start_get_friendship_servlet");
+		MESSAGE_START_GET_PROFILE_SERVLET = properties.getProperty("property.message.start_get_profile_servlet");
+		MESSAGE_START_ERROR_SERVLET = properties.getProperty("property.message.start_error_servlet");
+		MESSAGE_START_LIMIT_SERVLET = properties.getProperty("property.message.start_limit_servlet");
 
 		// Error Message Properties
 		MESSAGE_ERROR_NULL_ACCESS_TOKEN = properties.getProperty("property.message.error.null_access_token");
@@ -74,7 +87,7 @@ public class BeartterProperties {
 		SQL_DELETE_USERINFO = properties.getProperty("property.sql.delete_userinfo");
 	}
 
-	
+
 	/**
 	 * プロパティファイルからプロパティを読み込む
 	 * @return
@@ -94,7 +107,5 @@ public class BeartterProperties {
 
 		return properties;
 	}
-
-
 
 }

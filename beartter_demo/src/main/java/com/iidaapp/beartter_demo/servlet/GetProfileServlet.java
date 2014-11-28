@@ -32,8 +32,10 @@ public class GetProfileServlet extends HttpServlet {
 
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp){
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 		// 非同期で処理を行うため、ここはPOSTでのみ受け取る
+
+		log.info(BeartterProperties.MESSAGE_START_GET_PROFILE_SERVLET);
 
 		// Twitter情報を取得
 		Twitter twitter = (Twitter) req.getSession().getAttribute("twitter");

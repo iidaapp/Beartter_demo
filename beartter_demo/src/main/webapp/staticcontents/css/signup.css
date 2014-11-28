@@ -37,3 +37,16 @@ span.has-error {
 .panel .panel-body{
 	word-break: break-all;
 }
+
+.rules{
+	text-align: left;
+}
+
+.descrule{
+		border: 4px dashed #000000;
+		padding: 3px;
+}
+
+ul.list li.column{
+	padding: 10px;
+}

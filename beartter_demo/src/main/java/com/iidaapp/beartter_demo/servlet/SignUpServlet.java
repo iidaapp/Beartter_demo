@@ -43,8 +43,7 @@ public class SignUpServlet extends HttpServlet {
 	private void execute(HttpServletRequest req, HttpServletResponse resp) {
 
 		// ログ出力
-		// TODO ログ出力方法
-		System.out.println("SignUpServlet Start");
+		log.info(BeartterProperties.MESSAGE_START_SIGNUP_SERVLET);
 
 		// セッションの取得
 		HttpSession session = req.getSession(false);

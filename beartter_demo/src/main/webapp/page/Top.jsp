@@ -86,6 +86,10 @@
 					「フォロー（リムーブ）」<br />
 					のみ可能となります。<br />
 				</p>
+				<h3 id="about">&nbsp;推奨環境</h3>
+				<p>
+					PCのWebブラウザ（HTML5、CSS3以上動作）からのアクセスを想定しています。<br />
+				</p>
 			</div>
 		</div>
 		<div class="client">

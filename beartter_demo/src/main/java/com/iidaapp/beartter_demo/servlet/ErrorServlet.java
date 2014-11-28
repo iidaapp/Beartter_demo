@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.iidaapp.beartter_demo.util.BeartterProperties;
+
 /**
  * 共通エラー処理
  * @author iida
@@ -38,6 +40,8 @@ public class ErrorServlet extends HttpServlet {
 
 
 	private void execute(HttpServletRequest req, HttpServletResponse resp) {
+
+		log.info(BeartterProperties.MESSAGE_START_ERROR_SERVLET);
 
 		// セッションの情報をすべてクリア
 		req.getSession().invalidate();

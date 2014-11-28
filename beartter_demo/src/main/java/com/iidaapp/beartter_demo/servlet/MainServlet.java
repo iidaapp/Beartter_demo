@@ -59,6 +59,7 @@ public class MainServlet extends HttpServlet {
 
 	private void execute(HttpServletRequest req, HttpServletResponse resp){
 
+
 		HttpSession session = req.getSession(false);
 		if (session == null) {
 			log.error(BeartterProperties.MESSAGE_ERROR_NULL_SESSION);
@@ -71,6 +72,7 @@ public class MainServlet extends HttpServlet {
 		}
 
 		String beartterId = (String) session.getAttribute("beartterId");
+
 		if(StringUtils.isEmpty(beartterId)) {
 
 			log.error(BeartterProperties.MESSAGE_ERROR_NULL_BEARTTER_ID);
@@ -83,6 +85,7 @@ public class MainServlet extends HttpServlet {
 			}
 		}
 
+		
 		String pagingNoString = req.getParameter("paging");
 		if (pagingNoString == null)
 			pagingNoString = "1";
@@ -107,13 +110,26 @@ public class MainServlet extends HttpServlet {
 		}
 
 		List<ResponseList<Status>> statusList = new ArrayList<ResponseList<Status>>();
-		AccessToken accessToken = new AccessToken(accessTokenEntity.getoAuthToken(), accessTokenEntity.getoAuthSecret());
-		Twitter twitter = new TwitterFactory().getInstance(accessToken);
+		Twitter twitter = (Twitter) session.getAttribute("Twitter");
 
 		try {
 			statusList.add(twitter.getHomeTimeline(paging));
 		} catch (TwitterException e) {
+
 			log.error(e.toString());
+
+			if(e.getErrorCode() == 88) {
+				int secondsUntilReset = e.getRateLimitStatus().getSecondsUntilReset();
+				session.setAttribute("secondsUntilReset", secondsUntilReset);
+				try {
+					resp.sendRedirect("limit");
+				} catch (IOException e1) {
+					log.error(e1.toString());
+					return;
+				}
+				return;
+			}
+
 			try {
 				resp.sendRedirect("error");
 				return;
@@ -122,6 +138,7 @@ public class MainServlet extends HttpServlet {
 				return;
 			}
 		}
+
 
 		// TODO ストリームによるTLの取得処理の実装
 
@@ -137,25 +154,11 @@ public class MainServlet extends HttpServlet {
 			req.setAttribute("error", error);
 			session.removeAttribute("error");
 		}
-		User user = null;
-		try {
-			user = twitter.verifyCredentials();
-		} catch (TwitterException e) {
-			log.error(e.toString());
-			try {
-				resp.sendRedirect("error");
-				return;
-			} catch (IOException e1) {
-				log.error(e1.toString());
-				return;
-			}
-		}
 
 		req.setAttribute("statusList", statusList);
 		req.setAttribute("newLine", "\n");
 		session.setAttribute("pagingNo", pagingNo);
 		session.setAttribute("twitter", twitter);
-		session.setAttribute("profileImageUrl", user.getProfileImageURL());
 
 		// 遷移
 		try {

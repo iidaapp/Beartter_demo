@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +26,7 @@ import com.iidaapp.beartter_demo.util.BeartterProperties;
 import com.iidaapp.beartter_demo.util.BeartterUtils;
 import com.iidaapp.beartter_demo.util.SignUpForm;
 
-@WebServlet(name="signUpComplete", urlPatterns="/complete")
+@WebServlet(name = "signUpComplete", urlPatterns = "/complete")
 public class SignUpComplete extends HttpServlet {
 
 	private static Logger log = LoggerFactory.getLogger(SignUpComplete.class);
@@ -33,20 +34,20 @@ public class SignUpComplete extends HttpServlet {
 
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp){
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 
 		execute(req, resp);
 	}
 
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp){
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 
 		execute(req, resp);
 	}
 
 
-	private void execute(HttpServletRequest req, HttpServletResponse resp){
+	private void execute(HttpServletRequest req, HttpServletResponse resp) {
 
 		HttpSession session = req.getSession(false);
 		if(session == null) {
@@ -56,6 +57,25 @@ public class SignUpComplete extends HttpServlet {
 				return;
 			} catch (IOException e1) {
 				log.error(e1.toString());
+				return;
+			}
+		}
+
+		if(!StringUtils.isEmpty((String) session.getAttribute("beartterId"))) {
+			try {
+				req.getRequestDispatcher("/page/SignUpComplete.jsp").forward(req, resp);
+				return;
+			} catch (ServletException e) {
+				log.error(e.toString());
+				try {
+					resp.sendRedirect("error");
+					return;
+				} catch (IOException e1) {
+					log.error(e1.toString());
+					return;
+				}
+			} catch (IOException e) {
+				log.error(e.toString());
 				return;
 			}
 		}
@@ -93,7 +113,7 @@ public class SignUpComplete extends HttpServlet {
 		characterParamEntity.setBeartterId(beartterId);
 
 		try {
-			
+
 			DbUtils.insertSignUpData(userinfoEntity, accessTokenEntity, characterParamEntity);
 
 		} catch (SQLException e) {
@@ -109,14 +129,12 @@ public class SignUpComplete extends HttpServlet {
 		}
 
 		session.removeAttribute("signUpForm");
-		session.removeAttribute("AccessToken");
-		session.removeAttribute("Twitter");
 		session.removeAttribute("screenName");
-		session.removeAttribute("profileImageUrl");
 
 		session.setAttribute("beartterId", beartterId);
 		try {
 			req.getRequestDispatcher("/page/SignUpComplete.jsp").forward(req, resp);
+			return;
 		} catch (ServletException e) {
 			log.error(e.toString());
 			try {

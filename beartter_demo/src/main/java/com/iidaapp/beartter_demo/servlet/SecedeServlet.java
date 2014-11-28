@@ -58,7 +58,7 @@ public class SecedeServlet extends HttpServlet {
 
 			log.error(BeartterProperties.MESSAGE_ERROR_NULL_BEARTTER_ID);
 			try {
-				resp.sendRedirect("error");
+				resp.sendRedirect("/beartter/");
 				return;
 			} catch (IOException e1) {
 				log.error(e1.toString());

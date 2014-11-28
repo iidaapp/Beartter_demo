@@ -10,13 +10,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Bootstrap -->
-<link href="/beartter_demo/staticcontents/css/bootstrap.css" rel="stylesheet">
-<link href="/beartter_demo/staticcontents/css/bootstrap-theme.css" rel="stylesheet">
-<script src="/beartter_demo/staticcontents/js/bootstrap.min.js" type="text/javascript"></script>
+<link href="/beartter/staticcontents/css/bootstrap.css" rel="stylesheet">
+<link href="/beartter/staticcontents/css/bootstrap-theme.css" rel="stylesheet">
+<script src="/beartter/staticcontents/js/bootstrap.min.js" type="text/javascript"></script>
 <!-- mine -->
-<link href="/beartter_demo/staticcontents/css/main.css" rel="stylesheet">
+<link href="/beartter/staticcontents/css/main.css" rel="stylesheet">
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="/beartter_demo/staticcontents/css/settings.css" type="text/css" />
+<link rel="stylesheet" href="/beartter/staticcontents/css/settings.css" type="text/css" />
 
 </head>
 <body>
@@ -34,8 +34,8 @@
 						<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span> <span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/beartter_demo/main"> <img
-						src="/beartter_demo/staticcontents/img/icon.png" height="20" width="20" alt="icon"></a>
+					<a class="navbar-brand" href="/beartter/main"> <img
+						src="/beartter/staticcontents/img/icon.png" height="20" width="20" alt="icon"></a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -89,7 +89,7 @@
 						</button>
 						<h4 class="modal-title" id="deleteModalLabel">確認</h4>
 					</div>
-					<form action="/beartter_demo/secede" method="post">
+					<form action="/beartter/secede" method="post">
 						<div class="modal-body">
 							<ul class="list-unstyled" style="text-align: left;">
 								<li>・保存されている情報はすべて消去されます。</li>
