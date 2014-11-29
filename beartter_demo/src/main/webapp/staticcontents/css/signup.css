@@ -17,7 +17,7 @@ body {
 	display: inline-block;
 }
 
-span.has-error {
+.has-error {
 	color: #a94442;
 }
 

@@ -41,7 +41,7 @@ public class DbUtils {
 			stmt.setLong(1, userId);
 			rs = stmt.executeQuery();
 
-			if(rs.next()) {
+			if (rs.next()) {
 				beartterId = rs.getString("beartter_id");
 			}
 
@@ -50,11 +50,11 @@ public class DbUtils {
 			log.error(e.toString());
 			throw e;
 		} finally {
-			if(rs != null)
+			if (rs != null)
 				rs.close();
-			if(stmt != null)
+			if (stmt != null)
 				stmt.close();
-			if(con != null)
+			if (con != null)
 				con.close();
 
 		}
@@ -82,7 +82,7 @@ public class DbUtils {
 			stmt.setString(1, beartterId);
 			rs = stmt.executeQuery();
 
-			if(rs.next()) {
+			if (rs.next()) {
 				resultCount = rs.getInt(1);
 			}
 
@@ -91,11 +91,11 @@ public class DbUtils {
 			log.error(e.toString());
 			throw e;
 		} finally {
-			if(rs != null)
+			if (rs != null)
 				rs.close();
-			if(stmt != null)
+			if (stmt != null)
 				stmt.close();
-			if(con != null)
+			if (con != null)
 				con.close();
 
 		}
@@ -122,7 +122,7 @@ public class DbUtils {
 			stmt.setString(1, EmailAddress);
 			rs = stmt.executeQuery();
 
-			if(rs.next()) {
+			if (rs.next()) {
 				resultCount = rs.getInt(1);
 			}
 
@@ -131,11 +131,11 @@ public class DbUtils {
 			log.error(e.toString());
 			throw new RuntimeException();
 		} finally {
-			if(rs != null)
+			if (rs != null)
 				rs.close();
-			if(stmt != null)
+			if (stmt != null)
 				stmt.close();
-			if(con != null)
+			if (con != null)
 				con.close();
 
 		}
@@ -198,13 +198,13 @@ public class DbUtils {
 
 		} finally {
 
-			if(stmtCharacterParam != null)
+			if (stmtCharacterParam != null)
 				stmtCharacterParam.close();
-			if(stmtUserinfo != null)
+			if (stmtUserinfo != null)
 				stmtUserinfo.close();
-			if(stmtAccessToken != null)
+			if (stmtAccessToken != null)
 				stmtAccessToken.close();
-			if(con != null)
+			if (con != null)
 				con.close();
 
 		}
@@ -227,7 +227,7 @@ public class DbUtils {
 			stmt.setString(1, beartterId);
 			rs = stmt.executeQuery();
 
-			while(rs.next()) {
+			while (rs.next()) {
 				AccessTokenEntity entity = new AccessTokenEntity();
 				entity.setBeartterId(rs.getString(1));
 				entity.setoAuthToken(rs.getString(2));
@@ -244,9 +244,9 @@ public class DbUtils {
 			log.error(e.toString());
 			throw new RuntimeException();
 		} finally {
-			if(stmt != null)
+			if (stmt != null)
 				stmt.close();
-			if(con != null)
+			if (con != null)
 				con.close();
 
 		}
@@ -269,7 +269,7 @@ public class DbUtils {
 			stmt.setString(1, beartterId);
 			rs = stmt.executeQuery();
 
-			if(rs.next()) {
+			if (rs.next()) {
 				entity.setBeartterId(rs.getString(1));
 				entity.setoAuthToken(rs.getString(2));
 				entity.setoAuthSecret(rs.getString(3));
@@ -284,9 +284,9 @@ public class DbUtils {
 			log.error(e.toString());
 			throw new RuntimeException();
 		} finally {
-			if(stmt != null)
+			if (stmt != null)
 				stmt.close();
-			if(con != null)
+			if (con != null)
 				con.close();
 
 		}
@@ -309,7 +309,7 @@ public class DbUtils {
 			stmt = con.prepareStatement(sql);
 			stmt.setString(1, cname);
 			rs = stmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				entity.setCname(rs.getString(1));
 				entity.setParameterName(rs.getString(2));
 				entity.setParameterValue(rs.getInt(3));
@@ -320,9 +320,9 @@ public class DbUtils {
 			log.error(e.toString());
 			throw new RuntimeException();
 		} finally {
-			if(stmt != null)
+			if (stmt != null)
 				stmt.close();
-			if(con != null)
+			if (con != null)
 				con.close();
 
 		}
@@ -353,9 +353,9 @@ public class DbUtils {
 			throw new RuntimeException();
 
 		} finally {
-			if(stmt != null)
+			if (stmt != null)
 				stmt.close();
-			if(con != null)
+			if (con != null)
 				con.close();
 
 		}
@@ -375,7 +375,7 @@ public class DbUtils {
 			stmt = con.prepareStatement(sql);
 			stmt.setString(1, partOfSpeech);
 			rs = stmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				entity.setPartOfSpeech(rs.getString(1));
 				entity.setParameterName(rs.getString(2));
 				entity.setParameterValue(rs.getInt(3));
@@ -384,9 +384,9 @@ public class DbUtils {
 		} catch (SQLException e) {
 			throw new RuntimeException();
 		} finally {
-			if(stmt != null)
+			if (stmt != null)
 				stmt.close();
-			if(con != null)
+			if (con != null)
 				con.close();
 
 		}
@@ -430,17 +430,102 @@ public class DbUtils {
 			con.rollback();
 			throw new RuntimeException();
 		} finally {
-			if(stmt1 != null)
+			if (stmt1 != null)
 				stmt1.close();
-			if(stmt2 != null)
+			if (stmt2 != null)
 				stmt2.close();
-			if(stmt3 != null)
+			if (stmt3 != null)
 				stmt3.close();
 
-			if(con != null)
+			if (con != null)
 				con.close();
 
 		}
+	}
+
+
+	public static String selectPasswordFromUserinfoByBeatterId(String beartterId) throws SQLException {
+
+		String password = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Connection con = null;
+		String sql = BeartterProperties.SQL_SELECT_PASSWORD_BY_BEARTTER_ID;
+
+		try {
+
+			// コネクション取得
+			con = DbConnection.getConnection();
+
+			// 実行
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, beartterId);
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				password = rs.getString("password");
+			}
+
+		} catch (SQLException e) {
+
+			log.error(e.toString());
+			throw e;
+		} finally {
+			if (rs != null)
+				rs.close();
+			if (stmt != null)
+				stmt.close();
+			if (con != null)
+				con.close();
+
+		}
+
+		return password;
+	}
+
+
+	public static CharacterParamEntity selectCharacterParamByBeartterId(String beartterId) throws SQLException {
+
+		CharacterParamEntity characterParamEntity = new CharacterParamEntity();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Connection con = null;
+		String sql = BeartterProperties.SQL_SELECT_CHARACTER_PARAM_BY_BEARTTER_ID;
+
+		try {
+
+			// コネクション取得
+			con = DbConnection.getConnection();
+
+			// 実行
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, beartterId);
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				characterParamEntity.setBeartterId(rs.getString("beartter_id"));
+				characterParamEntity.setPretty(rs.getInt("pretty"));
+				characterParamEntity.setKnowledge(rs.getInt("knowledge"));
+				characterParamEntity.setArt(rs.getInt("art"));
+				characterParamEntity.setCheerful(rs.getInt("cheerful"));
+				characterParamEntity.setNerd(rs.getInt("nerd"));
+			}
+
+		} catch (SQLException e) {
+
+			log.error(e.toString());
+			throw e;
+		} finally {
+			if (rs != null)
+				rs.close();
+			if (stmt != null)
+				stmt.close();
+			if (con != null)
+				con.close();
+
+		}
+
+		return characterParamEntity;
 	}
 
 }

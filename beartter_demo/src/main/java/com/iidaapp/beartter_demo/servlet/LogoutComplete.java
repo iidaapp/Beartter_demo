@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.iidaapp.beartter_demo.util.BeartterProperties;
+
 /**
  * ログアウト処理完了クラス
  * @author iida
@@ -39,6 +41,8 @@ public class LogoutComplete extends HttpServlet {
 
 
 	private void execute(HttpServletRequest req, HttpServletResponse resp){
+
+		log.info(BeartterProperties.MESSAGE_START_LOGOUT_COMPLETE_SERVLET);
 
 		// セッション内容をすべて破棄してTOPページに遷移
 		req.getSession().invalidate();

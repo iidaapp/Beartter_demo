@@ -21,13 +21,9 @@ import twitter4j.ResponseList;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
-import twitter4j.User;
-import twitter4j.auth.AccessToken;
 
-import com.iidaapp.beartter_demo.db.DbUtils;
-import com.iidaapp.beartter_demo.entity.AccessTokenEntity;
 import com.iidaapp.beartter_demo.util.BeartterProperties;
+import com.iidaapp.beartter_demo.util.BeartterUtils;
 
 /**
  * メイン画面表示処理
@@ -42,7 +38,7 @@ public class MainServlet extends HttpServlet {
 
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp){
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 
 		// 共通処理へ
 		execute(req, resp);
@@ -50,16 +46,18 @@ public class MainServlet extends HttpServlet {
 
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp){
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 
 		// 共通処理へ
 		execute(req, resp);
 	}
 
 
-	private void execute(HttpServletRequest req, HttpServletResponse resp){
+	private void execute(HttpServletRequest req, HttpServletResponse resp) {
 
+		log.info(BeartterProperties.MESSAGE_START_MAIN_SERVLET);
 
+		// SessionがNULLの場合はエラー
 		HttpSession session = req.getSession(false);
 		if (session == null) {
 			log.error(BeartterProperties.MESSAGE_ERROR_NULL_SESSION);
@@ -71,9 +69,9 @@ public class MainServlet extends HttpServlet {
 			return;
 		}
 
+		// beartterIdがNULLの場合はエラー
 		String beartterId = (String) session.getAttribute("beartterId");
-
-		if(StringUtils.isEmpty(beartterId)) {
+		if (StringUtils.isEmpty(beartterId)) {
 
 			log.error(BeartterProperties.MESSAGE_ERROR_NULL_BEARTTER_ID);
 			try {
@@ -85,29 +83,13 @@ public class MainServlet extends HttpServlet {
 			}
 		}
 
-		
+		// Paging設定
 		String pagingNoString = req.getParameter("paging");
 		if (pagingNoString == null)
 			pagingNoString = "1";
 		Integer pagingNo = Integer.parseInt(pagingNoString);
 
 		Paging paging = new Paging(pagingNo);
-
-		AccessTokenEntity accessTokenEntity = null;
-
-		try {
-			accessTokenEntity = DbUtils.selectAccessTokenFromAccessToken(beartterId);
-		} catch (SQLException e) {
-			
-			log.error(e.toString());
-			try {
-				resp.sendRedirect("error");
-				return;
-			} catch (IOException e1) {
-				log.error(e1.toString());
-				return;
-			}
-		}
 
 		List<ResponseList<Status>> statusList = new ArrayList<ResponseList<Status>>();
 		Twitter twitter = (Twitter) session.getAttribute("Twitter");
@@ -118,7 +100,8 @@ public class MainServlet extends HttpServlet {
 
 			log.error(e.toString());
 
-			if(e.getErrorCode() == 88) {
+			// API制限エラー。専用ページヘ遷移。
+			if (e.getErrorCode() == 88) {
 				int secondsUntilReset = e.getRateLimitStatus().getSecondsUntilReset();
 				session.setAttribute("secondsUntilReset", secondsUntilReset);
 				try {
@@ -139,7 +122,6 @@ public class MainServlet extends HttpServlet {
 			}
 		}
 
-
 		// TODO ストリームによるTLの取得処理の実装
 
 		// try {
@@ -148,17 +130,36 @@ public class MainServlet extends HttpServlet {
 		// e.printStackTrace();
 		// }
 
+		String characterName = null;
+
+		try {
+			characterName = BeartterUtils.getCharacterName(beartterId);
+		} catch (SQLException e2) {
+			log.error(e2.toString());
+			try {
+				resp.sendRedirect("error");
+				return;
+			} catch (IOException e1) {
+				log.error(e1.toString());
+				return;
+			}
+		}
+
+		// ツイートエラー情報をセッションから取得
 		String error = (String) session.getAttribute("error");
 
+		// エラー情報が存在する場合はリクエストスコープに保存し、セッションからは削除
 		if (!StringUtils.isEmpty(error)) {
 			req.setAttribute("error", error);
 			session.removeAttribute("error");
 		}
 
+		// 各情報のセット
 		req.setAttribute("statusList", statusList);
 		req.setAttribute("newLine", "\n");
 		session.setAttribute("pagingNo", pagingNo);
 		session.setAttribute("twitter", twitter);
+		session.setAttribute("characterName", characterName);
 
 		// 遷移
 		try {

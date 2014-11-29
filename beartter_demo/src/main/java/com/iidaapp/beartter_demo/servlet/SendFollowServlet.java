@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
-import twitter4j.User;
 
 @WebServlet(name = "sendFollowServlet", urlPatterns = "/sendfollow")
 public class SendFollowServlet extends HttpServlet {
@@ -24,15 +23,19 @@ public class SendFollowServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-
+		// 非同期処理のため、POST通信に制限
+		
+		// Twitter情報の取得
 		Twitter twitter = (Twitter) req.getSession().getAttribute("twitter");
+		// 対象ユーザーIDの取得
 		Long userId = Long.parseLong(req.getParameter("userId"));
-		User user = null;
 
 		try {
-			user = twitter.createFriendship(userId);
+			// フォロー処理
+			twitter.createFriendship(userId);
 		} catch (TwitterException e) {
 			log.error(e.toString());
+			// エラーの場合は空のまま返却
 			return;
 		}
 

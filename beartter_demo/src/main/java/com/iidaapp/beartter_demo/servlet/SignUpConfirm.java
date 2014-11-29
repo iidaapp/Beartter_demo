@@ -170,7 +170,7 @@ public class SignUpConfirm extends HttpServlet {
 	private SignUpFormValidateResults validateSignUpForm(SignUpForm signUpForm) throws SQLException, ParseException {
 
 		SignUpFormValidateResults results = new SignUpFormValidateResults();
-		if(!ValidationUtils.checkValueExistInSignUpForm(signUpForm)) {
+		if(!signUpForm.checkValueExistInSignUpForm()) {
 			results.setCheckValueExistInSignUpForm(false);
 			return results;
 		}

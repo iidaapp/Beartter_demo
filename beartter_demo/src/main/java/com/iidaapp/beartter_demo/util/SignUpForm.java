@@ -1,5 +1,7 @@
 package com.iidaapp.beartter_demo.util;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class SignUpForm {
 
 	private String userName;
@@ -20,6 +22,18 @@ public class SignUpForm {
 		this.year = year;
 		this.month = month;
 		this.day = day;
+	}
+
+
+	public boolean checkValueExistInSignUpForm() {
+
+		if(StringUtils.isEmpty(getUserName()) 
+				|| StringUtils.isEmpty(getPassword()) 
+				|| StringUtils.isEmpty(getPasswordConfirm())
+				|| StringUtils.isEmpty(getMailAddress()))
+			return false;
+
+		return true;
 	}
 
 

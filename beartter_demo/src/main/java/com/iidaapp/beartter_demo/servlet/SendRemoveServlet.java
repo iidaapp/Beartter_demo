@@ -27,10 +27,9 @@ public class SendRemoveServlet extends HttpServlet {
 
 		Twitter twitter = (Twitter) req.getSession().getAttribute("twitter");
 		Long userId = Long.parseLong(req.getParameter("userId"));
-		User user = null;
 
 		try {
-			user = twitter.destroyFriendship(userId);
+			twitter.destroyFriendship(userId);
 		} catch (TwitterException e) {
 			e.printStackTrace();
 			return;

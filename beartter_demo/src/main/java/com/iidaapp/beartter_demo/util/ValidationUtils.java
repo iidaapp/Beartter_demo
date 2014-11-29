@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,18 +12,6 @@ import com.iidaapp.beartter_demo.db.DbUtils;
 public class ValidationUtils {
 
 	private static Logger log = LoggerFactory.getLogger(ValidationUtils.class);
-
-
-	public static boolean checkValueExistInSignUpForm(SignUpForm signUpForm) {
-
-		if(StringUtils.isEmpty(signUpForm.getUserName()) 
-				|| StringUtils.isEmpty(signUpForm.getPassword()) 
-				|| StringUtils.isEmpty(signUpForm.getPasswordConfirm())
-				|| StringUtils.isEmpty(signUpForm.getMailAddress()))
-			return false;
-
-		return true;
-	}
 
 
 	public static boolean isSamePassword(String password, String passwordConfirm) {

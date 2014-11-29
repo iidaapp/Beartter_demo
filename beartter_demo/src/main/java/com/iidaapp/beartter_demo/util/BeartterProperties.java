@@ -18,9 +18,12 @@ public class BeartterProperties {
 
 	// Message Properties
 	public static String MESSAGE_START_LOGIN_SERVLET;
+	public static String MESSAGE_START_LOGOUT_SERVLET;
+	public static String MESSAGE_START_LOGOUT_COMPLETE_SERVLET;
 	public static String MESSAGE_START_CALLBACK_SERVLET;
 	public static String MESSAGE_START_SIGNUP_SERVLET;
 	public static String MESSAGE_START_SIGNUP_CONFIRM_SERVLET;
+	public static String MESSAGE_START_MAIN_SERVLET;
 	public static String MESSAGE_START_GET_FRIENDSHIP_SERVLET;
 	public static String MESSAGE_START_GET_PROFILE_SERVLET;
 	public static String MESSAGE_START_ERROR_SERVLET;
@@ -31,6 +34,10 @@ public class BeartterProperties {
 	public static String MESSAGE_ERROR_NULL_BEARTTER_ID;
 	public static String MESSAGE_ERROR_NULL_SESSION;
 	public static String MESSAGE_ERROR_NULL_TWITTER;
+
+	public static String MESSAGE_ERROR_SECEDE_NULL_PASSWORD;
+	public static String MESSAGE_ERROR_SECEDE_NOT_CORRECT_PASSWORD;
+	public static String MESSAGE_ERROR_SECEDE_NOT_SAME_PASSWORD;
 
 	// SQL Properties
 	public static String SQL_SELECT_BEARTTER_ID_FROM_ACCESS_TOKEN;
@@ -46,6 +53,8 @@ public class BeartterProperties {
 	public static String SQL_DELETE_ACCESS_TOKEN;
 	public static String SQL_DELETE_CHARACTER_PARAM;
 	public static String SQL_DELETE_USERINFO;
+	public static String SQL_SELECT_PASSWORD_BY_BEARTTER_ID;
+	public static String SQL_SELECT_CHARACTER_PARAM_BY_BEARTTER_ID;
 
 	static {
 
@@ -57,9 +66,12 @@ public class BeartterProperties {
 
 		// Message Properties
 		MESSAGE_START_LOGIN_SERVLET = properties.getProperty("property.message.start_login_servlet");
+		MESSAGE_START_LOGOUT_SERVLET = properties.getProperty("property.message.start_logout_servlet");
+		MESSAGE_START_LOGOUT_COMPLETE_SERVLET = properties.getProperty("property.message.start_logout_complete_servlet");
 		MESSAGE_START_CALLBACK_SERVLET = properties.getProperty("property.message.start_callback_servlet");
 		MESSAGE_START_SIGNUP_SERVLET = properties.getProperty("property.message.start_singup_servlet");
 		MESSAGE_START_SIGNUP_CONFIRM_SERVLET = properties.getProperty("property.message.start_singup_confirm_servlet");
+		MESSAGE_START_MAIN_SERVLET = properties.getProperty("property.message.start_main_servlet");
 		MESSAGE_START_GET_FRIENDSHIP_SERVLET = properties.getProperty("property.message.start_get_friendship_servlet");
 		MESSAGE_START_GET_PROFILE_SERVLET = properties.getProperty("property.message.start_get_profile_servlet");
 		MESSAGE_START_ERROR_SERVLET = properties.getProperty("property.message.start_error_servlet");
@@ -70,6 +82,10 @@ public class BeartterProperties {
 		MESSAGE_ERROR_NULL_BEARTTER_ID = properties.getProperty("property.message.error.null_beartter_id");
 		MESSAGE_ERROR_NULL_SESSION = properties.getProperty("property.message.error.null_session");
 		MESSAGE_ERROR_NULL_TWITTER = properties.getProperty("property.message.error.null_twitter");
+		
+		MESSAGE_ERROR_SECEDE_NULL_PASSWORD = properties.getProperty("property.message.error.secede.null_password");
+		MESSAGE_ERROR_SECEDE_NOT_CORRECT_PASSWORD = properties.getProperty("property.message.error.secede.not_correct_password");
+		MESSAGE_ERROR_SECEDE_NOT_SAME_PASSWORD = properties.getProperty("property.message.error.secede.not_same_password");
 
 		// SQL Properties
 		SQL_SELECT_BEARTTER_ID_FROM_ACCESS_TOKEN = properties.getProperty("property.sql.select_beartter_id_from_access_token");
@@ -85,6 +101,8 @@ public class BeartterProperties {
 		SQL_DELETE_ACCESS_TOKEN = properties.getProperty("property.sql.delete_access_token");
 		SQL_DELETE_CHARACTER_PARAM = properties.getProperty("property.sql.delete_character_param");
 		SQL_DELETE_USERINFO = properties.getProperty("property.sql.delete_userinfo");
+		SQL_SELECT_PASSWORD_BY_BEARTTER_ID = properties.getProperty("property.sql.select_password_by_beartter_id");
+		SQL_SELECT_CHARACTER_PARAM_BY_BEARTTER_ID = properties.getProperty("property.sql.select_character_param_by_beartter_id");
 	}
 
 

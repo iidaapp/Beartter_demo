@@ -1,0 +1,30 @@
+html, body {
+	height: 100%;
+	margin: 0 auto;
+}
+
+body {
+	height: 100%;
+	text-align: center;
+}
+
+div.modal-button {
+	margin: 8px 15px 8px 15px;
+}
+
+div.modal-body {
+	min-height: 240px;
+}
+
+div.modal-footer img {
+	text-align: left;
+	float: left;
+}
+
+div.modal-dialog {
+	width: 450px;
+}
+
+span.has-error {
+	color: #a94442;
+}

@@ -1,6 +1,7 @@
 package com.iidaapp.beartter_demo.servlet;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -94,9 +95,22 @@ public class SignUpComplete extends HttpServlet {
 		String day = signUpForm.getDay();
 		Date birthDate = BeartterUtils.getBirthDate(year, month, day);
 
+		String passwordEncode = null;
+		try {
+			passwordEncode = BeartterUtils.encodePassdigiest(password);
+		} catch (NoSuchAlgorithmException e) {
+			log.error(e.toString());
+			try {
+				resp.sendRedirect("error");
+				return;
+			} catch (IOException e1) {
+				log.error(e1.toString());
+				return;
+			}
+		}
 		userinfoEntity.setBeartterId(beartterId);
 		userinfoEntity.setEmailAddress(emailAddress);
-		userinfoEntity.setPassword(password);
+		userinfoEntity.setPassword(passwordEncode);
 		userinfoEntity.setBirthDate(birthDate);
 		userinfoEntity.setAddDate(new Timestamp(System.currentTimeMillis()));
 		userinfoEntity.setModifyDate(new Timestamp(System.currentTimeMillis()));

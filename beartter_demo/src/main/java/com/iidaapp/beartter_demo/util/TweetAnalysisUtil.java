@@ -15,6 +15,7 @@ import org.atilika.kuromoji.Token;
 import org.atilika.kuromoji.Tokenizer;
 
 import com.iidaapp.beartter_demo.db.DbUtils;
+import com.iidaapp.beartter_demo.entity.CharacterParamEntity;
 import com.iidaapp.beartter_demo.entity.CnameTypeEntity;
 import com.iidaapp.beartter_demo.entity.PartOfSpeechTypeEntity;
 
@@ -86,6 +87,26 @@ public class TweetAnalysisUtil {
 		String parameterName = cnameEntity.getParameterName();
 		int parameterValue = cnameEntity.getParameterValue();
 
+		CharacterParamEntity characterParamEntity = new CharacterParamEntity();
+
+		characterParamEntity = DbUtils.selectCharacterParamByBeartterId(beartterId);
+
+		if (StringUtils.isEmpty(characterParamEntity.getBeartterId())) {
+			throw new RuntimeException();
+		}
+
+		if(parameterName.equals("pretty"))
+			parameterValue = parameterValue + characterParamEntity.getPretty();
+		else if(parameterName.equals("knowledge"))
+			parameterValue = parameterValue + characterParamEntity.getKnowledge();
+		else if(parameterName.equals("art"))
+			parameterValue = parameterValue + characterParamEntity.getArt();
+		else if(parameterName.equals("cheerful"))
+			parameterValue = parameterValue + characterParamEntity.getCheerful();
+		else if(parameterName.equals("nerd"))
+			parameterValue = parameterValue + characterParamEntity.getNerd();
+
+		
 		// TODO パラメータのカンスト値が必要
 		DbUtils.updateCharacterParam(parameterName, parameterValue, beartterId);
 

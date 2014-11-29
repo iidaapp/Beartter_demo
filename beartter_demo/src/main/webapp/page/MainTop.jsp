@@ -81,9 +81,6 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li><a href="#howtouse">How to</a></li>
-					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
 						<li>
@@ -220,16 +217,16 @@
 			<table>
 				<tr>
 					<td>
-						<div class="arrow_box" id="talk">
+<!-- 						<div class="arrow_box" id="talk">
 							<p>何について調べますか？</p>
 							<div id="talk-span">
 								<input type="text" />
 							</div>
 							<button id="talk-button" type="button" class="btn btn-default">検索</button>
-						</div>
+						</div> -->
 					</td>
 					<td>
-						<img alt="character" src="/beartter/staticcontents/img/default_character.png" class="img-responsive" onclick="changeArrowBoxDisp()">
+						<img alt="character" src="/beartter/staticcontents/img/${characterName}.png" class="img-responsive" onclick="changeArrowBoxDisp()">
 					</td>
 			</table>
 		</div>
@@ -335,14 +332,14 @@ function getValue(id){
 	getFriendship(id);
 }
 
-function changeArrowBoxDisp(){
+/* function changeArrowBoxDisp(){
 	var element = document.getElementById('talk');
 	if((element.currentStyle || document.defaultView.getComputedStyle(element, '')).visibility == "hidden"){
 		element.style.visibility = "visible";
 	}else{
 		element.style.visibility = "hidden";
 	}
-}
+} */
 
 $(function() {
     // #div1をdrag可能に

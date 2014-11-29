@@ -27,7 +27,7 @@ public class LogoutServlet extends HttpServlet {
 
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp){
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 
 		// 共通処理へ
 		execute(req, resp);
@@ -35,7 +35,7 @@ public class LogoutServlet extends HttpServlet {
 
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp){
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 
 		// 共通処理へ
 		execute(req, resp);
@@ -44,9 +44,11 @@ public class LogoutServlet extends HttpServlet {
 
 	private void execute(HttpServletRequest req, HttpServletResponse resp) {
 
+		log.info(BeartterProperties.MESSAGE_START_LOGOUT_SERVLET);
+
 		// beartterIdがなければ通常遷移ではないため、エラー画面へ遷移
 		String beartterId = (String) req.getSession().getAttribute("beartterId");
-		if(StringUtils.isEmpty(beartterId)) {
+		if (StringUtils.isEmpty(beartterId)) {
 
 			log.error(BeartterProperties.MESSAGE_ERROR_NULL_BEARTTER_ID);
 			try {

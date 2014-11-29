@@ -31,6 +31,7 @@ public class TweetServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 
 		try {
+			// 文字コード設定
 			req.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e2) {
 			log.error(e2.toString());
