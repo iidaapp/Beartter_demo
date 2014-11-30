@@ -1,0 +1,140 @@
+html, body {
+	height: 100%;
+	margin: 0 auto;
+}
+
+body {
+	height: 100%;
+	text-align: center;
+}
+
+div.modal-button {
+	margin: 8px 15px 8px 15px;
+}
+
+div.modal-body {
+	height: 150px;
+}
+
+div.modal-footer img{
+	text-align: left;
+	float: left;
+}
+
+div.modal-dialog {
+	width: 450px;
+}
+
+div.container{
+	height: 100%; /*ç≈è¨ÇÃçÇÇ≥Ç100ÅiâÊñ Ç¢Ç¡ÇœÇ¢ÅjÇ…éwíËÇµÇ‹Ç∑*/
+	padding-top: 50px;
+	
+}
+
+div.row{
+	height: 100%;
+
+}
+
+#timeline{
+	overflow: auto;
+	min-width: 345px;
+	height: 100%;
+}
+
+#prof{
+	width: 100%;
+}
+
+#text_tl{
+	text-align: left;
+}
+
+#desc_tl{
+	text-align: right;
+}
+
+textarea {
+	resize: none;
+	height: 70px;
+}
+
+textarea#talk {
+	position: absolute;
+	bottom: 0;
+	left: 10%;
+	width: 80%;
+}
+
+textarea#tweet_text {
+	width: 100%;
+	height: 100%;
+}
+
+.dropdown-header {
+	color: #428bca;
+	font-size: 18px;
+}
+
+.panel-default {
+	
+}
+
+.fixed {
+	position: absolute;
+}
+
+#div1 {
+	z-index: 1000;
+	width: 200px;
+	position: absolute;
+	right: 0;
+	bottom: 0
+}
+
+table {
+	margin: 10px 0;
+}
+
+td.left {
+	width: 150px;
+}
+
+#talk-button {
+	position: absolute;
+	right: 10%;
+}
+
+#talk {
+	visibility: hidden;
+	position: relative;
+	background: #FFFFFF;
+	border: 4px solid #c2e1f5;
+	width: 200px;
+	height: 100px;
+}
+
+.arrow_box:after, .arrow_box:before {
+	left: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-left-color: #FFFFFF;
+	border-width: 30px;
+	margin-top: -30px;
+}
+
+.arrow_box:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-left-color: #c2e1f5;
+	border-width: 36px;
+	margin-top: -36px;
+}

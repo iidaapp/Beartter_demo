@@ -1,0 +1,52 @@
+html, body {
+	height: 100%;
+	margin: 50px 0 0 0;
+}
+
+body {
+	text-align: center;
+}
+
+.form-year {
+	width: 60px;
+	display: inline-block;
+}
+
+.form-monthday {
+	width: 50px;
+	display: inline-block;
+}
+
+.has-error {
+	color: #a94442;
+}
+
+.description {
+	text-align: left;
+}
+
+.twitterName {
+	text-align: right;
+	padding: 6px 12px;
+}
+
+.screenName{
+	padding: 6px 12px;
+}
+
+.panel .panel-body{
+	word-break: break-all;
+}
+
+.rules{
+	text-align: left;
+}
+
+.descrule{
+		border: 4px dashed #000000;
+		padding: 3px;
+}
+
+ul.list li.column{
+	padding: 10px;
+}

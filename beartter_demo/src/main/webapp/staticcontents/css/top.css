@@ -1,0 +1,121 @@
+.container {
+	word-wrap: break-word;
+}
+
+.catchcopy {
+	margin-top: 10px;
+	font-size: 20px;
+	color: #B2B2B2;
+}
+
+.mainimage {
+	padding-top: 100px;
+	min-height: 950px;
+	margin-bottom: 30px;
+}
+
+#about{
+	color: #E496B7;
+	border-left:10px solid #E496B7;
+	border-bottom: 1px dashed #E496B7;
+}
+
+.box .image {
+	display: table-cell; /* p要素でテーブルの構造を表現 */
+	vertical-align: middle; /* 画像を垂直に */
+	text-align: center; /* 画像を中央に */
+	line-height: 0;
+}
+
+.howtouse {
+	min-height: 600px;
+	width: 100%;
+	overflow: hidden;
+	height: 100%;
+}
+
+.howtouse .container {
+	margin-left: 0;
+	margin-right: 0;
+	width: 100%;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.howtouse .worker .container, .howtouse .client .container {
+	width: 100%;
+}
+
+.howtouse .client .container{
+	height: 100%;
+}
+
+.howtouse .worker, .howtouse .client {
+	height: 100%;
+	width: 50%;
+	float: left;
+	padding: 20px;
+
+	padding-bottom: 32768px;
+	margin-bottom: -32768px;
+}
+
+.howtouse .worker {
+
+}
+
+.howtouse .client {
+	
+}
+
+.howtouse .target {
+	height: 560px;
+}
+
+.howtouse .target .center-block {
+	width: 50%;
+}
+
+.policies {
+	min-height: 600px;
+	background: #FF796B no-repeat;
+}
+
+.policies .container {
+	padding: 30px;
+}
+
+.policies .container p {
+	padding: 20px;
+	font-size: @font-size-base+ 4;
+	color: #FFFFFF;
+}
+
+.contact {
+	color: #FFF;
+	padding: 40px;
+	background: #000000;
+	border-bottom: 1px solid #000;
+}
+
+.contact label {
+	padding: 0;
+}
+
+.contact  label:before {
+	content: "*";
+	color: red;
+	padding-right: 3px;
+}
+
+.contact textarea {
+	width: 100%;
+	margin: 10px auto;
+}
+
+footer {
+	padding: 40px;
+	color: #FFF;
+	background: #000000;
+	border-top: 1px solid #696969;
+}
